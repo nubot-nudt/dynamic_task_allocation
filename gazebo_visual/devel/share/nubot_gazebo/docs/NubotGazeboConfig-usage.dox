@@ -1,0 +1,11 @@
+\subsubsection usage Usage
+\verbatim
+<node name="nubot_gazebo" pkg="nubot_gazebo" type="nubot_gazebo">
+  <param name="P" type="double" value="0.5" />
+  <param name="I" type="double" value="0.0" />
+  <param name="D" type="double" value="0.0" />
+  <param name="I_max" type="double" value="10.0" />
+  <param name="I_min" type="double" value="0.0" />
+</node>
+\endverbatim
+

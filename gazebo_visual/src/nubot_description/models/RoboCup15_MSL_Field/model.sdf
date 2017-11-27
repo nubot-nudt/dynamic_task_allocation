@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <model name="RoboCup15_MSL_Field">
+    <static>true</static>
+
+    <link name="chassis">
+      <pose>0 0 0.01 0 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>18 12</size>
+          </plane>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="carpet">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>18 12</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://materials/scripts/</uri>
+            <uri>file://materials/textures/</uri>
+            <name>RoboCup/Carpet</name>
+          </script>
+        </material>
+      </visual>
+
+       <visual name="base1">
+        <pose>0 6.75 0.01 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>21.0 1.5</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://materials/scripts/</uri>
+            <uri>file://materials/textures/</uri>
+            <name>RoboCup/FieldBorder</name>
+          </script>
+        </material>
+      </visual>
+      <visual name="base2">
+        <pose>0 -6.75 0.01 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>21.0 1.5</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://materials/scripts/</uri>
+            <uri>file://materials/textures/</uri>
+            <name>RoboCup/FieldBorder</name>
+          </script>
+        </material>
+      </visual>
+      <visual name="base3">
+        <pose>9.75 0 0.01 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>1.5 12.0</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://materials/scripts/</uri>
+            <uri>file://materials/textures/</uri>
+            <name>RoboCup/FieldBorder</name>
+          </script>
+        </material>
+      </visual>
+      <visual name="base4">
+        <pose>-9.75 0 0.01 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>1.5 12.0</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://materials/scripts/</uri>
+            <uri>file://materials/textures/</uri>
+            <name>RoboCup/FieldBorder</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+
+  </model>
+</sdf>

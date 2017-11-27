@@ -1,0 +1,8 @@
+prefix=/home/nubot8/dynamic_allocation/gazebo_visual/install
+
+Name: nubot_gazebo
+Description: Description of nubot_gazebo
+Version: 0.1.0
+Cflags: -I/home/nubot8/dynamic_allocation/gazebo_visual/install/include
+Libs: -L/home/nubot8/dynamic_allocation/gazebo_visual/install/lib 
+Requires: sensor_msgs gazebo_ros roscpp dynamic_reconfigure

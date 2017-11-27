@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <name>nubot_description</name>
+  <version>1.0.0</version>
+  <description>Describes nubot model for Gazebo</description>
+  <maintainer email="abcgarden@126.com">Weijia Yao</maintainer>
+  <license>BSD</license>
+  <author email="abcgarden@126.com">Weijia Yao</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>gazebo_ros</build_depend>
+  
+  <run_depend>gazebo_ros</run_depend>
+  
+  <!-- Important: export the model path to gazebo_ros gazebo -->
+	<!-- gazebo_media_path, gazebo_model_path, plugin_path -->
+  <export>      
+		 <gazebo_ros gazebo_model_path="${prefix}/models/" />
+		 <gazebo_ros gazebo_media_path="${prefix}" />
+  </export>
+</package>

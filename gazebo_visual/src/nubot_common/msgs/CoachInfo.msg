@@ -1,0 +1,11 @@
+Header header
+char MatchMode
+char MatchType
+char TestMode           
+Point2d pointA
+Point2d pointB
+int16 angleA
+int16 angleB
+char idA
+char idB
+char kickforce

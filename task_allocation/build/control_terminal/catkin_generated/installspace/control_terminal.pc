@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: control_terminal
+Description: Description of control_terminal
+Version: 0.0.0
+Cflags: -I/usr/local/include
+Libs: -L/usr/local/lib 
+Requires: message_generation dynamic_reconfigure roscpp rospy std_msgs std_srvs

@@ -1,0 +1,2 @@
+nubot_common:nubot_description:nubot_gazebo
+-DCATKIN_DEVEL_PREFIX=/home/nubot8/dynamic_allocation/gazebo_visual/devel -DCMAKE_INSTALL_PREFIX=/home/nubot8/dynamic_allocation/gazebo_visual/install -G Unix Makefiles

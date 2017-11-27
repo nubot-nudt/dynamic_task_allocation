@@ -1,0 +1,32 @@
+<launch>
+   <!-- rosrun rqt_plot rqt_plot /gazebo/model_states/twist[4]/linear -->
+   
+  <arg name="nubot_linear_vel" default="true"/>
+  <arg name="nubot_angular_vel" default="false"/>
+  <arg name="ball_linear_vel" default="true"/>
+  <arg name="ball_angular_vel" default="false"/>
+  <arg name="separate"          default="false"/>
+	
+  <!-- set command arguments -->
+  <!-- default: nubot info's index is 5, football info's index is 4 -->
+  <arg unless="$(arg nubot_linear_vel)" name="command_arg1" value=""/>
+  <arg     if="$(arg nubot_linear_vel)" name="command_arg1" value="/gazebo/model_states/twist[5]/linear"/>
+  <arg unless="$(arg nubot_angular_vel)" name="command_arg2" value=""/>
+  <arg     if="$(arg nubot_angular_vel)" name="command_arg2" value="/gazebo/model_states/twist[5]/angular/z"/>
+  <arg unless="$(arg ball_linear_vel)" name="command_arg3" value=""/>
+  <arg     if="$(arg ball_linear_vel)" name="command_arg3" value="/gazebo/model_states/twist[4]/linear"/>
+  <arg unless="$(arg ball_angular_vel)" name="command_arg4" value="gzserver"/>
+  <arg     if="$(arg ball_angular_vel)" name="command_arg4" value="/gazebo/model_states/twist[4]/angular/z"/>
+  
+  <group unless="$(arg separate)">
+    <node name="model_plot" pkg="rqt_plot" type="rqt_plot" args="$(arg command_arg1) $(arg command_arg2) $(arg command_arg3) $(arg command_arg4)"/>
+  </group>
+  
+  <group if="$(arg separate)">
+   <node name="nubot_plot" pkg="rqt_plot" type="rqt_plot" args="$(arg command_arg1) $(arg command_arg2)"/>
+   <node name="ball_plot" pkg="rqt_plot" type="rqt_plot" args="$(arg command_arg3) $(arg command_arg4)"/>
+  </group>
+   
+</launch>
+
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+# change those .cfg and .sh files to be executables
+find src/ -type f -exec sudo chmod -x '{}' \;
+find src/ -type f \( -name '*.cfg' -o -name '*.sh' \) -exec sudo chmod +x '{}' \;
+
+# let Git ignores the modification of the config file 
+echo 'Just a hint: You could ignore errors related to Git if you are not using Git. :)'
+git update-index --assume-unchanged src/nubot_gazebo/config/global_config.yaml
+# let Git ignores the modification of file mode
+git config core.fileMode false
+
+sudo chmod +x configure
+

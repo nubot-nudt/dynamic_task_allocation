@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.4">
+   <model name="nubot5">
+      <static>false</static>
+      <link name="chassis">
+         <pose>0 0 0.01 0 0 0</pose>
+         <inertial>
+            <mass>31</mass>
+            <pose>0 0 0 0 0 0</pose>
+            <inertia>
+               <ixx>100</ixx>
+               <ixy>0</ixy>
+               <ixz>0</ixz>
+               <iyy>100</iyy>
+               <iyz>0</iyz>
+               <izz>2.86</izz>
+            </inertia>
+         </inertial>
+         <collision name="collision">
+            <pose>0 0 0 0 0 0</pose>
+            <geometry>
+               <mesh>
+                  <scale>1.5 1.5 1.6</scale>
+                  <uri>file://meshes/nubot_frame_collision.dae</uri>
+               </mesh>
+            </geometry>
+            <surface>
+               <bounce>
+                  <restitution_coefficient>0</restitution_coefficient>
+               </bounce>
+               <friction>
+                  <ode>
+                     <mu>0.1</mu>
+                     <mu2>0.1</mu2>
+                  </ode>
+               </friction>
+            </surface>
+         </collision>
+         <visual name="visual">
+            <pose>0 0 0 0 0 0</pose>
+            <geometry>
+               <mesh>
+                  <scale>1.5 1.5 1.6</scale>
+                  <uri>file://meshes/nubot_frame/nubot_frame5.dae</uri>
+               </mesh>
+            </geometry>
+         </visual>
+         <velocity_decay>
+            <linear>0</linear>
+            <angular>0</angular>
+         </velocity_decay>
+         <self_collide>0</self_collide>
+         <gravity>1</gravity>
+      </link>
+      <plugin name="nubot_gazebo" filename="libnubot_gazebo.so" />
+   </model>
+</sdf>
+<!-- for copy-paste :)
+    <plugin name="nubot_gazebo"     filename="libnubot_gazebo.so"/>
+    <plugin name="world_model"      filename="libworld_model.so"/>
+    <plugin name="nubot_control"    filename="libnubot_control.so"/>
+-->

@@ -1,0 +1,23 @@
+# Uses ISO units. For example, use 'm' for length.
+general:
+  dribble_distance_thres: 0.60           # theshold distance between nubot and football below which dribble ball
+  dribble_angle_thres: 40.0              # kicking mechanism aligning with football; allowed maximum angle error in degrees
+  noise_scale: 0.0                     # the scale of gaussian noise (m)
+  noise_rate: 0.0                       # how frequent the noise generates
+
+cyan:
+  prefix: "nubot"             # Nubot name prefix. Linked with model name; don't change
+  num: 3
+ 
+magenta:
+  prefix: "rival"            # Rival name prefix. Linked with model name; don't change
+  num: 2
+
+field:
+  length: 18                     # Use integer!   used in spawn_model_script
+  width: 12                      # Use integer!  used in spawn_model_script
+  
+football:
+  name: "football"                   # football model name
+  chassis_link: "football::chassis"     # football body link name  
+

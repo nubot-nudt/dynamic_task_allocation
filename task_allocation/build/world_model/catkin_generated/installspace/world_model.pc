@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: world_model
+Description: Description of world_model
+Version: 0.0.0
+Cflags: -I/usr/local/include
+Libs: -L/usr/local/lib -lworld_model
+Requires: dynamic_reconfigure message_filters message_generation roscpp rospy std_msgs std_srvs

@@ -1,28 +1,8 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+## Ignore build files
+build/
+devel/
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+CMakeLists.txt.*
+*~
+*.tar.gz
+*.zip

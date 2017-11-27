@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../devel/lib/libworld_model.a  CMakeFiles/world_model.dir/src/agent.cpp.o CMakeFiles/world_model.dir/src/task.cpp.o
+/usr/bin/ranlib ../devel/lib/libworld_model.a

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<package>
+  <name>nubot_gazebo</name>
+  <version>0.1.0</version>
+  <description>Provides Gazebo launch files to expose nubot model in ROS</description>
+  <maintainer email="weijia.yao.nudt@gmail.com">Weijia Yao</maintainer>
+  <license>BSD</license>
+  <author email="weijia.yao.nudt@gmail.com">Weijia Yao</author>
+
+  <buildtool_depend>catkin</buildtool_depend>  
+  
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>gazebo_ros_control</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>nubot_common</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>std_msgs</build_depend>
+  
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>gazebo_ros_control</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>nubot_description</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>nubot_common</run_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
+  <run_depend>std_msgs</run_depend>
+
+  <export>
+		<!--gazebo_ros gazebo_model_path="${prefix}/../nubot_description/models" /-->
+  </export>
+
+</package>
+
+<!--
+    <gazebo_ros 
+      gazebo_plugin_path="${prefix}/lib" 
+      gazebo_model_path="/home/winston/workspace/nubot_gazebo_ws/src/nubot_common/nubot_description/models"
+			gazebo_media_path="/home/winston/workspace/nubot_gazebo_ws/src/nubot_common/nubot_description/models" />
+-->

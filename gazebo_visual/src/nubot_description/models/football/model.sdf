@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.4">
+   <!-- mass 0.41  -->
+   <!-- inertia 3.2e-03 -->
+   <model name="football">
+      <static>0</static>
+      <pose>0 0 0 0 -0 0</pose>
+      <link name="chassis">
+         <inertial>
+            <mass>0.41</mass>
+            <inertia>
+               <ixx>3.2e-03</ixx>
+               <iyy>3.2e-03</iyy>
+               <izz>3.2e-03</izz>
+               <ixy>0</ixy>
+               <ixz>0</ixz>
+               <iyz>0</iyz>
+            </inertia>
+         </inertial>
+         <collision name="collision">
+            <geometry>
+               <sphere>
+                  <radius>0.11</radius>
+               </sphere>
+            </geometry>
+            <surface>
+               <bounce>
+                  <restitution_coefficient>0.05</restitution_coefficient>
+                  <threshold>10</threshold>
+               </bounce>
+               <friction>
+                  <torsional>
+                     <coefficient>1.0</coefficient>
+                     <use_patch_radius>true</use_patch_radius>
+                     <patch_radius>0.05</patch_radius>
+                  </torsional>
+                  <ode>
+                     <mu>1</mu>
+                     <mu2>1</mu2>
+                  </ode>
+               </friction>
+               <contact>
+                  <ode>
+                     <max_vel>5</max_vel>
+                  </ode>
+               </contact>
+            </surface>
+         </collision>
+         <visual name="visual">
+            <geometry>
+               <mesh>
+                  <scale>0.11 0.11 0.11</scale>
+                  <uri>file://meshes/ball.dae</uri>
+               </mesh>
+            </geometry>
+         </visual>
+         <sensor name="contact" type="contact">
+            <plugin name="contact" filename="libgazebo_ros_bumper.so">
+               <robotNamespace>football</robotNamespace>
+               <frameName>world</frameName>
+            </plugin>
+            <contact>
+               <collision>collision</collision>
+            </contact>
+         </sensor>
+      </link>
+      <plugin name="ball_gazebo" filename="libball_gazebo.so" />
+   </model>
+</sdf>

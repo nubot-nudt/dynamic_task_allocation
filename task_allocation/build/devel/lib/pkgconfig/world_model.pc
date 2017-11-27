@@ -1,0 +1,8 @@
+prefix=/home/nubot8/dynamic_allocation/task_allocation/build/devel
+
+Name: world_model
+Description: Description of world_model
+Version: 0.0.0
+Cflags: -I/home/nubot8/dynamic_allocation/task_allocation/src/world_model/include
+Libs: -L/home/nubot8/dynamic_allocation/task_allocation/build/devel/lib -lworld_model
+Requires: dynamic_reconfigure message_filters message_generation roscpp rospy std_msgs std_srvs

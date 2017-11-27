@@ -1,0 +1,7 @@
+#!/bin/bash
+# change those cfg files to be executables
+find src/ -type f -exec sudo chmod -x '{}' \;
+find src/ -type f -name '*.cfg' -exec sudo chmod +x '{}' \;
+find src/ -type f -name '*.sh' -exec sudo chmod +x '{}' \;
+sudo chmod +x configure
+

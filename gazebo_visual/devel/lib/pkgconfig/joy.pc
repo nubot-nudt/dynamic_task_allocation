@@ -1,0 +1,8 @@
+prefix=/home/nubot8/dynamic_allocation/gazebo_visual/devel
+
+Name: joy
+Description: Description of joy
+Version: 1.9.10
+Cflags: 
+Libs: -L/home/nubot8/dynamic_allocation/gazebo_visual/devel/lib 
+Requires: roscpp diagnostic_updater sensor_msgs
