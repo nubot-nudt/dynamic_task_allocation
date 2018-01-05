@@ -1,2 +1,0 @@
-set(nubot_common_MESSAGE_FILES "msgs/Angle.msg;msgs/Point2d.msg;msgs/PPoint.msg;msgs/Point3d.msg;msgs/RobotInfo.msg;msgs/MotorInfo.msg;msgs/BallInfo.msg;msgs/BallInfo3d.msg;msgs/ObstaclesInfo.msg;msgs/OminiVisionInfo.msg;msgs/currentCmd.msg;msgs/VelCmd.msg;msgs/OdoInfo.msg;msgs/CoachInfo.msg;msgs/PassCommands.msg;msgs/WorldModelInfo.msg;msgs/StrategyInfo.msg;msgs/TargetInfo.msg;msgs/FrontBallInfo.msg;msgs/simulation_strategy.msg;msgs/Pos2d.msg")
-set(nubot_common_SERVICE_FILES "srv/BallHandle.srv;srv/Shoot.srv")

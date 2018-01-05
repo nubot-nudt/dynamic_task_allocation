@@ -1,4 +1,0 @@
-<launch>
-  <node name="world_model_node" pkg="world_model" type="world_model_node" output="screen"/>
-</launch>
-

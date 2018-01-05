@@ -1,8 +1,0 @@
-prefix=/usr/local
-
-Name: common
-Description: Description of common
-Version: 0.0.0
-Cflags: -I/usr/local/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include
-Libs: -L/usr/local/lib 
-Requires: 

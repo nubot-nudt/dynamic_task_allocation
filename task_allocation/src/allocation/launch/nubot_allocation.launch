@@ -1,3 +1,0 @@
-<launch>
-<node name="nubot_allocation" pkg="nubot_allocation" type="nubot_allocation"/>
-</launch>

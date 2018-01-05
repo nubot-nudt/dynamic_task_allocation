@@ -1,8 +1,0 @@
-prefix=/home/nubot8/dynamic_allocation/task_allocation/build/devel
-
-Name: control_terminal
-Description: Description of control_terminal
-Version: 0.0.0
-Cflags: -I/home/nubot8/dynamic_allocation/task_allocation/src/control_terminal/include
-Libs: -L/home/nubot8/dynamic_allocation/task_allocation/build/devel/lib 
-Requires: message_generation dynamic_reconfigure roscpp rospy std_msgs std_srvs

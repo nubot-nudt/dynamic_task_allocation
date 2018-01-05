@@ -1,0 +1,20 @@
+<launch>
+  <!--load gazebo-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name"   value="$(find gazebo_description)/worlds/Allocation_Map.world"/>
+    <arg name="verbose"      default="true"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui"          default="true"/>
+    <arg name="headless"     default="false"/>
+    <arg name="debug"        default="false"/> 
+    <arg name="paused"       default="false"/>
+  </include>
+
+  <!--load control terminal-->
+  <node name="control_terminal" pkg="control_terminal" type="control_terminal_node" output="screen" required="true">
+     <param name="robots_num"  value="0"  />
+  </node>
+
+</launch>
+
+

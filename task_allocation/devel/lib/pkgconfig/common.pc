@@ -1,8 +1,0 @@
-prefix=/home/nubot8/dynamic_allocation/task_allocation/devel
-
-Name: common
-Description: Description of common
-Version: 0.0.0
-Cflags: -I/home/nubot8/dynamic_allocation/task_allocation/devel/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include -I/home/nubot8/dynamic_allocation/task_allocation/src/common/include
-Libs: -L/home/nubot8/dynamic_allocation/task_allocation/devel/lib 
-Requires: 

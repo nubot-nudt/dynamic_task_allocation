@@ -1,8 +1,0 @@
-prefix=/home/nubot8/dynamic_allocation/gazebo_visual/devel
-
-Name: nubot_description
-Description: Description of nubot_description
-Version: 1.0.0
-Cflags: 
-Libs: -L/home/nubot8/dynamic_allocation/gazebo_visual/devel/lib 
-Requires: gazebo_ros

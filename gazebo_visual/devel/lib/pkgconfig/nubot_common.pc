@@ -1,8 +1,0 @@
-prefix=/home/nubot8/dynamic_allocation/gazebo_visual/devel
-
-Name: nubot_common
-Description: Description of nubot_common
-Version: 0.0.0
-Cflags: -I/home/nubot8/dynamic_allocation/gazebo_visual/devel/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include -I/home/nubot8/dynamic_allocation/gazebo_visual/src/nubot_common/core/include
-Libs: -L/home/nubot8/dynamic_allocation/gazebo_visual/devel/lib 
-Requires: 

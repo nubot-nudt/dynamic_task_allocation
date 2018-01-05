@@ -1,2 +1,0 @@
-allocation:common:control_terminal:world_model
--DCATKIN_DEVEL_PREFIX=/home/nubot8/dynamic_allocation/task_allocation/devel -DCMAKE_INSTALL_PREFIX=/home/nubot8/dynamic_allocation/task_allocation/install -G Unix Makefiles

@@ -1,8 +1,0 @@
-prefix=/home/nubot8/dynamic_allocation/task_allocation/devel
-
-Name: allocation
-Description: Description of allocation
-Version: 0.0.0
-Cflags: -I/home/nubot8/dynamic_allocation/task_allocation/devel/include -I/home/nubot8/dynamic_allocation/task_allocation/src/allocation/include
-Libs: -L/home/nubot8/dynamic_allocation/task_allocation/devel/lib 
-Requires: message_generation dynamic_reconfigure roscpp rospy std_msgs std_srvs
