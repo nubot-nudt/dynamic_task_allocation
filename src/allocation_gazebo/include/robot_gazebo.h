@@ -21,7 +21,8 @@ private:
 
     math::Vector3                         desired_rot_vector_;
     math::Vector3                         desired_trans_vector_;
-    math::Vector3                         unitX_robot_;
+    math::Vector3                         unitX_world_;
+    math::Vector3                         unitY_world_;
 
     std::string                           model_name_;
     std::string                           robot_namespace_;
@@ -33,8 +34,8 @@ private:
     double                                dribble_P_;
     double                                dribble_I_;
     double                                dribble_D_;
-    double                                I_term_max_;                // maximum I term
-    double                                I_term_min_;                // minimum I term
+    double                                I_term_max_;                         // maximum I term
+    double                                I_term_min_;                         // minimum I term
 
     int                                   robotID_;
     dynamic_reconfigure::Server<allocation_gazebo::Robot_GazeboConfig> *reconfigureServer_;

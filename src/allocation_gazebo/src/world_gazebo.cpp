@@ -139,65 +139,69 @@ void World_Gazebo::terminal_info_CB(const allocation_common::terminal2gazebo_inf
     std::string task_name;
     std::string task_pose;
 
-    if(_msg->isNew_allocation)
+    // each robot has different model, so we can use the factory msg to spwan robot model
+    msgs::Factory  factory_msg;
+    for(int i=0;i<_msg->robot_pos_x.size();i++)
     {
-        // each robot has different model, so we can use the factory msg to spwan robot model
-        msgs::Factory  factory_msg;
-        for(int i=0;i<_msg->robot_pos_x.size();i++)
-        {
-            // Model file to load
-            factory_msg.set_sdf_filename("model://Robot"+std::to_string(i));
-            // Pose to initialize the model to world
-            msgs::Set(factory_msg.mutable_pose(),ignition::math::Pose3d(ignition::math::Vector3d(_msg->robot_pos_x[i],_msg->robot_pos_y[i],0),ignition::math::Quaterniond(0, 0, 0)));
-            // Send the message
-            factoryPub_->Publish(factory_msg);
-        }
-
-        // because the model of task is same, so we must modify the name of it before it register
-        sdf::SDF TaskSDF;
-        TaskSDF.SetFromString(
-               "<sdf version='1.6'>\
-                <model name='Task'>\
-                <pose>1 0 0 0 0 0</pose>\
-                <static>true</static>\
-                <link name='chassis'>\
-                <pose>0 0 0 0 0 0</pose>\
-                <collision name='collision'>\
-                <pose>0 0 0 0 0 0</pose>\
-                <geometry>\
-                <mesh>\
-                <scale>1 1 1</scale>\
-                <uri>file://meshes/task.dae</uri>\
-                </mesh>\
-                </geometry>\
-                </collision>\
-                <visual name='visual'>\
-                <pose>0 0 0 0 0 0</pose>\
-                <geometry>\
-                <mesh>\
-                <scale>1 1 1</scale>\
-                <uri>file://meshes/task.dae</uri>\
-                </mesh>\
-                </geometry>\
-                </visual>\
-                </link>\
-                <plugin name='task_gazebo' filename='libtask_gazebo.so' />\
-                </model>\
-                </sdf>");
-
-        for(int i=0;i<_msg->task_pos_x.size();i++)
-        {
-            // set different name for each task (Task i)
-            task_name="Task"+std::to_string(i);
-            sdf::ElementPtr model = TaskSDF.Root()->GetElement("model");
-            model->GetAttribute("name")->SetFromString(task_name);
-            // set different pose for each task (pos_x pos_y 0 0 0 0)
-            task_pose=std::to_string(_msg->task_pos_x[i])+" "+std::to_string(_msg->task_pos_y[i])+" 0 0 0 0";
-            sdf::ElementPtr pose = model->GetElement("pose");
-            pose->AddValue("pose",task_pose,false,"new pose for different tasks");
-            world_->InsertModelSDF(TaskSDF);
-        }
+        // Model file to load
+        factory_msg.set_sdf_filename("model://Robot"+std::to_string(i));
+        // Pose to initialize the model to world
+        msgs::Set(factory_msg.mutable_pose(),ignition::math::Pose3d(ignition::math::Vector3d(_msg->robot_pos_x[i],_msg->robot_pos_y[i],0),ignition::math::Quaterniond(0, 0, 0)));
+        // Send the message
+        factoryPub_->Publish(factory_msg);
     }
+
+    // because the model of task is same, so we must modify the name of it before it register
+    sdf::SDF TaskSDF;
+    TaskSDF.SetFromString(
+                "<sdf version='1.6'>\
+                <model name='Task'>\
+            <pose>1 0 0 0 0 0</pose>\
+            <static>true</static>\
+            <link name='chassis'>\
+            <pose>0 0 0 0 0 0</pose>\
+            <collision name='collision'>\
+            <pose>0 0 0 0 0 0</pose>\
+            <geometry>\
+            <mesh>\
+            <scale>1 1 1</scale>\
+            <uri>file://meshes/task.dae</uri>\
+            </mesh>\
+            </geometry>\
+            </collision>\
+            <visual name='visual'>\
+            <pose>0 0 0 0 0 0</pose>\
+            <geometry>\
+            <mesh>\
+            <scale>1 1 1</scale>\
+            <uri>file://meshes/task.dae</uri>\
+            </mesh>\
+            </geometry>\
+            </visual>\
+            </link>\
+            <plugin name='task_gazebo' filename='libtask_gazebo.so' />\
+            </model>\
+            </sdf>");
+
+    for(int i=0;i<_msg->task_pos_x.size();i++)
+    {
+        // set different name for each task (Task i)
+        task_name="Task"+std::to_string(i);
+        sdf::ElementPtr model = TaskSDF.Root()->GetElement("model");
+        model->GetAttribute("name")->SetFromString(task_name);
+        // set different pose for each task (pos_x pos_y 0 0 0 0)
+        task_pose=std::to_string(_msg->task_pos_x[i])+" "+std::to_string(_msg->task_pos_y[i])+" 0 0 0 0";
+        sdf::ElementPtr pose = model->GetElement("pose");
+        pose->AddValue("pose",task_pose,false,"new pose for different tasks");
+        world_->InsertModelSDF(TaskSDF);
+    }
+
+//    for(unsigned int i=0;i<_msg->all_allocation_task_info.size();i++)
+//        if(_msg->all_allocation_task_info[i].iscomplete)
+//            destroy_tasks_.push_back(_msg->all_allocation_task_info[i].task_ID);
+//    for(unsigned int i=0;i<_msg->all_allocation_robot_info.size();i++)
+//        if(!_msg->all_allocation_robot_info[i].isvalid)
+//            destroy_robots_.push_back(_msg->all_allocation_robot_info[i].robot_ID);
 
     msgCB_lock_.unlock();
 }
@@ -215,7 +219,7 @@ bool World_Gazebo::update_model_info(void)
             // the origin of task is the angular, change it to the center
             if(model_states_.name[i].compare(0, task_name.size(), task_name) == 0)
             {
-                int task_id = atoi(model_states_.name[i].substr(task_name.size(),1).c_str() );
+                int task_id= atoi(model_states_.name[i].substr(task_name.size(),2).c_str());
                 geometry_msgs::Pose  task_pose = model_states_.pose[i];
 
                 tasks_info_.task_ID = task_id;
@@ -228,7 +232,8 @@ bool World_Gazebo::update_model_info(void)
             // robots info
             else if(model_states_.name[i].compare(0, robot_name.size(), robot_name)==0)
             {
-                int robot_id = atoi(model_states_.name[i].substr(robot_name.size(),1).c_str() );
+                int robot_id = atoi(model_states_.name[i].substr(robot_name.size(),1).c_str());
+
                 geometry_msgs::Pose  robot_pose  = model_states_.pose[i];
                 geometry_msgs::Twist robot_twist = model_states_.twist[i];
                 math::Quaternion rot_qua(robot_pose.orientation.w, robot_pose.orientation.x,

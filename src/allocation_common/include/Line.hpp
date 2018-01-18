@@ -59,7 +59,7 @@ inline Line_::Line_(double a,double b,double c) : A_(a),B_(b),C_(c),isLine_(a!=0
 		isSlope_=false;
 	}
 }
-inline Line_::Line_(double k,double b) : k_(k),b_(b),A_(k),B_(-1),C_(b),isSlope_(true),isLine_(true) {}
+inline Line_::Line_(double k,double b) : A_(k),B_(-1),C_(b),k_(k),b_(b),isSlope_(true),isLine_(true) {}
 template<typename _Tp> inline Line_::Line_(const DPoint_<_Tp> & pt1,const DPoint_<_Tp> & pt2)
 {
 	if(pt1!=pt2)

@@ -41,11 +41,6 @@ public:
 
     int num_task_valid_;                           //the number of task that uncompleted
     int num_target_valid_;                         //the number of target that had not been destroyed
-    int num_robot_valid_;                          //the number of agent vaild
-
-    float vel_x_;
-    float vel_y_;
-    float w_;
 
     bool is_world_update_;
     bool greedorprobability_;                      //greed 0, probability 1
@@ -56,6 +51,7 @@ public:
     ros::Subscriber  terminal2robot_sub_;
     ros::Publisher   robot2gazebo_pub_;
     ros::Publisher   allocation2terminal_pub_;
+    ros::Publisher   robot2task_pub_;
     ros::Timer       allocation_timer_;
     ros::NodeHandle* nh_;
 };

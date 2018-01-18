@@ -19,7 +19,9 @@
 #include <boost/thread/mutex.hpp>
 	
 #define MAXNUM_AGENT 10
-#define LOCATION_ERROR 0.05
+#define LOCATION_ERROR 0.1
+#define EXPLORE_TIME 30              //the time explore process will spend
+#define HIT_TIME 30                  //the time hit process will spend
 
 enum Robots_mode
 {
@@ -28,7 +30,8 @@ enum Robots_mode
     EXECUTE,                         //execute the task
     EXPLORE,                         //explore the unknown region
     HIT,                             //hit the target region
-    DAMAGE                           //robot is damaged
+    DAMAGE,                          //robot is damaged
+    RESET                            //reset the robot
 };
 
 enum Allocation_mode
@@ -74,6 +77,13 @@ struct Allocation_robot_info
         which_target=-1;
         isvalid=true;
     }
+    void robot_reset()
+    {
+        robot_mode=RESET;
+        which_task=-1;
+        which_target=-1;
+        isvalid=true;
+    }
 };
 
 struct Allocation_task_info
@@ -91,6 +101,14 @@ struct Allocation_task_info
     {
         task_power=0;
         task_ID=0;
+        known_power=0;
+        current_distance=1000;
+        istarget=false;
+        iscomplete=false;
+        isexplored=false;
+    }
+    void task_reset()
+    {
         known_power=0;
         current_distance=1000;
         istarget=false;
@@ -127,8 +145,8 @@ struct Terminal2Robots_info
     bool recordornot;                  //not record 0, record 1
     bool powerordistance;              //power 0, distance 1
 
-    Allocation_robot_info all_allocation_robot_info[MAXNUM_AGENT];
-    Allocation_task_info all_allocation_task_info[MAXNUM_AGENT];
+    std::vector<Allocation_robot_info> all_allocation_robot_info;
+    std::vector<Allocation_task_info> all_allocation_task_info;
 };
 
 struct Gazebo2World_info

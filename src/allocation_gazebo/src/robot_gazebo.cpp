@@ -5,7 +5,8 @@ Robot_Gazebo::Robot_Gazebo()
 {
     robotID_=0;
     Vx_cmd_=Vy_cmd_=w_cmd_=0;
-    unitX_robot_=XUNIT_VECTOR;
+    unitX_world_=XUNIT_VECTOR;
+    unitY_world_=YUNIT_VECTOR;
 }
 
 Robot_Gazebo::~Robot_Gazebo()
@@ -58,9 +59,9 @@ void Robot_Gazebo::Reset()
     // Variables initialization
     desired_rot_vector_ = ZERO_VECTOR;
     desired_trans_vector_ = ZERO_VECTOR;
-    unitX_robot_ = XUNIT_VECTOR;
+    unitX_world_ = XUNIT_VECTOR;
+    unitY_world_ = YUNIT_VECTOR;
     Vx_cmd_=Vy_cmd_=w_cmd_=0;
-    robotID_=0;
 }
 
 /// \brief Custom message callback queue thread
@@ -99,17 +100,20 @@ void Robot_Gazebo::robot2gazebo_CB(const allocation_common::robot2gazebo_info::C
 {
     msgCB_lock_.lock();
 
+    // the robot is damage
+    if(_msg->current_mode==DAMAGE||_msg->current_mode==RESET)
+        robot_model_->Reset();
     Vx_cmd_ = _msg->robot_twist.linear.x;
     Vy_cmd_ = _msg->robot_twist.linear.y;
     w_cmd_  = _msg->robot_twist.angular;
 
-    math::Vector3 Vx_robot     = Vx_cmd_*unitX_robot_;
-    math::Vector3 Vy_robot     = Vy_cmd_*(math::Vector3(0,0,1).Cross(unitX_robot_));
+    math::Vector3 Vx_robot     = Vx_cmd_*unitX_world_;
+    math::Vector3 Vy_robot     = Vy_cmd_*unitY_world_;
     math::Vector3 linear_vector= Vx_robot + Vy_robot;
     math::Vector3 angular_vector(0,0,w_cmd_);
 
-    //    ROS_FATAL("%s vel_cmd_CB():linear_vector:%f %f %f angular_vector:0 0 %f",model_name_.c_str(),
-    //                    linear_vector.x, linear_vector.y, linear_vector.z, angular_vector.z);
+//        ROS_FATAL("%s vel_cmd_CB():linear_vector:%f %f %f angular_vector:0 0 %f",model_name_.c_str(),
+//                        linear_vector.x, linear_vector.y, linear_vector.z, angular_vector.z);
     robot_locomotion(linear_vector, angular_vector);
 
     msgCB_lock_.unlock();

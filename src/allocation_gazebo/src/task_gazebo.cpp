@@ -23,8 +23,8 @@ void Task_Gazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 {
     // Get the world name.
     world_ = _model->GetWorld();
-    robot_model_= _model;
-    model_name_ = _model->GetName();
+    task_model_= _model;
+    model_name_= _model->GetName();
     robot_namespace_ = _model->GetName();
     taskID_ = atoi(model_name_.substr(task_name.size(),2).c_str());
 
@@ -37,17 +37,17 @@ void Task_Gazebo::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     }
     rosnode_ = new ros::NodeHandle();
 
-    // Subscribers
-//    ros::SubscribeOptions so = ros::SubscribeOptions::create <allocation_common::task2gazebo_info>(
-//                "/task2gazebo_info", 100, boost::bind( &Task_Gazebo::task_state_CB,this,_1),
+    //Subscribers
+//    ros::SubscribeOptions so = ros::SubscribeOptions::create <allocation_common::allocation_task_info>(
+//                "/task_allocation/task_state_info",1, boost::bind( &Task_Gazebo::task_state_CB,this,_1),
 //                ros::VoidPtr(), &message_queue_);
-//    task2gazebo_sub_ = rosnode_->subscribe(so);
+//    robot2task_sub_ = rosnode_->subscribe(so);
 
     // Custom Callback Queue Thread. Use threads to process message and service callback queue
     message_callback_queue_thread_ = boost::thread( boost::bind( &Task_Gazebo::message_queue_thread,this ) );
 
     // Output info
-    std::cout<<model_name_.c_str()<<" has "<<robot_model_->GetPluginCount()<<" plugins, "<<"taskID: "<<taskID_<<std::endl;
+    std::cout<<model_name_.c_str()<<" has "<<task_model_->GetPluginCount()<<" plugins, "<<"taskID: "<<taskID_<<std::endl;
 }
 
 
@@ -71,7 +71,21 @@ void Task_Gazebo::message_queue_thread()
 }
 
 /// \brief according to the current robot state which allocated this task, change the task state
-//void Task_Gazebo::task_state_CB(const allocation_common::task2gazebo_info::ConstPtr &_msg)
+//void Task_Gazebo::task_state_CB(const allocation_common::allocation_task_info::ConstPtr &_msg)
 //{
+//    msgCB_lock_.lock();
+//    math::Pose obs_position;
 
+//    if(_msg->task_ID!=taskID_)
+//        return;
+//    else if(_msg->iscomplete)
+//    {
+//        obs_position=math::Pose(math::Vector3(10,10,0), math::Quaternion(0,0,0));
+//        task_model_->SetWorldPose(obs_position);
+//    }
+//    else if(_msg->istarget)
+//    {
+
+//    }
+//    msgCB_lock_.unlock();
 //}

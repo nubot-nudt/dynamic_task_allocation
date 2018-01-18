@@ -26,6 +26,7 @@
 #include <allocation_common/gazebo2world_info.h>
 #include <allocation_common/gazebo_robot_info.h>
 #include <allocation_common/gazebo_task_info.h>
+#include <allocation_common/allocation_task_info.h>
 #include <allocation_common/robot2gazebo_info.h>
 #include <allocation_common/terminal2gazebo_info.h>
 #include <dynamic_reconfigure/server.h>

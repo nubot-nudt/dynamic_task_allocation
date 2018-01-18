@@ -52,8 +52,11 @@ void Behaviour::move2Position(float pval, float dval, DPoint target, float maxve
     static float _pos_e1 = 0;
     float speed  = 0;
     speed = basicPDControl(pval,dval,_pos_e,_pos_e1,maxvel);
-    app_vx_ =  speed*cos(tar_theta - _robot_ori.radian_)+ realtarvel.x_;
-    app_vy_ =  speed*sin(tar_theta - _robot_ori.radian_)+ realtarvel.y_;
+//    app_vx_ =  speed*cos(tar_theta - _robot_ori.radian_)+ realtarvel.x_;
+//    app_vy_ =  speed*sin(tar_theta - _robot_ori.radian_)+ realtarvel.y_;
+    //use vx,vy in world frame
+    app_vx_ =  speed*cos(tar_theta)+ realtarvel.x_;
+    app_vy_ =  speed*sin(tar_theta)+ realtarvel.y_;
     double v=sqrt(app_vx_*app_vx_+app_vy_*app_vy_);
 
     if(v>maxvel)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>370</width>
-    <height>690</height>
+    <width>750</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,9 +21,9 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>90</y>
+     <y>140</y>
      <width>331</width>
-     <height>103</height>
+     <height>94</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -61,6 +61,9 @@
         <property name="maximum">
          <number>20</number>
         </property>
+        <property name="value">
+         <number>12</number>
+        </property>
        </widget>
       </item>
       <item row="1" column="1">
@@ -75,7 +78,7 @@
          <number>20</number>
         </property>
         <property name="value">
-         <number>8</number>
+         <number>12</number>
         </property>
        </widget>
       </item>
@@ -91,7 +94,7 @@
          <number>100</number>
         </property>
         <property name="value">
-         <number>10</number>
+         <number>25</number>
         </property>
        </widget>
       </item>
@@ -119,13 +122,20 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>210</y>
+     <y>240</y>
      <width>331</width>
-     <height>181</height>
+     <height>221</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="3" column="4">
+    <item row="2" column="2">
+     <widget class="QLineEdit" name="dis_agent_3">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="4">
      <widget class="QSpinBox" name="power_10">
       <property name="focusPolicy">
        <enum>Qt::StrongFocus</enum>
@@ -141,13 +151,18 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="4">
+    <item row="3" column="4">
      <widget class="QPushButton" name="agent_10">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
@@ -157,7 +172,7 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="3">
+    <item row="4" column="3">
      <widget class="QSpinBox" name="power_9">
       <property name="focusPolicy">
        <enum>Qt::StrongFocus</enum>
@@ -173,24 +188,8 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="3">
-     <widget class="QPushButton" name="agent_9">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="text">
-       <string>Agent9</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="2">
-     <widget class="QSpinBox" name="power_8">
+    <item row="1" column="1">
+     <widget class="QSpinBox" name="power_2">
       <property name="focusPolicy">
        <enum>Qt::StrongFocus</enum>
       </property>
@@ -205,24 +204,29 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="2">
-     <widget class="QPushButton" name="agent_8">
+    <item row="0" column="1">
+     <widget class="QPushButton" name="agent_2">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
       <property name="text">
-       <string>Agent8</string>
+       <string>Agent2</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QSpinBox" name="power_7">
+    <item row="1" column="0">
+     <widget class="QSpinBox" name="power_1">
       <property name="focusPolicy">
        <enum>Qt::StrongFocus</enum>
       </property>
@@ -237,51 +241,24 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="agent_7">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="agent_1">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="text">
-       <string>Agent7</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QSpinBox" name="power_6">
-      <property name="focusPolicy">
-       <enum>Qt::StrongFocus</enum>
-      </property>
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>10</number>
-      </property>
-      <property name="value">
-       <number>10</number>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="agent_6">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
       <property name="text">
-       <string>Agent6</string>
+       <string>Agent1</string>
       </property>
      </widget>
     </item>
@@ -308,6 +285,11 @@
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
@@ -341,6 +323,11 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
@@ -361,7 +348,14 @@
        <number>10</number>
       </property>
       <property name="value">
-       <number>6</number>
+       <number>10</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLineEdit" name="dis_agent_1">
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -373,6 +367,11 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
@@ -381,8 +380,29 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QSpinBox" name="power_2">
+    <item row="3" column="3">
+     <widget class="QPushButton" name="agent_9">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="text">
+       <string>Agent9</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
+     <widget class="QSpinBox" name="power_8">
       <property name="focusPolicy">
        <enum>Qt::StrongFocus</enum>
       </property>
@@ -393,28 +413,33 @@
        <number>10</number>
       </property>
       <property name="value">
-       <number>4</number>
+       <number>10</number>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="agent_2">
+    <item row="3" column="2">
+     <widget class="QPushButton" name="agent_8">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
       <property name="text">
-       <string>Agent2</string>
+       <string>Agent8</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QSpinBox" name="power_1">
+    <item row="4" column="1">
+     <widget class="QSpinBox" name="power_7">
       <property name="focusPolicy">
        <enum>Qt::StrongFocus</enum>
       </property>
@@ -425,23 +450,121 @@
        <number>10</number>
       </property>
       <property name="value">
-       <number>2</number>
+       <number>10</number>
       </property>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="agent_1">
+    <item row="3" column="1">
+     <widget class="QPushButton" name="agent_7">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
       <property name="text">
-       <string>Agent1</string>
+       <string>Agent7</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QSpinBox" name="power_6">
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>10</number>
+      </property>
+      <property name="value">
+       <number>10</number>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="agent_6">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="text">
+       <string>Agent6</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="4">
+     <widget class="QLineEdit" name="dis_agent_5">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3">
+     <widget class="QLineEdit" name="dis_agent_4">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="dis_agent_2">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLineEdit" name="dis_agent_6">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLineEdit" name="dis_agent_7">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="2">
+     <widget class="QLineEdit" name="dis_agent_8">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="3">
+     <widget class="QLineEdit" name="dis_agent_9">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="4">
+     <widget class="QLineEdit" name="dis_agent_10">
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -451,7 +574,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>430</y>
+     <y>80</y>
      <width>331</width>
      <height>51</height>
     </rect>
@@ -467,6 +590,20 @@
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+color:rgb(255,255,255);
+background-color:rgb(1,124,194);
+border:0;
+border-radius:5px;
+}
+QPushButton:pressed{
+color:rgb(182, 180, 180);
+background-color:rgb(0, 46, 92);
+border:0;
+border-radius:5px;
+}</string>
       </property>
       <property name="text">
        <string>START</string>
@@ -484,54 +621,22 @@
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+color:rgb(255,255,255);
+background-color:rgb(233, 34, 34);
+border:0;
+border-radius:5px;
+}
+QPushButton:pressed{
+color:rgb(152, 152, 152);
+background-color:rgb(85, 30, 30);
+border:0;
+border-radius:5px;
+}</string>
+      </property>
       <property name="text">
        <string>STOP</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget_3">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>500</y>
-     <width>331</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_3">
-    <item>
-     <widget class="QLabel" name="steps_label">
-      <property name="text">
-       <string>Steps</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="steps_show">
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="time_label">
-      <property name="text">
-       <string>Time</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="time_show">
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -541,7 +646,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>540</y>
+     <y>470</y>
      <width>331</width>
      <height>31</height>
     </rect>
@@ -581,13 +686,30 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QLabel" name="time_label">
+      <property name="text">
+       <string>Time</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="time_show">
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QWidget" name="horizontalLayoutWidget_5">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>580</y>
+     <y>510</y>
      <width>331</width>
      <height>31</height>
     </rect>
@@ -621,51 +743,13 @@
     </item>
    </layout>
   </widget>
-  <widget class="QCheckBox" name="show_agent">
-   <property name="geometry">
-    <rect>
-     <x>21</x>
-     <y>390</y>
-     <width>111</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="text">
-    <string>Show_agent</string>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="constant_start">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>400</y>
-     <width>121</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="text">
-    <string>Constant_start</string>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="logo">
    <property name="geometry">
     <rect>
      <x>45</x>
      <y>15</y>
-     <width>60</width>
-     <height>60</height>
+     <width>51</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="text">
@@ -681,10 +765,10 @@
   <widget class="QLabel" name="title">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>120</x>
      <y>15</y>
-     <width>201</width>
-     <height>61</height>
+     <width>211</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
@@ -702,7 +786,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>620</y>
+     <y>540</y>
      <width>331</width>
      <height>31</height>
     </rect>
@@ -732,6 +816,48 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="show_more">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>280</y>
+     <width>10</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string>&gt;</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="show_task_info">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>39</y>
+     <width>371</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_task_info">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>6</y>
+     <width>371</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Task_ID | isexplored | iscompleted | istarget | Position</string>
+   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

@@ -6,3 +6,4 @@ bool     iscomplete
 bool     isexplored
 
 int32    task_power
+bool     isupdate
