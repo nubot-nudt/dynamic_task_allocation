@@ -5,4 +5,5 @@ int32    which_target
 bool     isvalid
 
 int32    robot_power
+float32  move_distance
 bool     isupdate

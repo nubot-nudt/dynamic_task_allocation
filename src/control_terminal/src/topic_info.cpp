@@ -39,6 +39,7 @@ void Topic_Info::publish(const ros::TimerEvent &)
             terminal2gazebo_pub_info_.robot_pos_x.push_back(terminal2gazebo_info.robot_pos_x[i]);
             terminal2gazebo_pub_info_.robot_pos_y.push_back(terminal2gazebo_info.robot_pos_y[i]);
         }
+        terminal2gazebo_pub_info_.is_noise=terminal2gazebo_info.is_noise;
         terminal2gazebo_info.isNew_allocation=false;
         terminal2gazebo_pub_.publish(terminal2gazebo_pub_info_);
     }
@@ -46,8 +47,7 @@ void Topic_Info::publish(const ros::TimerEvent &)
     //pub the terminal2robot_info, control the allocation mode
     terminal2robot_pub_info_.allocation_mode=terminal2robots_info.allocation_mode;
     terminal2robot_pub_info_.greedorprobability=terminal2robots_info.greedorprobability;
-    terminal2robot_pub_info_.recordornot=terminal2robots_info.recordornot;
-    terminal2robot_pub_info_.powerordistance=terminal2robots_info.powerordistance;
+    terminal2robot_pub_info_.marketorprediction=terminal2robots_info.marketorprediction;
 
     terminal2robot_pub_.publish(terminal2robot_pub_info_);
     for(unsigned i=0;i<terminal2robot_pub_info_.all_allocation_robot_info.size();i++)
@@ -76,6 +76,7 @@ void Topic_Info::update_allocation_info(const allocation_common::allocation2term
     terminal2robots_info.all_allocation_robot_info[topic_id].robot_mode=_msg->robot_info.robot_mode;
     terminal2robots_info.all_allocation_robot_info[topic_id].which_target=_msg->robot_info.which_target;
     terminal2robots_info.all_allocation_robot_info[topic_id].which_task=_msg->robot_info.which_task;
+    terminal2robots_info.all_allocation_robot_info[topic_id].move_distance=_msg->robot_info.move_distance;
 
     int _task_id=_msg->task_info.task_ID;
     if(_task_id!=-1)

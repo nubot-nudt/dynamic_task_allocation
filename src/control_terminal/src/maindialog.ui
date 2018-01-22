@@ -17,107 +17,6 @@
    <iconset resource="../source/source.qrc">
     <normaloff>:/logo.png</normaloff>:/logo.png</iconset>
   </property>
-  <widget class="QWidget" name="horizontalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>140</y>
-     <width>331</width>
-     <height>94</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0">
-       <widget class="QLabel" name="width">
-        <property name="text">
-         <string>Width</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="height">
-        <property name="text">
-         <string>Height</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="tasks_num">
-        <property name="text">
-         <string>Tasks</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QSpinBox" name="height_in">
-        <property name="focusPolicy">
-         <enum>Qt::StrongFocus</enum>
-        </property>
-        <property name="minimum">
-         <number>8</number>
-        </property>
-        <property name="maximum">
-         <number>20</number>
-        </property>
-        <property name="value">
-         <number>12</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="width_in">
-        <property name="focusPolicy">
-         <enum>Qt::StrongFocus</enum>
-        </property>
-        <property name="minimum">
-         <number>8</number>
-        </property>
-        <property name="maximum">
-         <number>20</number>
-        </property>
-        <property name="value">
-         <number>12</number>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QSpinBox" name="tasks_num_in">
-        <property name="focusPolicy">
-         <enum>Qt::StrongFocus</enum>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>100</number>
-        </property>
-        <property name="value">
-         <number>25</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <widget class="QPushButton" name="init_map">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="text">
-       <string>INIT_MAP</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="gridLayoutWidget_2">
    <property name="geometry">
     <rect>
@@ -130,6 +29,9 @@
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="2" column="2">
      <widget class="QLineEdit" name="dis_agent_3">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -354,6 +256,9 @@
     </item>
     <item row="2" column="0">
      <widget class="QLineEdit" name="dis_agent_1">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -514,6 +419,9 @@
     </item>
     <item row="2" column="4">
      <widget class="QLineEdit" name="dis_agent_5">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -521,6 +429,9 @@
     </item>
     <item row="2" column="3">
      <widget class="QLineEdit" name="dis_agent_4">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -528,6 +439,9 @@
     </item>
     <item row="2" column="1">
      <widget class="QLineEdit" name="dis_agent_2">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -535,6 +449,9 @@
     </item>
     <item row="5" column="0">
      <widget class="QLineEdit" name="dis_agent_6">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -542,6 +459,9 @@
     </item>
     <item row="5" column="1">
      <widget class="QLineEdit" name="dis_agent_7">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -549,6 +469,9 @@
     </item>
     <item row="5" column="2">
      <widget class="QLineEdit" name="dis_agent_8">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -556,6 +479,9 @@
     </item>
     <item row="5" column="3">
      <widget class="QLineEdit" name="dis_agent_9">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -563,6 +489,9 @@
     </item>
     <item row="5" column="4">
      <widget class="QLineEdit" name="dis_agent_10">
+      <property name="maxLength">
+       <number>5</number>
+      </property>
       <property name="readOnly">
        <bool>true</bool>
       </property>
@@ -858,6 +787,147 @@ border-radius:5px;
    <property name="text">
     <string>Task_ID | isexplored | iscompleted | istarget | Position</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>140</y>
+     <width>331</width>
+     <height>92</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="1" column="0">
+     <widget class="QLabel" name="width">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Width</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="height">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Height</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QSpinBox" name="width_in">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
+      <property name="minimum">
+       <number>8</number>
+      </property>
+      <property name="maximum">
+       <number>20</number>
+      </property>
+      <property name="value">
+       <number>12</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="tasks_num">
+      <property name="text">
+       <string>Tasks</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QRadioButton" name="is_noise">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>noise</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QSpinBox" name="tasks_num_in">
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>25</number>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QSpinBox" name="height_in">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
+      <property name="minimum">
+       <number>8</number>
+      </property>
+      <property name="maximum">
+       <number>20</number>
+      </property>
+      <property name="value">
+       <number>12</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3">
+     <widget class="QRadioButton" name="random_pos">
+      <property name="text">
+       <string>random_pos</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2" rowspan="2" colspan="2">
+     <widget class="QPushButton" name="init_map">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="text">
+       <string>INIT_MAP</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

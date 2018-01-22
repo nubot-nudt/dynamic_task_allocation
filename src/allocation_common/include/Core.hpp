@@ -67,6 +67,7 @@ struct Allocation_robot_info
     char   robot_mode;
     int    which_task;
     int    which_target;
+    float  move_distance;
     bool   isvalid;
     Allocation_robot_info()
     {
@@ -75,6 +76,7 @@ struct Allocation_robot_info
         robot_mode=IDLE;
         which_task=-1;
         which_target=-1;
+        move_distance=0;
         isvalid=true;
     }
     void robot_reset()
@@ -82,6 +84,7 @@ struct Allocation_robot_info
         robot_mode=RESET;
         which_task=-1;
         which_target=-1;
+        move_distance=0;
         isvalid=true;
     }
 };
@@ -135,6 +138,7 @@ struct Terminal2Gazebo_info
     std::vector<int>  robot_pos_y;
     std::vector<int>  task_pos_x;
     std::vector<int>  task_pos_y;
+    bool is_noise;
     bool isNew_allocation;
 };
 
@@ -142,8 +146,7 @@ struct Terminal2Robots_info
 {
     char allocation_mode;              //start 1, stop 0
     bool greedorprobability;           //greed 0, probability 1
-    bool recordornot;                  //not record 0, record 1
-    bool powerordistance;              //power 0, distance 1
+    bool marketorprediction;           //market 0, prediction 1
 
     std::vector<Allocation_robot_info> all_allocation_robot_info;
     std::vector<Allocation_task_info> all_allocation_task_info;

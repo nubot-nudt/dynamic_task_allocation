@@ -21,7 +21,6 @@ Task_Allocation::Task_Allocation(int argc,char** argv)
 
     num_task_valid_=0;
     num_target_valid_=0;
-    greedorprobability_=true;
     is_world_update_=false;
     all_tasks_.clear();
     all_robots_.clear();
@@ -33,7 +32,6 @@ Task_Allocation::~Task_Allocation()
 {
     num_task_valid_=0;
     num_target_valid_=0;
-    greedorprobability_=true;
     is_world_update_=false;
 }
 
@@ -64,7 +62,11 @@ void Task_Allocation::update_gazebo_world(const allocation_common::gazebo2world_
 
         //if the robot_ID is me
         if(_robot_info_tmp.robot_ID==my_robot_.gazebo_robot_info.robot_ID)
+        {
+            my_robot_.allocation_robot_info.move_distance=my_robot_.allocation_robot_info.move_distance
+                                                          +_robot_info_tmp.robot_pos.distance(my_robot_.gazebo_robot_info.robot_pos);
             my_robot_.gazebo_robot_info=_robot_info_tmp;
+        }
 
         //if the robot_ID is not me, it is a obstacle
         else
@@ -166,8 +168,7 @@ void Task_Allocation::update_terminal_info(const allocation_common::terminal2rob
 
     terminal_info_.allocation_mode=_msg->allocation_mode;
     terminal_info_.greedorprobability=_msg->greedorprobability;
-    terminal_info_.powerordistance=_msg->powerordistance;
-    terminal_info_.recordornot=_msg->recordornot;
+    terminal_info_.marketorprediction=_msg->marketorprediction;
 }
 
 /// \brief the process that robot to explore the task
@@ -186,7 +187,7 @@ bool Task_Allocation::try2explore_()
             int distance_1=my_robot_.gazebo_robot_info.robot_pos.distance(_my_task.gazebo_task_info.task_pos);
             int distance_2=all_robots_[i].gazebo_robot_info.robot_pos.distance(_my_task.gazebo_task_info.task_pos);
             //other robot's distance is littler
-            if(distance_1>=distance_2)
+            if(distance_1>distance_2)
             {
                 //drop this task
                 my_robot_.allocation_robot_info.robot_mode=IDLE;
@@ -249,7 +250,7 @@ bool Task_Allocation::try2hit_()
             int distance_1=my_robot_.gazebo_robot_info.robot_pos.distance(_my_target.gazebo_task_info.task_pos);
             int distance_2=all_robots_[i].gazebo_robot_info.robot_pos.distance(_my_target.gazebo_task_info.task_pos);
             //other robot's distance is littler
-            if(distance_1>=distance_2)
+            if(distance_1>distance_2)
             {
                 //drop this target
                 my_robot_.allocation_robot_info.robot_mode=IDLE;
@@ -318,7 +319,7 @@ bool Task_Allocation::choose2hitOrexplore_()
     if(num_target_valid_>0)
     {
         //make choice base on greed or probability
-        if(!greedorprobability_)
+        if(!terminal_info_.greedorprobability)
         {
             int less_distance=1000;
             //calculate the distance between my_robot and each uncomplete target
@@ -337,6 +338,7 @@ bool Task_Allocation::choose2hitOrexplore_()
             if(my_robot_.allocation_robot_info.which_target!=-1)
             {
                 my_robot_.allocation_robot_info.robot_mode=PLAN;
+                std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" selects target "<<my_robot_.allocation_robot_info.which_target<<std::endl;
                 return true;
             }
         }
@@ -393,7 +395,7 @@ bool Task_Allocation::choose2hitOrexplore_()
     //there is no available target, but there are tasks uncomplete
     if(num_task_valid_>0)
     {
-        if(!greedorprobability_)
+        if(!terminal_info_.greedorprobability)
         {
             int less_distance2=1000;
             //choose the nearest region for exploration
@@ -411,6 +413,7 @@ bool Task_Allocation::choose2hitOrexplore_()
             if(my_robot_.allocation_robot_info.which_task!=-1)
             {
                 my_robot_.allocation_robot_info.robot_mode=PLAN;
+                std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" selects task "<<my_robot_.allocation_robot_info.which_task<<std::endl;
                 return true;
             }
         }
@@ -554,6 +557,7 @@ void Task_Allocation::pubAllocation_info()
     _allocation_info.robot_info.which_task=my_robot_.allocation_robot_info.which_task;
     _allocation_info.robot_info.which_target=my_robot_.allocation_robot_info.which_target;
     _allocation_info.robot_info.isvalid=my_robot_.allocation_robot_info.isvalid;
+    _allocation_info.robot_info.move_distance=my_robot_.allocation_robot_info.move_distance;
 
     if(my_robot_.allocation_robot_info.which_target!=-1&&
        (my_robot_.allocation_robot_info.robot_mode==EXECUTE||my_robot_.allocation_robot_info.robot_mode==HIT||my_robot_.allocation_robot_info.robot_mode==DAMAGE))
@@ -563,6 +567,11 @@ void Task_Allocation::pubAllocation_info()
         {
             _target_info.current_distance=my_robot_.gazebo_robot_info.robot_pos.distance(all_tasks_[my_robot_.allocation_robot_info.which_target].gazebo_task_info.task_pos);
             _allocation_info.task_info.current_distance=_target_info.current_distance;
+            _allocation_info.task_info.task_ID=_target_info.task_ID;
+            _allocation_info.task_info.known_power=_target_info.known_power;
+            _allocation_info.task_info.istarget=_target_info.istarget;
+            _allocation_info.task_info.iscomplete=_target_info.iscomplete;
+            _allocation_info.task_info.isexplored=_target_info.isexplored;
         }
 
         else
@@ -583,6 +592,11 @@ void Task_Allocation::pubAllocation_info()
         {
             _task_info.current_distance=my_robot_.gazebo_robot_info.robot_pos.distance(all_tasks_[my_robot_.allocation_robot_info.which_task].gazebo_task_info.task_pos);
             _allocation_info.task_info.current_distance=_task_info.current_distance;
+            _allocation_info.task_info.task_ID=_task_info.task_ID;
+            _allocation_info.task_info.known_power=_task_info.known_power;
+            _allocation_info.task_info.istarget=_task_info.istarget;
+            _allocation_info.task_info.iscomplete=_task_info.iscomplete;
+            _allocation_info.task_info.isexplored=_task_info.isexplored;
         }
 
         else
@@ -621,7 +635,6 @@ void Task_Allocation::stopAllocation()
     //reset
     num_task_valid_=0;
     num_target_valid_=0;
-    greedorprobability_=true;
     is_world_update_=false;
     all_tasks_.clear();
     all_robots_.clear();

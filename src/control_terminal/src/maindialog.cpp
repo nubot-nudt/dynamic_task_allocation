@@ -27,7 +27,11 @@ MainDialog::MainDialog(Terminal2Gazebo_info &terminal2gazebo_info, Terminal2Robo
     num_robots_=0;
 
     for(int i=0;i<MAXNUM_AGENT;i++)
+    {
         agent_vaild_[i]->setCheckable(true);
+        agent_distance_[i]->setText("0");
+    }
+
     this->setFixedSize(370,580);
 
     //time initialization
@@ -36,6 +40,8 @@ MainDialog::MainDialog(Terminal2Gazebo_info &terminal2gazebo_info, Terminal2Robo
     is_robot_exsit_=false;
 
     terminal2robots_info_->allocation_mode=ALLOCATION_STOP;
+    terminal2robots_info_->greedorprobability=1;
+    terminal2robots_info_->marketorprediction=1;
 
     terminal2gazebo_info_->isNew_allocation=false;
     terminal2gazebo_info_->robot_pos_x.clear();
@@ -110,6 +116,7 @@ void MainDialog::timerUpdate()
             default:break;
             }
             agent_vaild_[i]->setText(current_mode_);
+            agent_distance_[i]->setText(QString::number(terminal2robots_info_->all_allocation_robot_info[i].move_distance));
         }
     //show task_information
     QString _allShow_combine;
@@ -125,10 +132,10 @@ void MainDialog::timerUpdate()
 
         Allocation_task_info _tmp_task_info=terminal2robots_info_->all_allocation_task_info[i];
         if(i<10)
-            task_info_show_[i]=QString(" Task.%1  |          %2          |            %3           |       %4        |  (%5, %6)").arg(_tmp_task_info.current_distance).arg(_tmp_task_info.isexplored)
+            task_info_show_[i]=QString(" Task.%1  |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
                            .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
         else
-            task_info_show_[i]=QString("Task.%1 |          %2          |            %3           |       %4        |  (%5, %6)").arg(_tmp_task_info.current_distance).arg(_tmp_task_info.isexplored)
+            task_info_show_[i]=QString("Task.%1 |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
                            .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
         _allShow_combine=_allShow_combine+task_info_show_[i]+"\n";
     }
@@ -180,10 +187,10 @@ bool MainDialog::on_init_map_clicked()
 
     //initialize the position of task randomly
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-    int num=0;
-    int task_power=0;
-    int x_num=ui->height_in->value();
-    int y_num=ui->width_in->value();
+    int  num=0;
+    int  task_power=0;
+    int  x_num=ui->height_in->value();
+    int  y_num=ui->width_in->value();
     lab_tasks_=QVector <QVector<int>> (x_num,QVector<int>(y_num,-1));
 
     for(int i=0;i<num_tasks_;i++)
@@ -209,16 +216,60 @@ bool MainDialog::on_init_map_clicked()
     }
     ui->tasks_show->setText(QString::number(num_tasks_));
 
+    int  _tmp;
+    bool _tmp_pos[x_num][y_num]={0};
     //initialize the position of robot
     for(int i=0;i<num_robots_;i++)
     {
-        //robots place the left of allocation map
-        terminal2gazebo_info_->robot_pos_x.push_back(-x_num/2-1);
-        terminal2gazebo_info_->robot_pos_y.push_back(-y_num/2+i);
+        //place the robots on left of allocation map
+        if(!ui->random_pos->isChecked())
+        {
+            terminal2gazebo_info_->robot_pos_x.push_back(-x_num/2-1);
+            terminal2gazebo_info_->robot_pos_y.push_back(-y_num/2+i);
+        }
+        //place the robots on the random position around the map
+        else
+        {
+            _tmp=qrand()%(4);
+            if(_tmp==0)
+            {
+                terminal2gazebo_info_->robot_pos_x.push_back(-x_num/2-1);
+                while(_tmp_pos[0][_tmp])
+                    _tmp=qrand()%(y_num);
+                terminal2gazebo_info_->robot_pos_y.push_back(_tmp-y_num/2);
+                _tmp_pos[0][_tmp]=true;
+            }
+            else if(_tmp==1)
+            {
+                terminal2gazebo_info_->robot_pos_x.push_back(x_num/2+1);
+                while(_tmp_pos[x_num-1][_tmp])
+                    _tmp=qrand()%(y_num);
+                terminal2gazebo_info_->robot_pos_y.push_back(_tmp-y_num/2);
+                _tmp_pos[x_num-1][_tmp]=true;
+            }
+            else if(_tmp==2)
+            {
+                terminal2gazebo_info_->robot_pos_y.push_back(-y_num/2-1);
+                while(_tmp_pos[_tmp][0])
+                    _tmp=qrand()%(x_num);
+                terminal2gazebo_info_->robot_pos_x.push_back(_tmp-x_num/2);
+                _tmp_pos[_tmp][0]=true;
+            }
+            else
+            {
+                terminal2gazebo_info_->robot_pos_y.push_back(y_num/2+1);
+                while(_tmp_pos[_tmp][y_num-1])
+                    _tmp=qrand()%(x_num);
+                terminal2gazebo_info_->robot_pos_x.push_back(_tmp-x_num/2);
+                _tmp_pos[_tmp][y_num-1]=true;
+            }
+        }
 
         //initialize the power of robot according to the button
         terminal2robots_info_->all_allocation_robot_info[i].robot_power=agent_power_[i]->value();
     }
+
+    terminal2gazebo_info_->is_noise=ui->is_noise;
     terminal2gazebo_info_->isNew_allocation=true;
 
     return true;
@@ -240,6 +291,7 @@ void MainDialog::on_start_pause_clicked()
         ui->start_pause->setText("PAUSE");
         terminal2robots_info_->allocation_mode=ALLOCATION_START;
         terminal2robots_info_->greedorprobability=ui->probability->isChecked();
+        terminal2robots_info_->marketorprediction=ui->prediction->isChecked();
 
         current_time_.start();
         timer_->start(100);
@@ -282,6 +334,7 @@ void MainDialog::on_stop_clicked()
     {
         agent_vaild_[i]->setText("Agent"+agent_str[i]);
         agent_vaild_[i]->setChecked(false);
+        agent_distance_[i]->setText("0");
     }
 }
 

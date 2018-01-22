@@ -43,9 +43,6 @@ public:
     int num_target_valid_;                         //the number of target that had not been destroyed
 
     bool is_world_update_;
-    bool greedorprobability_;                      //greed 0, probability 1
-    bool recordornot_;                             //not record 0, record 1
-    bool powerordistance_;                         //power 0, distance 1
 
     ros::Subscriber  gazebo2world_sub_;
     ros::Subscriber  terminal2robot_sub_;

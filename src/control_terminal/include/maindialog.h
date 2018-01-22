@@ -49,7 +49,7 @@ public:
 
     QTime   current_time_;
     QString current_mode_;
-    double  duration_time_;                         //record the duration time
+    double  duration_time_;                          //record the duration time
     double  tmp_time_;
     bool    is_robot_exsit_;                         //is robot exsit in the gazebo
 

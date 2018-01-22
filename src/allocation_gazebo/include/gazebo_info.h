@@ -24,6 +24,7 @@
 #include <geometry_msgs/Twist.h>
 
 #include <allocation_common/gazebo2world_info.h>
+#include <allocation_common/gazebo2terminal_info.h>
 #include <allocation_common/gazebo_robot_info.h>
 #include <allocation_common/gazebo_task_info.h>
 #include <allocation_common/allocation_task_info.h>

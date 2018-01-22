@@ -34,8 +34,8 @@ private:
     double                                dribble_P_;
     double                                dribble_I_;
     double                                dribble_D_;
-    double                                I_term_max_;                         // maximum I term
-    double                                I_term_min_;                         // minimum I term
+    double                                I_term_max_;                         //maximum I term
+    double                                I_term_min_;                         //minimum I term
 
     int                                   robotID_;
     dynamic_reconfigure::Server<allocation_gazebo::Robot_GazeboConfig> *reconfigureServer_;

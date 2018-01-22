@@ -139,6 +139,11 @@ void World_Gazebo::terminal_info_CB(const allocation_common::terminal2gazebo_inf
     std::string task_name;
     std::string task_pose;
 
+    if(_msg->is_noise)
+    {
+        noise_rate_=0.05;
+        noise_scale_=0.03;
+    }
     // each robot has different model, so we can use the factory msg to spwan robot model
     msgs::Factory  factory_msg;
     for(int i=0;i<_msg->robot_pos_x.size();i++)
@@ -211,6 +216,7 @@ void World_Gazebo::terminal_info_CB(const allocation_common::terminal2gazebo_inf
 bool World_Gazebo::update_model_info(void)
 {
     allocation_common::gazebo2world_info    _gazebo2world_info;
+
     if(ModelStatesCB_flag_)
     {
         for(int i=0; i<model_count_;i++)
