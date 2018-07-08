@@ -65,6 +65,7 @@ struct Allocation_robot_info
     /// these information are obtained from task_allocation
     int    robot_ID;
     char   robot_mode;
+    /// for the prediction method
     int    which_task;
     int    which_target;
     float  move_distance;

@@ -36,7 +36,6 @@ public:
 
 //    std::vector<Agent> init_agents_;             //record initial agent parameters
 //    std::vector<Task>  init_tasks_;              //record initial task parameters
-
 //    std::vector<int>   lab_agent_;               //record the number of agent that choose
 
     int num_task_valid_;                           //the number of task that uncompleted

@@ -149,7 +149,7 @@ void Task_Allocation::update_terminal_info(const allocation_common::terminal2rob
                 _task_info_tmp.known_power=_msg->all_allocation_task_info[j].known_power;
                 _task_info_tmp.task_power=_msg->all_allocation_task_info[j].task_power;
 
-                //            std::cout<<_task_info_tmp.isexplored<<std::endl;
+                //std::cout<<_task_info_tmp.isexplored<<std::endl;
                 all_tasks_[_task_info_tmp.task_ID].allocation_task_info=_task_info_tmp;
             }
         }
@@ -472,7 +472,8 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
         stopAllocation();
     else if(terminal_info_.allocation_mode==ALLOCATION_PAUSE)
         pauseAllocation();
-    else if(terminal_info_.allocation_mode==ALLOCATION_START)
+    //using prediction method to complete the allocation
+    else if(terminal_info_.allocation_mode==ALLOCATION_START&&terminal_info_.marketorprediction)
     {
         if(!my_robot_.allocation_robot_info.isvalid)
         {
@@ -524,6 +525,17 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
             if(my_robot_.allocation_robot_info.robot_mode==HIT&&_is_target_completed)
                 my_robot_.allocation_robot_info.robot_mode=IDLE;
             my_robot_.allocation_robot_info.which_target=-1;
+        }
+    }
+    //using market-base method to complete the allocation
+    else if(terminal_info_.allocation_mode==ALLOCATION_START&&terminal_info_.marketorprediction)
+    {
+        if(!my_robot_.allocation_robot_info.isvalid)
+        {
+            //if this robot is inviald, stop the loopcontrol
+            std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" is destroyed!"<<std::endl;
+            allocation_timer_.stop();
+            return;
         }
     }
     setVelCommond();

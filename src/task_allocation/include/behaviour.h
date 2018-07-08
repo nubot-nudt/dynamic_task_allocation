@@ -12,7 +12,7 @@ public:
 
     float basicPDControl(float pgain,float dgain, float err,float err1, float maxval);
     void move2Position(float pval, float dval, DPoint target, float maxvel,
-                       const DPoint  & _robot_pos,const Angle  & _robot_ori,DPoint realtarvel=DPoint(0,0));
+                       const DPoint  & _robot_pos,const Angle  & _robot_ori,bool avoid_obs, DPoint realtarvel=DPoint(0,0));
     void move2Positionwithobs(float pval, float dval, DPoint target, float maxvel,
                               const DPoint & _robot_pos, const Angle & _robot_ori);
     void rotate2AbsOrienation(float pval, float dval, float orientation,float maxw,const Angle & _robot_ori);

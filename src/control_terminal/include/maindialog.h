@@ -10,7 +10,6 @@
 #include <QMessageBox>
 #include <QSpinBox>
 #include <QDebug>
-#include <QVector>
 #include <topic_info.h>
 #include <stdio.h>
 

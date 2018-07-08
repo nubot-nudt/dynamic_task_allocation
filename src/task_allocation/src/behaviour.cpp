@@ -43,14 +43,14 @@ float Behaviour::basicPDControl(float pgain,float dgain, float err,float err1, f
 
 /// \brief tranlation control move to the target point by using PD control
 void Behaviour::move2Position(float pval, float dval, DPoint target, float maxvel,
-                         const DPoint & _robot_pos,const Angle & _robot_ori,DPoint realtarvel)
+                         const DPoint & _robot_pos, const Angle & _robot_ori, bool avoid_obs, DPoint realtarvel)
 {
-
+#if 0
     float _pos_e = _robot_pos.distance(target);
     DPoint relposoftarget =  target  - _robot_pos;
     float tar_theta = relposoftarget.angle().radian_;
     static float _pos_e1 = 0;
-    float speed  = 0;
+    float  speed = 0;
     speed = basicPDControl(pval,dval,_pos_e,_pos_e1,maxvel);
 //    app_vx_ =  speed*cos(tar_theta - _robot_ori.radian_)+ realtarvel.x_;
 //    app_vy_ =  speed*sin(tar_theta - _robot_ori.radian_)+ realtarvel.y_;
@@ -65,6 +65,48 @@ void Behaviour::move2Position(float pval, float dval, DPoint target, float maxve
         app_vy_=app_vy_*maxvel/v;
     }
     _pos_e1  = _pos_e;
+#else
+    static float _pos_e1 = 0;
+    static bool move_x=true;
+    static bool move_y=true;
+    float _pos_e=0;
+    float  speed = 0;
+
+    if(fabs(_robot_pos.x_-target.x_)>0.5)
+        move_x=true;
+    else if(fabs(_robot_pos.x_-target.x_)<0.1)
+        move_x=false;
+
+    if(fabs(_robot_pos.y_-target.y_)>0.5)
+        move_y=true;
+    else if(fabs(_robot_pos.y_-target.y_)<0.1)
+        move_y=false;
+
+    if(move_x&&!avoid_obs)
+    {
+        _pos_e = target.x_-_robot_pos.x_;
+        speed = basicPDControl(pval,dval,_pos_e,_pos_e1,maxvel);
+        app_vx_ = speed+realtarvel.x_;
+        app_vy_ = 0;
+    }
+    else if(move_y&&!avoid_obs)
+    {
+        _pos_e = target.y_-_robot_pos.y_;
+        speed = basicPDControl(pval,dval,_pos_e,_pos_e1,maxvel);
+        app_vy_ = speed+realtarvel.y_;
+        app_vx_ = 0;
+    }
+    else
+    {
+        _pos_e = _robot_pos.distance(target);
+        DPoint relposoftarget =  target  - _robot_pos;
+        float tar_theta = relposoftarget.angle().radian_;
+        speed = basicPDControl(pval,dval,_pos_e,_pos_e1,maxvel);
+        app_vx_ =  speed*cos(tar_theta)+ realtarvel.x_;
+        app_vy_ =  speed*sin(tar_theta)+ realtarvel.y_;
+    }
+    _pos_e1  = _pos_e;
+#endif
 }
 
 /// \brief move to the target point with avoiding obstacles
@@ -76,11 +118,11 @@ void Behaviour::move2Positionwithobs(float pval, float dval, DPoint target, floa
 
     if(m_subtargets_.subtargets_pos_==target)
     {
-        move2Position(pval,dval,target,maxvel,_robot_pos,_robot_ori);
+        move2Position(pval,dval,target,maxvel,_robot_pos,_robot_ori,false);
         theta = thetaof2p(_robot_pos,target);
     }
     else
-        move2Position(pval,dval,m_subtargets_.subtargets_pos_,maxvel,_robot_pos,_robot_ori);
+        move2Position(pval,dval,m_subtargets_.subtargets_pos_,maxvel,_robot_pos,_robot_ori,true);
 }
 
 /// \brief rotate to the target orientation by using PD control

@@ -59,7 +59,7 @@ Subtargets::subtarget(DPoint target_pos_, DPoint robot_pos_)
     for(int c = Obstacles_->size();c<9;c++)
         Obstacles_->push_back(DPoint(10000,10000));
 
-    double radius_robot=0.5,radius_Obs=0.5;
+    double radius_robot=0.7,radius_Obs=0.7;
     double a[9],b[9];
     DPoint point_=target_pos_- robot_pos_;
     int i=0,j=0,k=0;

@@ -57,19 +57,22 @@ MainDialog::MainDialog(Terminal2Gazebo_info &terminal2gazebo_info, Terminal2Robo
 MainDialog::~MainDialog()
 {
     delete ui;
-    //get the task_allocation_node pid
-    ROS_INFO("Delete the task_allocation_node");
-    FILE *fp=NULL;
-    char pid_line[64];
-    fp=popen("pidof task_allocation_node","r");
-    char *tmp=fgets(pid_line,64,fp);
+    if(is_robot_exsit_)
+    {
+        //get the task_allocation_node pid
+        ROS_INFO("Delete the task_allocation_node");
+        FILE *fp=NULL;
+        char pid_line[64];
+        fp=popen("pidof task_allocation_node","r");
+        char *tmp=fgets(pid_line,64,fp);
 
-    //kill the pids
-    char pid_kill[128];
-    strcpy(pid_kill, "kill ");
-    strcat(pid_kill, pid_line);
-    fp=popen(pid_kill,"r");
-    pclose(fp);
+        //kill the pids
+        char pid_kill[128];
+        strcpy(pid_kill, "kill ");
+        strcat(pid_kill, pid_line);
+        fp=popen(pid_kill,"r");
+        pclose(fp);
+    }
 }
 
 /// \brief initialize the number of agents and map_height, map_width, put them in the rosparam, and all node can use
