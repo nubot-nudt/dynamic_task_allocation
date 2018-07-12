@@ -76,6 +76,8 @@ void Topic_Info::update_allocation_info(const allocation_common::allocation2term
     terminal2robots_info.all_allocation_robot_info[topic_id].robot_mode=_msg->robot_info.robot_mode;
     terminal2robots_info.all_allocation_robot_info[topic_id].which_target=_msg->robot_info.which_target;
     terminal2robots_info.all_allocation_robot_info[topic_id].which_task=_msg->robot_info.which_task;
+//    terminal2robots_info.all_allocation_robot_info[topic_id].expect_pos.x_=_msg->robot_info.expect_pos.position.x;
+//    terminal2robots_info.all_allocation_robot_info[topic_id].expect_pos.y_=_msg->robot_info.expect_pos.position.y;
     terminal2robots_info.all_allocation_robot_info[topic_id].move_distance=_msg->robot_info.move_distance;
 
     int _task_id=_msg->task_info.task_ID;
@@ -83,6 +85,7 @@ void Topic_Info::update_allocation_info(const allocation_common::allocation2term
     {
         terminal2robots_info.all_allocation_task_info[_task_id].current_distance=_msg->task_info.current_distance;
         terminal2robots_info.all_allocation_task_info[_task_id].iscomplete=_msg->task_info.iscomplete;
+        terminal2robots_info.all_allocation_task_info[_task_id].isallocated=_msg->task_info.isallocated;
         terminal2robots_info.all_allocation_task_info[_task_id].isexplored=_msg->task_info.isexplored;
         terminal2robots_info.all_allocation_task_info[_task_id].istarget=_msg->task_info.istarget;
         terminal2robots_info.all_allocation_task_info[_task_id].known_power=_msg->task_info.known_power;
@@ -98,17 +101,21 @@ void Topic_Info::update_allocation_info(const allocation_common::allocation2term
     _tmp_robot_info.robot_mode=_msg->robot_info.robot_mode;
     _tmp_robot_info.which_target=_msg->robot_info.which_target;
     _tmp_robot_info.which_task=_msg->robot_info.which_task;
+    _tmp_robot_info.expect_pos.position.x=_msg->robot_info.expect_pos.position.x;
+    _tmp_robot_info.expect_pos.position.y=_msg->robot_info.expect_pos.position.y;
     _tmp_robot_info.isupdate=true;
 
     //the robot_power is certained by control_terminal, not task_allocation
     _tmp_robot_info.robot_power=terminal2robots_info.all_allocation_robot_info[_tmp_robot_info.robot_ID].robot_power;
     terminal2robot_pub_info_.all_allocation_robot_info[topic_id]=_tmp_robot_info;
+//    std::cout<<_tmp_robot_info.robot_ID<<" "<<topic_id<<std::endl;
 
     if(_msg->task_info.task_ID!=-1)
     {
         _tmp_task_info.current_distance=_msg->task_info.current_distance;
         _tmp_task_info.iscomplete=_msg->task_info.iscomplete;
         _tmp_task_info.isexplored=_msg->task_info.isexplored;
+        _tmp_task_info.isallocated=_msg->task_info.isallocated;
         _tmp_task_info.istarget=_msg->task_info.istarget;
         _tmp_task_info.known_power=_msg->task_info.known_power;
         _tmp_task_info.task_ID=_msg->task_info.task_ID;

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>580</height>
+    <width>990</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,14 +21,14 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>240</y>
-     <width>331</width>
-     <height>221</height>
+     <y>330</y>
+     <width>451</width>
+     <height>281</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="focusPolicy">
@@ -39,7 +39,7 @@
      <widget class="QLineEdit" name="dis_agent_3">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -57,7 +57,7 @@
      <widget class="QSpinBox" name="power_10">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -84,7 +84,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -99,7 +99,7 @@
      <widget class="QSpinBox" name="power_9">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -120,7 +120,7 @@
      <widget class="QSpinBox" name="power_2">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -147,7 +147,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -162,7 +162,7 @@
      <widget class="QSpinBox" name="power_1">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -189,7 +189,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -204,7 +204,7 @@
      <widget class="QSpinBox" name="power_5">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -231,7 +231,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -246,7 +246,7 @@
      <widget class="QSpinBox" name="power_4">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -273,7 +273,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -288,7 +288,7 @@
      <widget class="QSpinBox" name="power_3">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -309,7 +309,7 @@
      <widget class="QLineEdit" name="dis_agent_1">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -333,7 +333,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -354,7 +354,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -369,7 +369,7 @@
      <widget class="QSpinBox" name="power_8">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -396,7 +396,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -411,7 +411,7 @@
      <widget class="QSpinBox" name="power_7">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -438,7 +438,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -453,7 +453,7 @@
      <widget class="QSpinBox" name="power_6">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -480,7 +480,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -495,7 +495,7 @@
      <widget class="QLineEdit" name="dis_agent_5">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -513,7 +513,7 @@
      <widget class="QLineEdit" name="dis_agent_4">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -531,7 +531,7 @@
      <widget class="QLineEdit" name="dis_agent_2">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -549,7 +549,7 @@
      <widget class="QLineEdit" name="dis_agent_6">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -567,7 +567,7 @@
      <widget class="QLineEdit" name="dis_agent_7">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -585,7 +585,7 @@
      <widget class="QLineEdit" name="dis_agent_8">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -603,7 +603,7 @@
      <widget class="QLineEdit" name="dis_agent_9">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -621,7 +621,7 @@
      <widget class="QLineEdit" name="dis_agent_10">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -641,9 +641,9 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>80</y>
-     <width>331</width>
-     <height>51</height>
+     <y>110</y>
+     <width>451</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="font">
@@ -659,11 +659,6 @@
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>13</pointsize>
-       </font>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
@@ -695,11 +690,6 @@ border-radius:5px;
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="font">
-       <font>
-        <pointsize>13</pointsize>
-       </font>
-      </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
@@ -728,14 +718,14 @@ border-radius:5px;
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>470</y>
-     <width>331</width>
-     <height>33</height>
+     <y>620</y>
+     <width>451</width>
+     <height>35</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>13</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -743,7 +733,7 @@ border-radius:5px;
      <widget class="QLabel" name="tasks_label">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -755,7 +745,7 @@ border-radius:5px;
      <widget class="QLineEdit" name="tasks_show">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -770,7 +760,7 @@ border-radius:5px;
      <widget class="QLabel" name="target_label">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -782,7 +772,7 @@ border-radius:5px;
      <widget class="QLineEdit" name="target_show">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -797,7 +787,7 @@ border-radius:5px;
      <widget class="QLabel" name="time_label">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -809,7 +799,7 @@ border-radius:5px;
      <widget class="QLineEdit" name="time_show">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -826,14 +816,14 @@ border-radius:5px;
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>510</y>
-     <width>331</width>
-     <height>31</height>
+     <y>660</y>
+     <width>451</width>
+     <height>37</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>13</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -841,7 +831,7 @@ border-radius:5px;
      <widget class="QRadioButton" name="prediction">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -859,7 +849,7 @@ border-radius:5px;
      <widget class="QRadioButton" name="market_base">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -880,8 +870,8 @@ border-radius:5px;
     <rect>
      <x>45</x>
      <y>15</y>
-     <width>51</width>
-     <height>51</height>
+     <width>81</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="font">
@@ -902,15 +892,15 @@ border-radius:5px;
   <widget class="QLabel" name="title">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>15</y>
-     <width>211</width>
+     <x>160</x>
+     <y>30</y>
+     <width>311</width>
      <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
+     <pointsize>19</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -923,14 +913,14 @@ border-radius:5px;
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>540</y>
-     <width>331</width>
-     <height>31</height>
+     <y>700</y>
+     <width>451</width>
+     <height>37</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>13</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -938,7 +928,7 @@ border-radius:5px;
      <widget class="QRadioButton" name="probability">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -956,7 +946,7 @@ border-radius:5px;
      <widget class="QRadioButton" name="greed">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -972,15 +962,15 @@ border-radius:5px;
   <widget class="QPushButton" name="show_more">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>280</y>
+     <x>480</x>
+     <y>360</y>
      <width>10</width>
      <height>60</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <pointsize>8</pointsize>
     </font>
    </property>
    <property name="focusPolicy">
@@ -993,15 +983,15 @@ border-radius:5px;
   <widget class="QTextBrowser" name="show_task_info">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>39</y>
-     <width>371</width>
-     <height>531</height>
+     <x>500</x>
+     <y>50</y>
+     <width>481</width>
+     <height>691</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="focusPolicy">
@@ -1011,15 +1001,15 @@ border-radius:5px;
   <widget class="QLabel" name="label_task_info">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>6</y>
-     <width>371</width>
+     <x>500</x>
+     <y>10</y>
+     <width>551</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="text">
@@ -1030,14 +1020,14 @@ border-radius:5px;
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>140</y>
-     <width>331</width>
-     <height>98</height>
+     <y>200</y>
+     <width>451</width>
+     <height>121</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>13</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
@@ -1051,7 +1041,7 @@ border-radius:5px;
       </property>
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -1069,7 +1059,7 @@ border-radius:5px;
       </property>
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -1080,14 +1070,14 @@ border-radius:5px;
     <item row="1" column="1">
      <widget class="QSpinBox" name="width_in">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -1108,7 +1098,7 @@ border-radius:5px;
      <widget class="QLabel" name="tasks_num">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -1126,7 +1116,7 @@ border-radius:5px;
       </property>
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -1139,9 +1129,15 @@ border-radius:5px;
     </item>
     <item row="2" column="1">
      <widget class="QSpinBox" name="tasks_num_in">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -1161,14 +1157,14 @@ border-radius:5px;
     <item row="0" column="1">
      <widget class="QSpinBox" name="height_in">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="focusPolicy">
@@ -1189,7 +1185,7 @@ border-radius:5px;
      <widget class="QRadioButton" name="random_pos">
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
@@ -1210,7 +1206,7 @@ border-radius:5px;
       </property>
       <property name="font">
        <font>
-        <pointsize>13</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="focusPolicy">

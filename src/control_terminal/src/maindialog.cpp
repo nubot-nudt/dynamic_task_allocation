@@ -32,7 +32,7 @@ MainDialog::MainDialog(Terminal2Gazebo_info &terminal2gazebo_info, Terminal2Robo
         agent_distance_[i]->setText("0");
     }
 
-    this->setFixedSize(370,580);
+    this->setFixedSize(490,750);
 
     //time initialization
     duration_time_=0;
@@ -134,12 +134,25 @@ void MainDialog::timerUpdate()
             _uncomplete_task++;
 
         Allocation_task_info _tmp_task_info=terminal2robots_info_->all_allocation_task_info[i];
-        if(i<10)
-            task_info_show_[i]=QString(" Task.%1  |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
-                           .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+        if(terminal2robots_info_->marketorprediction)
+        {
+            if(i<10)
+                task_info_show_[i]=QString(" Task.%1  |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
+                        .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+            else
+                task_info_show_[i]=QString("Task.%1 |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
+                        .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+        }
         else
-            task_info_show_[i]=QString("Task.%1 |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
-                           .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+        {
+            if(i<10)
+                task_info_show_[i]=QString(" Task.%1  |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isallocated)
+                        .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+            else
+                task_info_show_[i]=QString("Task.%1 |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isallocated)
+                        .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+        }
+
         _allShow_combine=_allShow_combine+task_info_show_[i]+"\n";
     }
     ui->show_task_info->setText(_allShow_combine);
@@ -343,14 +356,14 @@ void MainDialog::on_stop_clicked()
 
 void MainDialog::on_show_more_clicked()
 {
-    if(this->size().width()==750)
+    if(this->size().width()==990)
     {
-        this->setFixedWidth(370);
+        this->setFixedWidth(490);
         ui->show_more->setText(">");
     }
     else
     {
-        this->setFixedWidth(750);
+        this->setFixedWidth(990);
         ui->show_more->setText("<");
     }
 }
