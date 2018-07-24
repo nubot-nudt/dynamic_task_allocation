@@ -54,6 +54,7 @@ public:
     bool is_task_explored;
     bool is_target_dropped;
     bool is_task_dropped;
+    bool is_all_completed;
 
     ros::Subscriber  gazebo2world_sub_;
     ros::Subscriber  terminal2robot_sub_;

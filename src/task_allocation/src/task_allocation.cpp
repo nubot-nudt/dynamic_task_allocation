@@ -11,12 +11,12 @@ Task_Allocation::Task_Allocation(int argc,char** argv)
     ROS_INFO("start %s task_allocation_process",robot_name.c_str());
 
     nh_ = new ros::NodeHandle();
-    robot2gazebo_pub_       =nh_->advertise<allocation_common::robot2gazebo_info>(robot_name+"/task_allocation/robot2gazebo_info",10);
-    //robot2task_pub_         =nh_->advertise<allocation_common::allocation_task_info>("/task_allocation/task_state_info",1);
+    robot2gazebo_pub_ =nh_->advertise<allocation_common::robot2gazebo_info>(robot_name+"/task_allocation/robot2gazebo_info",10);
+    //robot2task_pub_ =nh_->advertise<allocation_common::allocation_task_info>("/task_allocation/task_state_info",1);
     allocation2terminal_pub_=nh_->advertise<allocation_common::allocation2terminal_info>(robot_name+"/task_allocation/allocation2terminal_info",10);
     gazebo2world_sub_  =nh_->subscribe("/allocation_gazebo/gazebo2world_info",10,&Task_Allocation::update_gazebo_world,this);
     terminal2robot_sub_=nh_->subscribe("/control_terminal/terminal2robot_info",10,&Task_Allocation::update_terminal_info,this);
-    allocation_timer_  =nh_->createTimer(ros::Duration(0.03),&Task_Allocation::loopControl,this);
+    allocation_timer_  =nh_->createTimer(ros::Duration(0.05),&Task_Allocation::loopControl,this);
     my_behaviour_=new Behaviour(obstacles_);
 
     num_task_valid_=0;
@@ -28,6 +28,7 @@ Task_Allocation::Task_Allocation(int argc,char** argv)
     is_target_completed=false;
     is_task_explored=false;
     is_world_update_=false;
+    is_all_completed=false;
     all_tasks_.clear();
     all_robots_.clear();
 
@@ -45,6 +46,7 @@ Task_Allocation::~Task_Allocation()
     is_target_completed=false;
     is_task_explored=false;
     is_world_update_=false;
+    is_all_completed=false;
 }
 
 /// \brief update the model sate from gazebo msg
@@ -142,7 +144,6 @@ void Task_Allocation::update_terminal_info(const allocation_common::terminal2rob
                 _robot_info_tmp.which_task=_msg->all_allocation_robot_info[i].which_task;
                 _robot_info_tmp.expect_pos.x_=_msg->all_allocation_robot_info[i].expect_pos.position.x;
                 _robot_info_tmp.expect_pos.y_=_msg->all_allocation_robot_info[i].expect_pos.position.y;
-
 
                 all_robots_[_robot_info_tmp.robot_ID].allocation_robot_info=_robot_info_tmp;
             }
@@ -384,6 +385,7 @@ bool Task_Allocation::try2hit_()
         //if the target power bigger than the robot power, the robot will be destroyed
         if(_my_target.allocation_task_info.task_power>my_robot_.allocation_robot_info.robot_power)
         {
+            std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" is destroyed!"<<std::endl;
             my_robot_.allocation_robot_info.robot_mode=DAMAGE;
             my_robot_.allocation_robot_info.isvalid=false;
             all_tasks_[_which_target].allocation_task_info.known_power=my_robot_.allocation_robot_info.robot_power+1;
@@ -670,43 +672,65 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
         stopAllocation();
     else if(terminal_info_.allocation_mode==ALLOCATION_PAUSE)
         pauseAllocation();
+
+    if(is_all_completed)
+        return;
+
+    if(!my_robot_.allocation_robot_info.isvalid)
+    {
+        //when the robot has been destroyed, the taskes in the task-list and target-list will be released (market-base method)
+        if(!terminal_info_.marketorprediction)
+        {
+            if(my_robot_.allocation_robot_info.target_list.size())
+            {
+                int _which_target=my_robot_.allocation_robot_info.target_list.back();
+                all_tasks_[_which_target].allocation_task_info.isallocated=false;
+                bid_new_target_=true;
+                pubAllocation_info();
+                my_robot_.allocation_robot_info.target_list.pop_back();
+            }
+            else if(my_robot_.allocation_robot_info.task_list.size())
+            {
+                int _which_task=my_robot_.allocation_robot_info.task_list.back();
+                all_tasks_[_which_task].allocation_task_info.isallocated=false;
+                bid_new_task_=true;
+                pubAllocation_info();
+                my_robot_.allocation_robot_info.task_list.pop_back();
+            }
+        }
+        return;
+    }
+
     //using prediction method to complete the allocation
     else if(terminal_info_.allocation_mode==ALLOCATION_START&&terminal_info_.marketorprediction)
     {
-        if(!my_robot_.allocation_robot_info.isvalid)
+        //robot has complete the all task which allocated to it
+        if(my_robot_.allocation_robot_info.which_target==-1&&my_robot_.allocation_robot_info.which_task==-1)
         {
-            //if this robot is inviald, stop the loopcontrol
-            std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" is destroyed!"<<std::endl;
-            allocation_timer_.stop();
-            return;
-        }
-        else
-        {
-            //robot has complete the all task which allocated to it
-            if(my_robot_.allocation_robot_info.which_target==-1&&my_robot_.allocation_robot_info.which_task==-1)
+            if(!choose2hitOrexplore_())
             {
-                if(!choose2hitOrexplore_())
-                {
-                    //all tasks have been completed
-                    std::cout<<"All tasks have been completed!"<<std::endl;
-                    //allocation_timer_.stop();
-                }
-            }
-            //the allocated target is not completed
-            else if(my_robot_.allocation_robot_info.which_target!=-1)
-            {
-                is_target_completed=try2hit_();
-                if(is_target_completed)
-                    std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" destroy the target "<<my_robot_.allocation_robot_info.which_target<<std::endl;
-            }
-            //the allocated task is not explored
-            else if(my_robot_.allocation_robot_info.which_task!=-1)
-            {
-                is_task_explored=try2explore_();
-                if(is_task_explored)
-                    std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" explore the task "<<my_robot_.allocation_robot_info.which_task<<std::endl;
+                //all tasks have been completed
+                std::cout<<"All tasks have been completed!"<<std::endl;
+                is_all_completed=true;
+                return;
+                //allocation_timer_.stop();
             }
         }
+        //the allocated target is not completed
+        else if(my_robot_.allocation_robot_info.which_target!=-1)
+        {
+            is_target_completed=try2hit_();
+            if(is_target_completed)
+                std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" destroy the target "<<my_robot_.allocation_robot_info.which_target<<std::endl;
+        }
+        //the allocated task is not explored
+        else if(my_robot_.allocation_robot_info.which_task!=-1)
+        {
+            is_task_explored=try2explore_();
+            if(is_task_explored)
+                std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" explore the task "<<my_robot_.allocation_robot_info.which_task<<std::endl;
+        }
+
         pubAllocation_info();
 
         //if the task or target is done or dropped, clear the task or target
@@ -726,15 +750,8 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
     //using market-base method to complete the allocation
     else if(terminal_info_.allocation_mode==ALLOCATION_START&&!terminal_info_.marketorprediction)
     {
-        if(!my_robot_.allocation_robot_info.isvalid)
-        {
-            //if this robot is inviald, stop the loopcontrol
-            std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" is destroyed!"<<std::endl;
-            allocation_timer_.stop();
-            return;
-        }
         //there are residual task/target that unallocated
-        else if(num_target_unallocated_!=0)
+        if(num_target_unallocated_!=0)
         {
             my_robot_.allocation_robot_info.robot_mode=PLAN;
             bid_new_target_=which2hit_();
@@ -778,7 +795,11 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
             }
         }
         else if(!num_target_valid_&&!num_task_valid_)
+        {
             std::cout<<"All tasks have been completed!"<<std::endl;
+            is_all_completed=true;
+            return;
+        }
     }
     setVelCommond();
 }
@@ -877,6 +898,9 @@ void Task_Allocation::pauseAllocation()
 /// \brief when the controlterminal click "STOP", reset all robots and tasks
 void Task_Allocation::stopAllocation()
 {
+    //if these allocation info have reset yet
+    if(all_robots_.size()==0)
+        return;
     //clear velocity
     my_behaviour_->app_vx_=0;
     my_behaviour_->app_vy_=0;
@@ -892,6 +916,7 @@ void Task_Allocation::stopAllocation()
     bid_new_target_=false;
     is_target_completed=false;
     is_task_explored=false;
+    is_all_completed=false;
     all_tasks_.clear();
     all_robots_.clear();
 

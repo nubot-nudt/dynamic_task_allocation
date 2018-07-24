@@ -24,6 +24,10 @@ public:
 
     Terminal2Robots_info terminal2robots_info;
     Terminal2Gazebo_info terminal2gazebo_info;
+
+    //record the time that the flag of update will hold
+    vector<int> timeforupdatetask_;
+    vector<int> timeforupdaterobot_;
 public:
     Topic_Info();
     void run();

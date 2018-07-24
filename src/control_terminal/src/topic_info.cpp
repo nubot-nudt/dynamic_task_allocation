@@ -4,11 +4,9 @@ Topic_Info::Topic_Info()
 {
     ros::Time::init();
     nh_= boost::make_shared<ros::NodeHandle>();
-    terminalinfo_publish_timer_ = nh_->createTimer(ros::Duration(0.03),&Topic_Info::publish,this);
+    terminalinfo_publish_timer_ = nh_->createTimer(ros::Duration(0.05),&Topic_Info::publish,this);
     terminal2robot_pub_ = nh_->advertise<allocation_common::terminal2robot_info>("/control_terminal/terminal2robot_info",1);
     terminal2gazebo_pub_ = nh_->advertise<allocation_common::terminal2gazebo_info>("/control_terminal/terminal2gazebo_info",1);
-    terminal2robot_pub_info_.all_allocation_robot_info.resize(MAXNUM_AGENT);
-    terminal2robot_pub_info_.all_allocation_task_info.resize(MAXNUM_AGENT);
 
     terminal2robots_info.allocation_mode=ALLOCATION_STOP;
 
@@ -39,6 +37,14 @@ void Topic_Info::publish(const ros::TimerEvent &)
             terminal2gazebo_pub_info_.robot_pos_x.push_back(terminal2gazebo_info.robot_pos_x[i]);
             terminal2gazebo_pub_info_.robot_pos_y.push_back(terminal2gazebo_info.robot_pos_y[i]);
         }
+        terminal2robot_pub_info_.all_allocation_robot_info.resize(terminal2gazebo_info.robot_pos_x.size());
+        terminal2robot_pub_info_.all_allocation_task_info.resize(terminal2gazebo_info.task_pos_x.size());
+        terminal2robots_info.all_allocation_robot_info.resize(terminal2gazebo_info.robot_pos_x.size());
+        terminal2robots_info.all_allocation_task_info.resize(terminal2gazebo_info.task_pos_x.size());
+
+        timeforupdaterobot_.resize(terminal2gazebo_info.robot_pos_x.size(),0);
+        timeforupdatetask_.resize(terminal2gazebo_info.task_pos_x.size(),0);
+
         terminal2gazebo_pub_info_.is_noise=terminal2gazebo_info.is_noise;
         terminal2gazebo_info.isNew_allocation=false;
         terminal2gazebo_pub_.publish(terminal2gazebo_pub_info_);
@@ -50,15 +56,36 @@ void Topic_Info::publish(const ros::TimerEvent &)
     terminal2robot_pub_info_.marketorprediction=terminal2robots_info.marketorprediction;
 
     terminal2robot_pub_.publish(terminal2robot_pub_info_);
+
     for(unsigned i=0;i<terminal2robot_pub_info_.all_allocation_robot_info.size();i++)
+        if(terminal2robot_pub_info_.all_allocation_robot_info[i].isupdate==true)
+        {
+            if(timeforupdaterobot_[i]==2)
+                terminal2robot_pub_info_.all_allocation_robot_info[i].isupdate=false;
+            else
+                timeforupdaterobot_[i]++;
+        }
+    for(unsigned i=0;i<terminal2robot_pub_info_.all_allocation_task_info.size();i++)
+        if(terminal2robot_pub_info_.all_allocation_task_info[i].isupdate==true)
+        {
+            if(timeforupdatetask_[i]==2)
+                terminal2robot_pub_info_.all_allocation_task_info[i].isupdate=false;
+            else
+                timeforupdatetask_[i]++;
+        }
+
+    if(terminal2robots_info.allocation_mode==ALLOCATION_STOP&&terminal2robots_info.all_allocation_robot_info.size()!=0
+       &&terminal2robots_info.all_allocation_robot_info[0].move_distance!=0)
     {
-        terminal2robot_pub_info_.all_allocation_robot_info[i].isupdate=false;
-        terminal2robot_pub_info_.all_allocation_task_info[i].isupdate=false;
-    }
-    if(terminal2robots_info.allocation_mode==ALLOCATION_STOP)
-    {
-        terminal2robot_pub_info_.all_allocation_robot_info.resize(MAXNUM_AGENT);
-        terminal2robot_pub_info_.all_allocation_task_info.resize(MAXNUM_AGENT);
+        terminal2robot_pub_info_.all_allocation_robot_info.clear();
+        terminal2robot_pub_info_.all_allocation_task_info.clear();
+        terminal2robot_pub_info_.all_allocation_robot_info.resize(terminal2gazebo_info.robot_pos_x.size());
+        terminal2robot_pub_info_.all_allocation_task_info.resize(terminal2gazebo_info.task_pos_x.size());
+
+        for(unsigned int i=0;i<terminal2robots_info.all_allocation_robot_info.size();i++)
+            terminal2robots_info.all_allocation_robot_info[i].robot_reset();
+        for(unsigned int j=0;j<terminal2robots_info.all_allocation_task_info.size();j++)
+            terminal2robots_info.all_allocation_task_info[j].task_reset();
     }
 }
 void
@@ -80,9 +107,9 @@ void Topic_Info::update_allocation_info(const allocation_common::allocation2term
 //    terminal2robots_info.all_allocation_robot_info[topic_id].expect_pos.y_=_msg->robot_info.expect_pos.position.y;
     terminal2robots_info.all_allocation_robot_info[topic_id].move_distance=_msg->robot_info.move_distance;
 
-    int _task_id=_msg->task_info.task_ID;
-    if(_task_id!=-1)
+    if(_msg->task_info.task_ID!=-1)
     {
+        int _task_id=_msg->task_info.task_ID;
         terminal2robots_info.all_allocation_task_info[_task_id].current_distance=_msg->task_info.current_distance;
         terminal2robots_info.all_allocation_task_info[_task_id].iscomplete=_msg->task_info.iscomplete;
         terminal2robots_info.all_allocation_task_info[_task_id].isallocated=_msg->task_info.isallocated;
@@ -104,6 +131,7 @@ void Topic_Info::update_allocation_info(const allocation_common::allocation2term
     _tmp_robot_info.expect_pos.position.x=_msg->robot_info.expect_pos.position.x;
     _tmp_robot_info.expect_pos.position.y=_msg->robot_info.expect_pos.position.y;
     _tmp_robot_info.isupdate=true;
+    timeforupdaterobot_[_tmp_robot_info.robot_ID]=0;
 
     //the robot_power is certained by control_terminal, not task_allocation
     _tmp_robot_info.robot_power=terminal2robots_info.all_allocation_robot_info[_tmp_robot_info.robot_ID].robot_power;
@@ -123,6 +151,7 @@ void Topic_Info::update_allocation_info(const allocation_common::allocation2term
 
         //the task_power is certained by control_terminal, not task_allocation
         _tmp_task_info.task_power=terminal2robots_info.all_allocation_task_info[_tmp_task_info.task_ID].task_power;
-        terminal2robot_pub_info_.all_allocation_task_info[topic_id]=_tmp_task_info;
+        terminal2robot_pub_info_.all_allocation_task_info[_tmp_task_info.task_ID]=_tmp_task_info;
+        timeforupdatetask_[_tmp_task_info.task_ID]=0;
     }
 }

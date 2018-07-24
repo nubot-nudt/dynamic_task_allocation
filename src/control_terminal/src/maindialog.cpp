@@ -116,6 +116,7 @@ void MainDialog::timerUpdate()
             case 3: current_mode_="EXPLORE";break;
             case 4: current_mode_="HIT";break;
             case 5: current_mode_="DAMAGE";break;
+            case 6: current_mode_="RESET";break;
             default:break;
             }
             agent_vaild_[i]->setText(current_mode_);
@@ -284,7 +285,6 @@ bool MainDialog::on_init_map_clicked()
         //initialize the power of robot according to the button
         terminal2robots_info_->all_allocation_robot_info[i].robot_power=agent_power_[i]->value();
     }
-
     terminal2gazebo_info_->is_noise=ui->is_noise;
     terminal2gazebo_info_->isNew_allocation=true;
 
@@ -332,26 +332,14 @@ void MainDialog::on_start_pause_clicked()
 void MainDialog::on_stop_clicked()
 {
     terminal2robots_info_->allocation_mode=ALLOCATION_STOP;
-    for(unsigned int i=0;i<terminal2robots_info_->all_allocation_robot_info.size();i++)
-        terminal2robots_info_->all_allocation_robot_info[i].robot_reset();
-    for(unsigned int i=0;i<terminal2robots_info_->all_allocation_task_info.size();i++)
-        terminal2robots_info_->all_allocation_task_info[i].task_reset();
-
     ui->start_pause->setText("START");
 
     duration_time_=0;
     tmp_time_=0;
-    timer_->stop();
     ui->time_show->setText("0");
 
-    //reset the agent button
-    QString agent_str[MAXNUM_AGENT]={"1","2","3","4","5","6","7","8","9","X"};
     for(int i=0;i<MAXNUM_AGENT;i++)
-    {
-        agent_vaild_[i]->setText("Agent"+agent_str[i]);
-        agent_vaild_[i]->setChecked(false);
         agent_distance_[i]->setText("0");
-    }
 }
 
 void MainDialog::on_show_more_clicked()

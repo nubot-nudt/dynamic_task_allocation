@@ -26,6 +26,12 @@
      <height>281</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
@@ -37,6 +43,12 @@
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="2" column="2">
      <widget class="QLineEdit" name="dis_agent_3">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -55,6 +67,12 @@
     </item>
     <item row="4" column="4">
      <widget class="QSpinBox" name="power_10">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -97,6 +115,12 @@
     </item>
     <item row="4" column="3">
      <widget class="QSpinBox" name="power_9">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -118,6 +142,12 @@
     </item>
     <item row="1" column="1">
      <widget class="QSpinBox" name="power_2">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -160,6 +190,12 @@
     </item>
     <item row="1" column="0">
      <widget class="QSpinBox" name="power_1">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -182,7 +218,7 @@
     <item row="0" column="0">
      <widget class="QPushButton" name="agent_1">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -202,6 +238,12 @@
     </item>
     <item row="1" column="4">
      <widget class="QSpinBox" name="power_5">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -244,6 +286,12 @@
     </item>
     <item row="1" column="3">
      <widget class="QSpinBox" name="power_4">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -286,6 +334,12 @@
     </item>
     <item row="1" column="2">
      <widget class="QSpinBox" name="power_3">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -307,6 +361,12 @@
     </item>
     <item row="2" column="0">
      <widget class="QLineEdit" name="dis_agent_1">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -367,6 +427,12 @@
     </item>
     <item row="4" column="2">
      <widget class="QSpinBox" name="power_8">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -409,6 +475,12 @@
     </item>
     <item row="4" column="1">
      <widget class="QSpinBox" name="power_7">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -451,6 +523,12 @@
     </item>
     <item row="4" column="0">
      <widget class="QSpinBox" name="power_6">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -493,6 +571,12 @@
     </item>
     <item row="2" column="4">
      <widget class="QLineEdit" name="dis_agent_5">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -511,6 +595,12 @@
     </item>
     <item row="2" column="3">
      <widget class="QLineEdit" name="dis_agent_4">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -529,6 +619,12 @@
     </item>
     <item row="2" column="1">
      <widget class="QLineEdit" name="dis_agent_2">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -547,6 +643,12 @@
     </item>
     <item row="5" column="0">
      <widget class="QLineEdit" name="dis_agent_6">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -565,6 +667,12 @@
     </item>
     <item row="5" column="1">
      <widget class="QLineEdit" name="dis_agent_7">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -583,6 +691,12 @@
     </item>
     <item row="5" column="2">
      <widget class="QLineEdit" name="dis_agent_8">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -601,6 +715,12 @@
     </item>
     <item row="5" column="3">
      <widget class="QLineEdit" name="dis_agent_9">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -619,6 +739,12 @@
     </item>
     <item row="5" column="4">
      <widget class="QLineEdit" name="dis_agent_10">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -1022,7 +1148,7 @@ border-radius:5px;
      <x>20</x>
      <y>200</y>
      <width>451</width>
-     <height>121</height>
+     <height>122</height>
     </rect>
    </property>
    <property name="font">
