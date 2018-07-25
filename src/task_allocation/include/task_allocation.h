@@ -8,6 +8,7 @@
 #include <allocation_common/robot2gazebo_info.h>
 #include <allocation_common/terminal2robot_info.h>
 #include <allocation_common/allocation2terminal_info.h>
+#include <allocation_common/drawing_info.h>
 
 class Task_Allocation
 {
@@ -19,6 +20,7 @@ public:
     void loopControl(const ros::TimerEvent& event);
     void setVelCommond();
     void pubAllocation_info();
+    void pubDrawing_info();
     void pauseAllocation();
     void stopAllocation();
 
@@ -61,6 +63,7 @@ public:
     ros::Publisher   robot2gazebo_pub_;
     ros::Publisher   allocation2terminal_pub_;
     ros::Publisher   robot2task_pub_;
+    ros::Publisher   drawing_pub_;
     ros::Timer       allocation_timer_;
     ros::NodeHandle* nh_;
 };

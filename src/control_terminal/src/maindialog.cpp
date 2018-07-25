@@ -339,19 +339,23 @@ void MainDialog::on_stop_clicked()
     ui->time_show->setText("0");
 
     for(int i=0;i<MAXNUM_AGENT;i++)
-        agent_distance_[i]->setText("0");
+        if(agent_vaild_[i]->isChecked())
+        {
+            agent_vaild_[i]->setText("RESET");
+            agent_distance_[i]->setText("0");
+        }
 }
 
 void MainDialog::on_show_more_clicked()
 {
     if(this->size().width()==990)
     {
-        this->setFixedWidth(490);
+        this->setFixedSize(490,750);
         ui->show_more->setText(">");
     }
     else
     {
-        this->setFixedWidth(990);
+        this->setFixedSize(990,750);
         ui->show_more->setText("<");
     }
 }

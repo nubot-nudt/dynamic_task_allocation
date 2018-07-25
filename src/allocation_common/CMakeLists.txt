@@ -24,6 +24,7 @@ add_message_files(DIRECTORY msgs FILES
     allocation2terminal_info.msg
     Point2d.msg
     Pose.msg
+    drawing_info.msg
     Twist.msg)
 
 #add_service_files(DIRECTORY srv FILES)

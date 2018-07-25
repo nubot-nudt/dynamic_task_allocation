@@ -14,14 +14,15 @@ Task_Allocation::Task_Allocation(int argc,char** argv)
     robot2gazebo_pub_ =nh_->advertise<allocation_common::robot2gazebo_info>(robot_name+"/task_allocation/robot2gazebo_info",10);
     //robot2task_pub_ =nh_->advertise<allocation_common::allocation_task_info>("/task_allocation/task_state_info",1);
     allocation2terminal_pub_=nh_->advertise<allocation_common::allocation2terminal_info>(robot_name+"/task_allocation/allocation2terminal_info",10);
+    drawing_pub_=nh_->advertise<allocation_common::drawing_info>(robot_name+"/task_allocation/drawing_info",10);
     gazebo2world_sub_  =nh_->subscribe("/allocation_gazebo/gazebo2world_info",10,&Task_Allocation::update_gazebo_world,this);
     terminal2robot_sub_=nh_->subscribe("/control_terminal/terminal2robot_info",10,&Task_Allocation::update_terminal_info,this);
     allocation_timer_  =nh_->createTimer(ros::Duration(0.05),&Task_Allocation::loopControl,this);
     my_behaviour_=new Behaviour(obstacles_);
 
-    num_task_valid_=0;
+    num_task_valid_=1;
     num_target_valid_=0;
-    num_task_unallocated_=0;
+    num_task_unallocated_=1;
     num_target_unallocated_=0;
     bid_new_task_=false;
     bid_new_target_=false;
@@ -37,9 +38,9 @@ Task_Allocation::Task_Allocation(int argc,char** argv)
 
 Task_Allocation::~Task_Allocation()
 {
-    num_task_valid_=0;
+    num_task_valid_=1;
     num_target_valid_=0;
-    num_task_unallocated_=0;
+    num_task_unallocated_=1;
     num_target_unallocated_=0;
     bid_new_task_=false;
     bid_new_target_=false;
@@ -673,10 +674,10 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
     else if(terminal_info_.allocation_mode==ALLOCATION_PAUSE)
         pauseAllocation();
 
-    if(is_all_completed)
+    else if(is_all_completed)
         return;
 
-    if(!my_robot_.allocation_robot_info.isvalid)
+    else if(!my_robot_.allocation_robot_info.isvalid)
     {
         //when the robot has been destroyed, the taskes in the task-list and target-list will be released (market-base method)
         if(!terminal_info_.marketorprediction)
@@ -746,6 +747,8 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
                 my_robot_.allocation_robot_info.robot_mode=IDLE;
             my_robot_.allocation_robot_info.which_target=-1;
         }
+        setVelCommond();
+        pubDrawing_info();
     }
     //using market-base method to complete the allocation
     else if(terminal_info_.allocation_mode==ALLOCATION_START&&!terminal_info_.marketorprediction)
@@ -800,8 +803,9 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
             is_all_completed=true;
             return;
         }
+        setVelCommond();
+        pubDrawing_info();
     }
-    setVelCommond();
 }
 
 /// \brief pub the robot velocity, control the model in the gazebo
@@ -886,6 +890,18 @@ void Task_Allocation::pubAllocation_info()
     allocation2terminal_pub_.publish(_allocation_info);
 }
 
+/// \brief pub the info for drawing the robots' path
+void Task_Allocation::pubDrawing_info()
+{
+    allocation_common::drawing_info _drawing_info;
+
+    //_drawing_info.robot_mode=my_robot_.allocation_robot_info.robot_mode;
+    _drawing_info.robot_pos.x=my_robot_.gazebo_robot_info.robot_pos.x_;
+    _drawing_info.robot_pos.y=my_robot_.gazebo_robot_info.robot_pos.y_;
+
+    drawing_pub_.publish(_drawing_info);
+}
+
 /// \brief when the controlterminal click "PAUSE", clear the robot velocity
 void Task_Allocation::pauseAllocation()
 {
@@ -893,6 +909,7 @@ void Task_Allocation::pauseAllocation()
     my_behaviour_->app_vx_=0;
     my_behaviour_->app_vy_=0;
     my_behaviour_->app_w_=0;
+    setVelCommond();
 }
 
 /// \brief when the controlterminal click "STOP", reset all robots and tasks
@@ -907,9 +924,9 @@ void Task_Allocation::stopAllocation()
     my_behaviour_->app_w_=0;
 
     //reset
-    num_task_valid_=0;
+    num_task_valid_=1;
     num_target_valid_=0;
-    num_task_unallocated_=0;
+    num_task_unallocated_=1;
     num_target_unallocated_=0;
     is_world_update_=false;
     bid_new_task_=false;
@@ -921,4 +938,5 @@ void Task_Allocation::stopAllocation()
     all_robots_.clear();
 
     my_robot_.allocation_robot_info.robot_reset();
+    setVelCommond();
 }
