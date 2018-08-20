@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: maddpg
+Version: 0.0.1
+Summary: Multi-Agent Deep Deterministic Policy Gradient
+Home-page: https://github.com/openai/maddpg
+Author: Igor Mordatch
+Author-email: mordatch@openai.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

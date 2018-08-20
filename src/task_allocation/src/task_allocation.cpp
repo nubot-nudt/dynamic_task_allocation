@@ -14,7 +14,7 @@ Task_Allocation::Task_Allocation(int argc,char** argv)
     robot2gazebo_pub_ =nh_->advertise<allocation_common::robot2gazebo_info>(robot_name+"/task_allocation/robot2gazebo_info",10);
     //robot2task_pub_ =nh_->advertise<allocation_common::allocation_task_info>("/task_allocation/task_state_info",1);
     allocation2terminal_pub_=nh_->advertise<allocation_common::allocation2terminal_info>(robot_name+"/task_allocation/allocation2terminal_info",10);
-    drawing_pub_=nh_->advertise<allocation_common::drawing_info>(robot_name+"/task_allocation/drawing_info",10);
+    drawing_pub_=nh_->advertise<geometry_msgs::Point>(robot_name+"/task_allocation/drawing_info",10);
     gazebo2world_sub_  =nh_->subscribe("/allocation_gazebo/gazebo2world_info",10,&Task_Allocation::update_gazebo_world,this);
     terminal2robot_sub_=nh_->subscribe("/control_terminal/terminal2robot_info",10,&Task_Allocation::update_terminal_info,this);
     allocation_timer_  =nh_->createTimer(ros::Duration(0.05),&Task_Allocation::loopControl,this);
@@ -893,11 +893,11 @@ void Task_Allocation::pubAllocation_info()
 /// \brief pub the info for drawing the robots' path
 void Task_Allocation::pubDrawing_info()
 {
-    allocation_common::drawing_info _drawing_info;
+    geometry_msgs::Point _drawing_info;
 
-    //_drawing_info.robot_mode=my_robot_.allocation_robot_info.robot_mode;
-    _drawing_info.robot_pos.x=my_robot_.gazebo_robot_info.robot_pos.x_;
-    _drawing_info.robot_pos.y=my_robot_.gazebo_robot_info.robot_pos.y_;
+    _drawing_info.z=my_robot_.allocation_robot_info.robot_mode;
+    _drawing_info.x=my_robot_.gazebo_robot_info.robot_pos.x_;
+    _drawing_info.y=my_robot_.gazebo_robot_info.robot_pos.y_;
 
     drawing_pub_.publish(_drawing_info);
 }

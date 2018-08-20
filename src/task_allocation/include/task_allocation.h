@@ -8,7 +8,7 @@
 #include <allocation_common/robot2gazebo_info.h>
 #include <allocation_common/terminal2robot_info.h>
 #include <allocation_common/allocation2terminal_info.h>
-#include <allocation_common/drawing_info.h>
+#include <geometry_msgs/Point.h>
 
 class Task_Allocation
 {
