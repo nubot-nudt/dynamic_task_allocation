@@ -45,7 +45,7 @@ float Behaviour::basicPDControl(float pgain,float dgain, float err,float err1, f
 void Behaviour::move2Position(float pval, float dval, DPoint target, float maxvel,
                          const DPoint & _robot_pos, const Angle & _robot_ori, bool avoid_obs, DPoint realtarvel)
 {
-#if 0
+#if 1
     float _pos_e = _robot_pos.distance(target);
     DPoint relposoftarget =  target  - _robot_pos;
     float tar_theta = relposoftarget.angle().radian_;
@@ -102,8 +102,8 @@ void Behaviour::move2Position(float pval, float dval, DPoint target, float maxve
         DPoint relposoftarget =  target  - _robot_pos;
         float tar_theta = relposoftarget.angle().radian_;
         speed = basicPDControl(pval,dval,_pos_e,_pos_e1,maxvel);
-        app_vx_ =  speed*cos(tar_theta)+ realtarvel.x_;
-        app_vy_ =  speed*sin(tar_theta)+ realtarvel.y_;
+        app_vx_ = speed*cos(tar_theta)+ realtarvel.x_;
+        app_vy_ = speed*sin(tar_theta)+ realtarvel.y_;
     }
     _pos_e1  = _pos_e;
 #endif

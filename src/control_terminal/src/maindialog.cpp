@@ -32,7 +32,7 @@ MainDialog::MainDialog(Terminal2Gazebo_info &terminal2gazebo_info, Terminal2Robo
         agent_distance_[i]->setText("0");
     }
 
-    this->setFixedSize(370,580);
+    this->setFixedSize(490,750);
 
     //time initialization
     duration_time_=0;
@@ -116,6 +116,7 @@ void MainDialog::timerUpdate()
             case 3: current_mode_="EXPLORE";break;
             case 4: current_mode_="HIT";break;
             case 5: current_mode_="DAMAGE";break;
+            case 6: current_mode_="RESET";break;
             default:break;
             }
             agent_vaild_[i]->setText(current_mode_);
@@ -134,12 +135,25 @@ void MainDialog::timerUpdate()
             _uncomplete_task++;
 
         Allocation_task_info _tmp_task_info=terminal2robots_info_->all_allocation_task_info[i];
-        if(i<10)
-            task_info_show_[i]=QString(" Task.%1  |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
-                           .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+        if(terminal2robots_info_->marketorprediction)
+        {
+            if(i<10)
+                task_info_show_[i]=QString(" Task.%1  |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
+                        .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+            else
+                task_info_show_[i]=QString("Task.%1 |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
+                        .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+        }
         else
-            task_info_show_[i]=QString("Task.%1 |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
-                           .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+        {
+            if(i<10)
+                task_info_show_[i]=QString(" Task.%1  |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isallocated)
+                        .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+            else
+                task_info_show_[i]=QString("Task.%1 |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isallocated)
+                        .arg(_tmp_task_info.iscomplete).arg(_tmp_task_info.istarget).arg(terminal2gazebo_info_->task_pos_x[i]).arg(terminal2gazebo_info_->task_pos_y[i]);
+        }
+
         _allShow_combine=_allShow_combine+task_info_show_[i]+"\n";
     }
     ui->show_task_info->setText(_allShow_combine);
@@ -271,7 +285,6 @@ bool MainDialog::on_init_map_clicked()
         //initialize the power of robot according to the button
         terminal2robots_info_->all_allocation_robot_info[i].robot_power=agent_power_[i]->value();
     }
-
     terminal2gazebo_info_->is_noise=ui->is_noise;
     terminal2gazebo_info_->isNew_allocation=true;
 
@@ -319,38 +332,30 @@ void MainDialog::on_start_pause_clicked()
 void MainDialog::on_stop_clicked()
 {
     terminal2robots_info_->allocation_mode=ALLOCATION_STOP;
-    for(unsigned int i=0;i<terminal2robots_info_->all_allocation_robot_info.size();i++)
-        terminal2robots_info_->all_allocation_robot_info[i].robot_reset();
-    for(unsigned int i=0;i<terminal2robots_info_->all_allocation_task_info.size();i++)
-        terminal2robots_info_->all_allocation_task_info[i].task_reset();
-
     ui->start_pause->setText("START");
 
     duration_time_=0;
     tmp_time_=0;
-    timer_->stop();
     ui->time_show->setText("0");
 
-    //reset the agent button
-    QString agent_str[MAXNUM_AGENT]={"1","2","3","4","5","6","7","8","9","X"};
     for(int i=0;i<MAXNUM_AGENT;i++)
-    {
-        agent_vaild_[i]->setText("Agent"+agent_str[i]);
-        agent_vaild_[i]->setChecked(false);
-        agent_distance_[i]->setText("0");
-    }
+        if(agent_vaild_[i]->isChecked())
+        {
+            agent_vaild_[i]->setText("RESET");
+            agent_distance_[i]->setText("0");
+        }
 }
 
 void MainDialog::on_show_more_clicked()
 {
-    if(this->size().width()==750)
+    if(this->size().width()==990)
     {
-        this->setFixedWidth(370);
+        this->setFixedSize(490,750);
         ui->show_more->setText(">");
     }
     else
     {
-        this->setFixedWidth(750);
+        this->setFixedSize(990,750);
         ui->show_more->setText("<");
     }
 }

@@ -19,7 +19,7 @@
 #include <boost/thread/mutex.hpp>
 	
 #define MAXNUM_AGENT 10
-#define LOCATION_ERROR 0.1
+#define LOCATION_ERROR 0.2
 #define EXPLORE_TIME 30              //the time explore process will spend
 #define HIT_TIME 30                  //the time hit process will spend
 
@@ -64,12 +64,17 @@ struct Allocation_robot_info
     int    robot_power;
     /// these information are obtained from task_allocation
     int    robot_ID;
-    char   robot_mode;
+    char   robot_mode;   
+    float  move_distance;
+    bool   isvalid;
     /// for the prediction method
     int    which_task;
     int    which_target;
-    float  move_distance;
-    bool   isvalid;
+    /// for the market-base method
+    DPoint expect_pos;
+    vector<int> target_list;
+    vector<int> task_list;
+
     Allocation_robot_info()
     {
         robot_power=0;
@@ -77,6 +82,9 @@ struct Allocation_robot_info
         robot_mode=IDLE;
         which_task=-1;
         which_target=-1;
+        target_list.clear();
+        task_list.clear();
+        expect_pos=DPoint(-100,-100);    //the (-100,-100) is an initialzation and has no mean
         move_distance=0;
         isvalid=true;
     }
@@ -85,6 +93,9 @@ struct Allocation_robot_info
         robot_mode=RESET;
         which_task=-1;
         which_target=-1;
+        target_list.clear();
+        task_list.clear();
+        expect_pos=DPoint(-100,-100);
         move_distance=0;
         isvalid=true;
     }
@@ -97,10 +108,11 @@ struct Allocation_task_info
     /// these information are obtained from task_allocation
     int    task_ID;
     int    known_power;
-    double current_distance;
     bool   istarget;
+    double current_distance;
     bool   iscomplete;
     bool   isexplored;
+    bool   isallocated;
     Allocation_task_info()
     {
         task_power=0;
@@ -110,6 +122,7 @@ struct Allocation_task_info
         istarget=false;
         iscomplete=false;
         isexplored=false;
+        isallocated=false;
     }
     void task_reset()
     {
@@ -118,6 +131,7 @@ struct Allocation_task_info
         istarget=false;
         iscomplete=false;
         isexplored=false;
+        isallocated=false;
     }
 };
 

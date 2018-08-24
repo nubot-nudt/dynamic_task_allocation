@@ -8,6 +8,7 @@
 #include <allocation_common/robot2gazebo_info.h>
 #include <allocation_common/terminal2robot_info.h>
 #include <allocation_common/allocation2terminal_info.h>
+#include <geometry_msgs/Point.h>
 
 class Task_Allocation
 {
@@ -15,16 +16,21 @@ public:
     Task_Allocation(int argc, char **argv);
     ~Task_Allocation();
     void update_gazebo_world(const allocation_common::gazebo2world_info::ConstPtr & _msg);
-    void update_terminal_info(const allocation_common::terminal2robot_info::ConstPtr & _msg);
-    bool try2explore_();
-    bool try2hit_();
-    bool choose2hitOrexplore_();
+    void update_terminal_info(const allocation_common::terminal2robot_info::ConstPtr & _msg);    
     void loopControl(const ros::TimerEvent& event);
     void setVelCommond();
     void pubAllocation_info();
+    void pubDrawing_info();
     void pauseAllocation();
     void stopAllocation();
 
+    //for predition method
+    bool try2explore_();
+    bool try2hit_();
+    bool choose2hitOrexplore_();
+    //for market-base method
+    bool which2hit_();
+    bool which2explore_();
 public:
     Robot_info my_robot_;                          //my robot item
     std::vector<Robot_info> all_robots_;           //all robots
@@ -38,16 +44,26 @@ public:
 //    std::vector<Task>  init_tasks_;              //record initial task parameters
 //    std::vector<int>   lab_agent_;               //record the number of agent that choose
 
-    int num_task_valid_;                           //the number of task that uncompleted
-    int num_target_valid_;                         //the number of target that had not been destroyed
+    int num_task_valid_;                           //for prediction and market_base: the number of task that uncompleted
+    int num_target_valid_;                         //for prediction and market_base: the number of target that had not been destroyed
+    int num_task_unallocated_;                     //only for market_base: the number of task that unallocated
+    int num_target_unallocated_;                   //only for market_base: the number of target that unallocated
 
     bool is_world_update_;
+    bool bid_new_task_;
+    bool bid_new_target_;
+    bool is_target_completed;
+    bool is_task_explored;
+    bool is_target_dropped;
+    bool is_task_dropped;
+    bool is_all_completed;
 
     ros::Subscriber  gazebo2world_sub_;
     ros::Subscriber  terminal2robot_sub_;
     ros::Publisher   robot2gazebo_pub_;
     ros::Publisher   allocation2terminal_pub_;
     ros::Publisher   robot2task_pub_;
+    ros::Publisher   drawing_pub_;
     ros::Timer       allocation_timer_;
     ros::NodeHandle* nh_;
 };
