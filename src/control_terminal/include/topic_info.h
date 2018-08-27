@@ -7,6 +7,7 @@
 #include <std_msgs/String.h>
 #include <allocation_common/terminal2gazebo_info.h>
 #include <allocation_common/terminal2robot_info.h>
+#include <allocation_common/terminal2DQN_info.h>
 #include <allocation_common/allocation2terminal_info.h>
 
 class Topic_Info:public QThread
@@ -17,9 +18,9 @@ public:
     ros::Subscriber  allocation2terminal_sub_[MAXNUM_AGENT];
     ros::Publisher   terminal2robot_pub_;
     ros::Publisher   terminal2gazebo_pub_;
+    ros::Publisher   terminal2DQN_pub_;
     ros::Timer       terminalinfo_publish_timer_;
 
-    allocation_common::terminal2gazebo_info terminal2gazebo_pub_info_;
     allocation_common::terminal2robot_info  terminal2robot_pub_info_;
 
     Terminal2Robots_info terminal2robots_info;

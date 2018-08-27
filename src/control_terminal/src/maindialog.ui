@@ -989,6 +989,18 @@ border-radius:5px;
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QRadioButton" name="DQN">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>DQN</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QLabel" name="logo">

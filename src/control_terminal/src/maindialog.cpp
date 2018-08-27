@@ -41,7 +41,9 @@ MainDialog::MainDialog(Terminal2Gazebo_info &terminal2gazebo_info, Terminal2Robo
 
     terminal2robots_info_->allocation_mode=ALLOCATION_STOP;
     terminal2robots_info_->greedorprobability=1;
-    terminal2robots_info_->marketorprediction=1;
+//    terminal2robots_info_->marketorprediction=1;
+    //default use the prediction method
+    terminal2robots_info_->allocation_method=Prediction;
 
     terminal2gazebo_info_->isNew_allocation=false;
     terminal2gazebo_info_->robot_pos_x.clear();
@@ -135,7 +137,7 @@ void MainDialog::timerUpdate()
             _uncomplete_task++;
 
         Allocation_task_info _tmp_task_info=terminal2robots_info_->all_allocation_task_info[i];
-        if(terminal2robots_info_->marketorprediction)
+        if(terminal2robots_info_->allocation_method==Prediction||terminal2robots_info_->allocation_method==DQN)
         {
             if(i<10)
                 task_info_show_[i]=QString(" Task.%1  |          %2          |            %3           |       %4        |  (%5, %6)").arg(i).arg(_tmp_task_info.isexplored)
@@ -307,7 +309,12 @@ void MainDialog::on_start_pause_clicked()
         ui->start_pause->setText("PAUSE");
         terminal2robots_info_->allocation_mode=ALLOCATION_START;
         terminal2robots_info_->greedorprobability=ui->probability->isChecked();
-        terminal2robots_info_->marketorprediction=ui->prediction->isChecked();
+        if(ui->prediction->isChecked())
+            terminal2robots_info_->allocation_method=Prediction;
+        else if(ui->market_base->isChecked())
+            terminal2robots_info_->allocation_method=Market;
+        else
+            terminal2robots_info_->allocation_method=DQN;
 
         current_time_.start();
         timer_->start(100);
