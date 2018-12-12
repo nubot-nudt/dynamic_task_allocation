@@ -49,4 +49,5 @@ target_link_libraries(task_allocation_node
    ${Boost_LIBRARIES}
  )
 
-
+add_executable(call_node src/call.cpp)
+target_link_libraries(call_node ${catkin_LIBRARIES})

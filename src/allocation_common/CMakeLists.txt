@@ -19,14 +19,20 @@ add_message_files(DIRECTORY msgs FILES
     allocation_task_info.msg
     terminal2gazebo_info.msg
     terminal2robot_info.msg
+    terminal2DQN_info.msg
     gazebo2world_info.msg
     robot2gazebo_info.msg
     allocation2terminal_info.msg
     Point2d.msg
     Pose.msg
-    Twist.msg)
+    Twist.msg
+    Observation.msg
+    Teammateinfo.msg
+    Taskinfo.msg)
 
-#add_service_files(DIRECTORY srv FILES)
+add_service_files(DIRECTORY srv FILES
+    GetAction.srv
+    ReturnReward.srv)
 
 generate_messages(DEPENDENCIES std_msgs)
 

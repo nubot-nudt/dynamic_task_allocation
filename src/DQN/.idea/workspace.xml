@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="89335962-5fe8-4f81-94b1-27bcb388e5d9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/srcipts/dqn_PER.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcipts/gazebo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcipts/multi_discrete.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcipts/reinforcement_learning.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/srcipts/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/srcipts/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/srv/Taskinfo.msg" beforeDir="false" afterPath="$PROJECT_DIR$/srv/Taskinfo.msg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../allocation_common/include/Core.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/include/Core.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../allocation_common/msgs/Observation.msg" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/msgs/Observation.msg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../allocation_common/msgs/Taskinfo.msg" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/msgs/Taskinfo.msg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../allocation_common/msgs/Teammateinfo.msg" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/msgs/Teammateinfo.msg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../allocation_common/msgs/terminal2DQN_info.msg" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/msgs/terminal2DQN_info.msg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../allocation_common/srv/GetAction.srv" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/srv/GetAction.srv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../allocation_common/srv/ReturnReward.srv" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/srv/ReturnReward.srv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../control_terminal/include/maindialog.h" beforeDir="false" afterPath="$PROJECT_DIR$/../control_terminal/include/maindialog.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../control_terminal/src/maindialog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../control_terminal/src/maindialog.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../control_terminal/src/maindialog.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../control_terminal/src/maindialog.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../control_terminal/src/topic_info.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../control_terminal/src/topic_info.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task_allocation/include/task_allocation.h" beforeDir="false" afterPath="$PROJECT_DIR$/../task_allocation/include/task_allocation.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task_allocation/src/task_allocation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../task_allocation/src/task_allocation.cpp" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-552947856">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="17" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.5" value="4" />
+          <entry key="project.open.time.6" value="4" />
+          <entry key="project.open.time.7" value="5" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="20" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="md" value="4" />
+          <entry key="py" value="57" />
+          <entry key="txt" value="5" />
+          <entry key="xml" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Markdown" value="4" />
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="Python" value="57" />
+          <entry key="XML" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="101" />
+          <entry key="py" value="3263" />
+          <entry key="txt" value="58" />
+          <entry key="xml" value="83" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="58" />
+          <entry key="Python" value="3364" />
+          <entry key="XML" value="83" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="-1664950928">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="43" />
+          <entry key="project.open.time.0" value="3" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.19" value="1" />
+          <entry key="project.open.time.20" value="1" />
+          <entry key="project.open.time.4" value="10" />
+          <entry key="project.open.time.5" value="28" />
+          <entry key="project.open.time.6" value="4" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="3" />
+          <entry key="project.opened" value="54" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="cfg" value="2" />
+          <entry key="md" value="2" />
+          <entry key="py" value="74" />
+          <entry key="txt" value="3" />
+          <entry key="xml" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Markdown" value="2" />
+          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Python" value="76" />
+          <entry key="XML" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="cfg" value="321" />
+          <entry key="md" value="46" />
+          <entry key="py" value="9335" />
+          <entry key="txt" value="80" />
+          <entry key="xml" value="49" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Markdown" value="46" />
+          <entry key="PLAIN_TEXT" value="80" />
+          <entry key="Python" value="9656" />
+          <entry key="XML" value="49" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="maddpg" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/srcipts/train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3008">
+              <caret line="103" column="44" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
+              <folding>
+                <element signature="e#47#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/srcipts/dqn_PER.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="960">
+              <caret line="221" column="58" selection-start-line="241" selection-start-column="72" selection-end-line="241" selection-end-column="82" />
+              <folding>
+                <marker date="1542189974537" expanded="true" signature="11795:11804" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/srcipts/dqn_Double.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1824">
+              <caret line="58" column="65" selection-start-line="58" selection-start-column="61" selection-end-line="58" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/srcipts/dqn_Dueling.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1568">
+              <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>self.action_space</find>
+      <find>u_action_space</find>
+      <find>Discrete</find>
+      <find>observation_callback</find>
+      <find>gazebo_env</find>
+      <find>action_space</find>
+      <find>agent</find>
+      <find>memory_counter</find>
+      <find>randint</find>
+      <find>run</find>
+      <find>cos</find>
+      <find>loss_his</find>
+      <find>ISWeights</find>
+      <find>team_number</find>
+      <find>12</find>
+      <find>float32</find>
+      <find>acti</find>
+      <find>ru</find>
+      <find>observation_space</find>
+      <find>relu</find>
+      <find>rel</find>
+      <find>gym</find>
+      <find>n_actions</find>
+      <find>map_size</find>
+      <find>reward_average</find>
+      <find>reward_n</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>3</replace>
+      <replace>6</replace>
+      <replace>map_size/2</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/experiments/talker.py" />
+        <option value="$PROJECT_DIR$/src/experiments/GazeboEnv.py" />
+        <option value="$PROJECT_DIR$/src/experiments/environments.py" />
+        <option value="$PROJECT_DIR$/src/experiments/train.py" />
+        <option value="$PROJECT_DIR$/src/experiments/gazebo.py" />
+        <option value="$PROJECT_DIR$/srcipts/multiagent-particle/multiagent/multi_discrete.py" />
+        <option value="$PROJECT_DIR$/srcipts/multiagent-particle/multiagent/environment.py" />
+        <option value="$PROJECT_DIR$/srcipts/experiments/gazebo.py" />
+        <option value="$PROJECT_DIR$/srcipts/experiments/train.py" />
+        <option value="$PROJECT_DIR$/srcipts/gazebo.py" />
+        <option value="$PROJECT_DIR$/srcipts/talker.py" />
+        <option value="$PROJECT_DIR$/cfg/reward_cfg.cfg" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/package.xml" />
+        <option value="$PROJECT_DIR$/srcipts/reinforcement_learning.py" />
+        <option value="$PROJECT_DIR$/srcipts/double_DQN.py" />
+        <option value="$PROJECT_DIR$/srcipts/dqn_Double.py" />
+        <option value="$PROJECT_DIR$/srcipts/dqn_dueling.py" />
+        <option value="$PROJECT_DIR$/srcipts/dqn.py" />
+        <option value="$PROJECT_DIR$/srcipts/RL.py" />
+        <option value="$PROJECT_DIR$/srcipts/dqn_Dueling.py" />
+        <option value="$USER_HOME$/Desktop/deep reinforcement learning in multi-robot task allocation.md" />
+        <option value="$PROJECT_DIR$/srcipts/train_test.py" />
+        <option value="$PROJECT_DIR$/srcipts/dqn_PER.py" />
+        <option value="$PROJECT_DIR$/srcipts/train.py" />
+        <option value="$USER_HOME$/Desktop/WorkShop规则讨论的看法.md" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="253" />
+    <option name="y" value="444" />
+    <option name="width" value="2902" />
+    <option name="height" value="1964" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+          <State>
+            <id>Python</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>PyGlobalUndefinedInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="DQN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DQN" type="47feb1d3:ProjectViewModuleNode" />
+            </path>
+            <path>
+              <item name="DQN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DQN" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="DQN" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DQN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DQN" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="DQN" type="462c0819:PsiDirectoryNode" />
+              <item name="cfg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DQN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DQN" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="DQN" type="462c0819:PsiDirectoryNode" />
+              <item name="srcipts" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="maddpg" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="maddpg" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="PythonConfigurationType" />
+      </set>
+    </option>
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+    <option name="contentProportion" value="0.21558164" />
+  </component>
+  <component name="RunManager">
+    <configuration name="train" type="PythonConfigurationType" factoryName="Python">
+      <module name="DQN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/srcipts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/srcipts/train.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="89335962-5fe8-4f81-94b1-27bcb388e5d9" name="Default Changelist" comment="" />
+      <created>1534405132380</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1534405132380</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="96" y="-6" width="2906" height="2008" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49916527" visible="true" weight="0.13661775" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.5008347" side_tool="true" weight="0.18763103" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32941833" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32997763" />
+      <window_info anchor="bottom" id="Run Dashboard" order="7" weight="0.22166106" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32996634" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4996506" weight="0.33052748" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5003494" side_tool="true" weight="0.32941833" />
+      <window_info anchor="bottom" id="Python Console" order="11" weight="0.33052748" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/maddpg/maddpg/trainer/maddpg.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/srcipts/multiagent-particle/multiagent/multi_discrete.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/srcipts/dqn_PER.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/srcipts/LICENSE.txt" />
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/maddpg_ros/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/maddpg_ros/srv/_maddpg_o2a.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/maddpg/common/distributions.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/experiments/multi_discrete.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/multiagent-particle/multiagent/multi_discrete.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/multiagent-particle/multiagent/scenarios/simple_push.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/experiments/talker.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/multiagent-particle/multiagent/core.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/multiagent-particle/multiagent/environment.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/experiments/gazebo.py" />
+    <entry file="file://$USER_HOME$/maddpg/maddpg/trainer/maddpg.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/experiments/train.py" />
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/1718422131/numpy/random/mtrand.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="5499" column="8" selection-start-line="5499" selection-start-column="8" selection-end-line="5499" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3/dist-packages/em.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-21557">
+          <caret line="1749" column="8" selection-start-line="1749" selection-start-column="8" selection-end-line="1749" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///opt/ros/kinetic/lib/python2.7/dist-packages/rqt_bag/message_loader_thread.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1146">
+          <caret line="58" column="8" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/gym/core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="706">
+          <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcipts/gazebo.py" />
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/allocation_common/msg/_Teammateinfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1334">
+          <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/gym/spaces/box.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/allocation_common/msg/_gazebo_task_info.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="582">
+          <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/allocation_common/msg/_allocation_task_info.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1102">
+          <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/allocation_common/msg/_Observation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="568">
+          <caret line="68" column="11" selection-start-line="68" selection-start-column="11" selection-end-line="68" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/allocation_common/msg/_Taskinfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="568">
+          <caret line="56" column="11" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/allocation_common/srv/_GetAction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1283">
+          <caret line="284" column="6" selection-start-line="284" selection-start-column="6" selection-end-line="284" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcipts/talker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcipts/multi_discrete.py" />
+    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/gym/spaces/discrete.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/matplotlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="837">
+          <caret line="143" column="51" selection-start-line="143" selection-start-column="51" selection-end-line="143" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/tensorflow/python/client/session.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2686">
+          <caret line="766" column="6" selection-start-line="766" selection-start-column="6" selection-end-line="766" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcipts/reinforcement_learning.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/double_DQN.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/dqn_dueling.py" />
+    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/numpy/core/fromnumeric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="942" column="4" selection-start-line="942" selection-start-column="4" selection-end-line="942" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/allocation_common/srv/_ReturnReward.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1346">
+          <caret line="71" column="11" selection-start-line="71" selection-start-column="11" selection-end-line="71" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.local/lib/python3.5/site-packages/tensorflow/python/ops/math_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15148">
+          <caret line="2218" column="4" selection-start-line="2218" selection-start-column="4" selection-end-line="2218" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/allocation_common/msg/_terminal2DQN_info.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="755">
+          <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Reinforcement-Learning/algorithms/Dueling-DQN/dueling-dqn.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/dueling-dqn.py" />
+    <entry file="file://$PROJECT_DIR$/srcipts/dqn.py" />
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cfg/reward_cfg.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/deep reinforcement learning in multi-robot task allocation.md" />
+    <entry file="file://$PROJECT_DIR$/srcipts/RL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1728">
+          <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcipts/train_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1352">
+          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcipts/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3008">
+          <caret line="103" column="44" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
+          <folding>
+            <element signature="e#47#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcipts/dqn_Double.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1824">
+          <caret line="58" column="65" selection-start-line="58" selection-start-column="61" selection-end-line="58" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcipts/dqn_PER.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="221" column="58" selection-start-line="241" selection-start-column="72" selection-end-line="241" selection-end-column="82" />
+          <folding>
+            <marker date="1542189974537" expanded="true" signature="11795:11804" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/WorkShop规则讨论的看法.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="800">
+            <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcipts/dqn_Dueling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1568">
+          <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

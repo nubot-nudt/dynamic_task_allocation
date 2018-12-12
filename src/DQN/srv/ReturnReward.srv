@@ -1,0 +1,5 @@
+Observation observation_
+float32     reward
+bool        is_done
+---
+bool        is_train

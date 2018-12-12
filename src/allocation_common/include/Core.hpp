@@ -34,11 +34,29 @@ enum Robots_mode
     RESET                            //reset the robot
 };
 
+enum Reward_causes
+{
+    Invalid_task,                    //the allocated task has been completed
+    Valid_task,                      //the allocated task isn't completed
+    Drop_task,                       //drop the task halfway
+    Complete_target,                 //complete a target
+    Explore_task,                    //explore a task
+    Robot_damage,
+    All_complete,
+};
+
 enum Allocation_mode
 {
     ALLOCATION_START,
     ALLOCATION_PAUSE,
     ALLOCATION_STOP
+};
+
+enum Allocation_method
+{
+    Prediction,
+    Market,
+    DQN
 };
 
 struct Gazebo_robot_info
@@ -161,7 +179,9 @@ struct Terminal2Robots_info
 {
     char allocation_mode;              //start 1, stop 0
     bool greedorprobability;           //greed 0, probability 1
-    bool marketorprediction;           //market 0, prediction 1
+    char allocation_method;            //prediction 0, market 1, DQN 2
+    bool finish_episode;               //finish a episode
+    bool finish_train;                 //finish the DQN train
 
     std::vector<Allocation_robot_info> all_allocation_robot_info;
     std::vector<Allocation_task_info> all_allocation_task_info;
