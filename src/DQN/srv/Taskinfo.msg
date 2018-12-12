@@ -2,4 +2,4 @@
 int32   task_status
 int32   task_ID
 Point2d task_pos
-bool    is_target
+int32   is_target

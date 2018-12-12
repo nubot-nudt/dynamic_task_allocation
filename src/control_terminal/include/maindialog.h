@@ -25,7 +25,7 @@ public:
     explicit MainDialog(Terminal2Gazebo_info &terminal2gazebo_info, Terminal2Robots_info &terminal2robots_info, QWidget *parent = 0);
     ~MainDialog();
     bool init_robots();
-
+    void restart_game(int count);
 public:
     /**ui items**/
     Ui::MainDialog *ui;

@@ -1,1 +1,5 @@
-/home/daiwei/dynamic_allocation/src/DQN/srv/ReturnReward.srv
+Observation observation_
+float32     reward
+bool        is_done
+---
+bool        is_train

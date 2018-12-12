@@ -1,4 +1,5 @@
 #include "task_allocation.h"
+//#define debug
 
 Task_Allocation::Task_Allocation(int argc,char** argv)
 {
@@ -176,10 +177,11 @@ void Task_Allocation::update_terminal_info(const allocation_common::terminal2rob
         {
             //obtain the current allocation_task_info, then the information will part update
             _task_info_tmp=all_tasks_[_msg->all_allocation_task_info[j].task_ID].allocation_task_info;
-            if(terminal_info_.allocation_method==Prediction||terminal_info_.allocation_method==DQN)
+            if(terminal_info_.allocation_method==Prediction)
             {
                 //the task/target has been allocated to me will not update these information
-                if(_msg->all_allocation_task_info[j].task_ID!=my_robot_.allocation_robot_info.which_target&&_msg->all_allocation_task_info[j].task_ID!=my_robot_.allocation_robot_info.which_task)
+                if(_msg->all_allocation_task_info[j].task_ID!=my_robot_.allocation_robot_info.which_target&&
+                   _msg->all_allocation_task_info[j].task_ID!=my_robot_.allocation_robot_info.which_task)
                 {
                     _task_info_tmp.task_ID=_msg->all_allocation_task_info[j].task_ID;
                     _task_info_tmp.current_distance=_msg->all_allocation_task_info[j].current_distance;
@@ -200,7 +202,7 @@ void Task_Allocation::update_terminal_info(const allocation_common::terminal2rob
                 }
             }
 
-            else
+            else if(terminal_info_.allocation_method==Market)
             {
                 bool _isMytask=false;
                 bool _isMytarget=false;
@@ -236,6 +238,23 @@ void Task_Allocation::update_terminal_info(const allocation_common::terminal2rob
 
                     all_tasks_[_task_info_tmp.task_ID].allocation_task_info=_task_info_tmp;
                 }
+            }
+            else
+            {
+                //only the false->true change is allowed, the true->false is invalid
+                _task_info_tmp.task_ID=_msg->all_allocation_task_info[j].task_ID;
+                if(_msg->all_allocation_task_info[j].iscomplete)
+                    _task_info_tmp.iscomplete=_msg->all_allocation_task_info[j].iscomplete;
+                if(_msg->all_allocation_task_info[j].isexplored)
+                    _task_info_tmp.isexplored=_msg->all_allocation_task_info[j].isexplored;
+                if(_msg->all_allocation_task_info[j].istarget)
+                    _task_info_tmp.istarget=_msg->all_allocation_task_info[j].istarget;
+                if(_task_info_tmp.known_power<_msg->all_allocation_task_info[j].known_power)
+                    _task_info_tmp.known_power=_msg->all_allocation_task_info[j].known_power;
+
+                _task_info_tmp.isallocated=_msg->all_allocation_task_info[j].isallocated;
+                _task_info_tmp.task_power=_msg->all_allocation_task_info[j].task_power;
+                all_tasks_[_task_info_tmp.task_ID].allocation_task_info=_task_info_tmp;
             }
         }
     }
@@ -294,7 +313,9 @@ bool Task_Allocation::try2explore_()
                 {
                     //drop this task
                     my_robot_.allocation_robot_info.robot_mode=IDLE;
+#ifdef debug
                     std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" drops task "<<my_robot_.allocation_robot_info.which_task<<" because of robot "<<i<<std::endl;
+#endif
                     if(terminal_info_.allocation_method==DQN)
                         return_rewrad_(Drop_task);
                     return false;
@@ -330,18 +351,41 @@ bool Task_Allocation::try2explore_()
             {
                 all_tasks_[_which_task].allocation_task_info.known_power=1;
                 all_tasks_[_which_task].allocation_task_info.istarget=true;
-                if(terminal_info_.allocation_method==Prediction)
-                    all_tasks_[_which_task].allocation_task_info.current_distance=1000;
-                else
-                    all_tasks_[_which_task].allocation_task_info.isallocated=false;
+                //allocate this target to this robot right now
+                //if the target power bigger than the robot power, the robot will be destroyed
+                if(_my_task.allocation_task_info.task_power>my_robot_.allocation_robot_info.robot_power)
+                {
+#ifdef debug
+                    std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" is destroyed!"<<std::endl;
+#endif
+                    my_robot_.allocation_robot_info.robot_mode=DAMAGE;
+                    my_robot_.allocation_robot_info.isvalid=false;
+                    all_tasks_[_which_task].allocation_task_info.known_power=my_robot_.allocation_robot_info.robot_power+1;
 
-                cout<<"this is a target"<<endl;
+                    if(terminal_info_.allocation_method==Prediction)
+                        all_tasks_[_which_task].allocation_task_info.current_distance=1000;
+                    else if(terminal_info_.allocation_method==Market)
+                        all_tasks_[_which_task].allocation_task_info.isallocated=false;
+                    else
+                    {
+                        all_tasks_[_which_task].allocation_task_info.isallocated=false;
+                        return_rewrad_(Robot_damage);
+                    }
+                }
+                //if the target power less than the robot power, the target will be destroyed
+                else
+                {
+                    all_tasks_[_which_task].allocation_task_info.iscomplete=true;
+                    if(terminal_info_.allocation_method==DQN)
+                        return_rewrad_(Complete_target);
+                }
             }
             else
+            {
                 all_tasks_[_which_task].allocation_task_info.iscomplete=true;
-
-            if(terminal_info_.allocation_method==DQN)
-                return_rewrad_(Explore_task);
+                if(terminal_info_.allocation_method==DQN)
+                    return_rewrad_(Explore_task);
+            }
             return true;
         }
     }
@@ -374,7 +418,9 @@ bool Task_Allocation::try2hit_()
                 {
                     //drop this target
                     my_robot_.allocation_robot_info.robot_mode=IDLE;
+#ifdef debug
                     std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" drops target "<<my_robot_.allocation_robot_info.which_target<<" because of robot "<<i<<std::endl;
+#endif
                     if(terminal_info_.allocation_method==DQN)
                         return_rewrad_(Drop_task);
                     return false;
@@ -397,7 +443,9 @@ bool Task_Allocation::try2hit_()
         //if the target power bigger than the robot power, the robot will be destroyed
         if(_my_target.allocation_task_info.task_power>my_robot_.allocation_robot_info.robot_power)
         {
+#ifdef debug
             std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" is destroyed!"<<std::endl;
+#endif
             my_robot_.allocation_robot_info.robot_mode=DAMAGE;
             my_robot_.allocation_robot_info.isvalid=false;
             all_tasks_[_which_target].allocation_task_info.known_power=my_robot_.allocation_robot_info.robot_power+1;
@@ -477,7 +525,9 @@ bool Task_Allocation::choose2hitOrexplore_()
                 my_robot_.allocation_robot_info.robot_mode=PLAN;
                 _which_target=my_robot_.allocation_robot_info.which_target;
                 all_tasks_[_which_target].allocation_task_info.current_distance=my_robot_.gazebo_robot_info.robot_pos.distance(all_tasks_[_which_target].gazebo_task_info.task_pos);
+#ifdef debug
                 std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" selects target "<<_which_target<<std::endl;
+#endif
                 return true;
             }
         }
@@ -494,9 +544,7 @@ bool Task_Allocation::choose2hitOrexplore_()
                     lab_vec.push_back(i);
                 }
             //choose the target base on the probability
-            if(distance_vec.size()==0)
-                std::cout<<"There is not applicable target for Robot"<<my_robot_.allocation_robot_info.robot_ID<<std::endl;
-            else
+            if(distance_vec.size()!=0)
                 for(unsigned int i=0;i<distance_vec.size();i++)
                 {
                     if(distance_vec[i]!=0)
@@ -509,6 +557,10 @@ bool Task_Allocation::choose2hitOrexplore_()
                     }
                     possible_vec.push_back(sum_possible);
                 }
+#ifdef debug
+            else
+                std::cout<<"There is not applicable target for Robot"<<my_robot_.allocation_robot_info.robot_ID<<std::endl;
+#endif
             if(possible_vec.size()>0)
             {
                 srand(clock());
@@ -520,7 +572,9 @@ bool Task_Allocation::choose2hitOrexplore_()
                         my_robot_.allocation_robot_info.robot_mode=PLAN;
                         _which_target=my_robot_.allocation_robot_info.which_target;
                         all_tasks_[_which_target].allocation_task_info.current_distance=my_robot_.gazebo_robot_info.robot_pos.distance(all_tasks_[_which_target].gazebo_task_info.task_pos);
+#ifdef debug
                         std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" selects target "<<_which_target<<std::endl;
+#endif
                         return true;
                     }
             }
@@ -557,7 +611,9 @@ bool Task_Allocation::choose2hitOrexplore_()
                 my_robot_.allocation_robot_info.robot_mode=PLAN;
                 _which_task=my_robot_.allocation_robot_info.which_task;
                 all_tasks_[_which_task].allocation_task_info.current_distance=my_robot_.gazebo_robot_info.robot_pos.distance(all_tasks_[_which_task].gazebo_task_info.task_pos);
+#ifdef debug
                 std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" selects task "<<_which_task<<std::endl;
+#endif
                 return true;
             }
         }
@@ -572,9 +628,7 @@ bool Task_Allocation::choose2hitOrexplore_()
                     lab_vec.push_back(i);
                 }
             //choose the task base on the probability
-            if(distance_vec.size()==0)
-                std::cout<<"There is not applicable task for Robot"<<my_robot_.allocation_robot_info.robot_ID<<std::endl;
-            else
+            if(distance_vec.size()!=0)
                 for(unsigned int i=0;i<distance_vec.size();i++)
                 {
                     if(distance_vec[i]!=0)
@@ -587,6 +641,10 @@ bool Task_Allocation::choose2hitOrexplore_()
                     }
                     possible_vec.push_back(sum_possible);
                 }
+#ifdef debug
+            else
+                std::cout<<"There is not applicable task for Robot"<<my_robot_.allocation_robot_info.robot_ID<<std::endl;
+#endif
             if(possible_vec.size()>0)
             {
                 srand(clock());
@@ -599,7 +657,9 @@ bool Task_Allocation::choose2hitOrexplore_()
                         my_robot_.allocation_robot_info.robot_mode=PLAN;
                         _which_task=my_robot_.allocation_robot_info.which_task;
                         all_tasks_[_which_task].allocation_task_info.current_distance=my_robot_.gazebo_robot_info.robot_pos.distance(all_tasks_[_which_task].gazebo_task_info.task_pos);
+#ifdef debug
                         std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" selects task "<<_which_task<<std::endl;
+#endif
                         return true;
                     }
             }
@@ -617,12 +677,14 @@ bool Task_Allocation::which2hit_()
     float less_distance,distance;
     //choose the nearest robot for every unallocated target
     for(unsigned int i=0;i<all_tasks_.size();i++)
-        if(all_tasks_[i].allocation_task_info.istarget==true&&all_tasks_[i].allocation_task_info.iscomplete==false&&all_tasks_[i].allocation_task_info.isallocated==false)
+        if(all_tasks_[i].allocation_task_info.istarget==true&&all_tasks_[i].allocation_task_info.iscomplete==false&&
+           all_tasks_[i].allocation_task_info.isallocated==false&&all_tasks_[i].allocation_task_info.task_power<my_robot_.allocation_robot_info.robot_power)
         {
             less_distance=my_robot_.allocation_robot_info.expect_pos.distance(all_tasks_[i].gazebo_task_info.task_pos);
             for(unsigned int j=0;j<all_robots_.size();j++)
             {
-                if(all_robots_[j].allocation_robot_info.isvalid && all_robots_[j].allocation_robot_info.robot_ID!=my_robot_.allocation_robot_info.robot_ID)
+                if(all_robots_[j].allocation_robot_info.isvalid && all_robots_[j].allocation_robot_info.robot_ID!=my_robot_.allocation_robot_info.robot_ID&&
+                   all_tasks_[i].allocation_task_info.task_power<all_robots_[j].allocation_robot_info.robot_power)
                 {
                     distance=all_robots_[j].allocation_robot_info.expect_pos.distance(all_tasks_[i].gazebo_task_info.task_pos);
                     //if there is some robot near than me, this target will not allocated to me
@@ -650,26 +712,77 @@ bool Task_Allocation::which2explore_()
         return false;
 
     float less_distance,distance;
+    vector<int> task_list;
+    for(unsigned int i=0;i<all_tasks_.size();i++)
+        task_list.push_back(i);
+    //reorder the valid task
+    for(unsigned int i=0;i<all_tasks_.size()-1;i++)
+    {
+        for(unsigned int j=0;j<all_tasks_.size()-(i+1);j++)
+        {
+            double tmp_dis1=my_robot_.allocation_robot_info.expect_pos.distance(all_tasks_[task_list[j]].gazebo_task_info.task_pos);
+            double tmp_dis2=my_robot_.allocation_robot_info.expect_pos.distance(all_tasks_[task_list[j+1]].gazebo_task_info.task_pos);
+            if(tmp_dis1>tmp_dis2)
+            {
+                int tmp_list=task_list[j];
+                task_list[j]=task_list[j+1];
+                task_list[j+1]=tmp_list;
+            }
+        }
+    }
     //choose the nearest robot for every unallocated task
     for(unsigned int i=0;i<all_tasks_.size();i++)
-        if(all_tasks_[i].allocation_task_info.istarget==false&&all_tasks_[i].allocation_task_info.isexplored==false&&all_tasks_[i].allocation_task_info.isallocated==false)
+        if(all_tasks_[task_list[i]].allocation_task_info.istarget==false&&all_tasks_[task_list[i]].allocation_task_info.isexplored==false
+           &&all_tasks_[task_list[i]].allocation_task_info.isallocated==false)
         {
-            less_distance=my_robot_.allocation_robot_info.expect_pos.distance(all_tasks_[i].gazebo_task_info.task_pos);
+            less_distance=my_robot_.allocation_robot_info.expect_pos.distance(all_tasks_[task_list[i]].gazebo_task_info.task_pos);
             for(unsigned int j=0;j<all_robots_.size();j++)
             {
                 if(all_robots_[j].allocation_robot_info.isvalid && all_robots_[j].allocation_robot_info.robot_ID!=my_robot_.allocation_robot_info.robot_ID)
                 {
-                    distance=all_robots_[j].allocation_robot_info.expect_pos.distance(all_tasks_[i].gazebo_task_info.task_pos);
+                    distance=all_robots_[j].allocation_robot_info.expect_pos.distance(all_tasks_[task_list[i]].gazebo_task_info.task_pos);
                     //if there is some robot near than me, this target will not allocated to me
                     if(distance<less_distance||(distance==less_distance&&my_robot_.allocation_robot_info.robot_ID>all_robots_[j].allocation_robot_info.robot_ID))
                         return false;
                 }
                 //i am the nearest robot and win the auction
-                if(j==all_robots_.size()-1)
+                if(j==all_robots_.size()-1&&all_robots_.size()==1)
                 {
-                    my_robot_.allocation_robot_info.task_list.push_back(all_tasks_[i].allocation_task_info.task_ID);
-                    my_robot_.allocation_robot_info.expect_pos=all_tasks_[i].gazebo_task_info.task_pos;
-                    all_tasks_[i].allocation_task_info.isallocated=true;
+                    std::vector<int>::iterator it;
+                    it = my_robot_.allocation_robot_info.task_list.begin();
+                    float add_distance;
+                    float min_add_distance=1000;
+                    int insert_label=my_robot_.allocation_robot_info.task_list.size();
+                    for(unsigned int p=1;p<my_robot_.allocation_robot_info.task_list.size()+1;p++)
+                    {
+                        if(p==my_robot_.allocation_robot_info.task_list.size())
+                            add_distance=all_tasks_[my_robot_.allocation_robot_info.task_list[p-1]].gazebo_task_info.task_pos.distance(all_tasks_[task_list[i]].gazebo_task_info.task_pos);
+                        else
+                            add_distance=all_tasks_[my_robot_.allocation_robot_info.task_list[p-1]].gazebo_task_info.task_pos.distance(all_tasks_[task_list[i]].gazebo_task_info.task_pos)
+                                    +all_tasks_[task_list[i]].gazebo_task_info.task_pos.distance(all_tasks_[my_robot_.allocation_robot_info.task_list[p]].gazebo_task_info.task_pos)
+                                    -all_tasks_[my_robot_.allocation_robot_info.task_list[p-1]].gazebo_task_info.task_pos.distance(all_tasks_[my_robot_.allocation_robot_info.task_list[p]].gazebo_task_info.task_pos);
+                        if(add_distance<min_add_distance)
+                        {
+                            min_add_distance=add_distance;
+                            insert_label=p;
+                        }
+                    }
+                    if(insert_label==my_robot_.allocation_robot_info.task_list.size())
+                    {
+                        my_robot_.allocation_robot_info.task_list.push_back(all_tasks_[task_list[i]].allocation_task_info.task_ID);
+                        my_robot_.allocation_robot_info.expect_pos=all_tasks_[task_list[i]].gazebo_task_info.task_pos;
+                    }
+                    else
+                        my_robot_.allocation_robot_info.task_list.insert(it+insert_label,all_tasks_[task_list[i]].allocation_task_info.task_ID);
+
+                    all_tasks_[task_list[i]].allocation_task_info.isallocated=true;
+                    return true;
+                }
+                else if(j==all_robots_.size()-1)
+                {
+                    my_robot_.allocation_robot_info.task_list.push_back(all_tasks_[task_list[i]].allocation_task_info.task_ID);
+                    my_robot_.allocation_robot_info.expect_pos=all_tasks_[task_list[i]].gazebo_task_info.task_pos;
+                    all_tasks_[task_list[i]].allocation_task_info.isallocated=true;
                     return true;
                 }
             }
@@ -702,7 +815,20 @@ bool Task_Allocation::choose_task_()
                 teammateinfo.robot_pos.x=tmp_gazebo.robot_pos.x_;
                 teammateinfo.robot_pos.y=tmp_gazebo.robot_pos.y_;
                 teammateinfo.which_task=tmp_allocation.which_target!=-1? tmp_allocation.which_target:
-                                                                         tmp_allocation.which_target;
+                                                                         tmp_allocation.which_task;
+
+//                teammateinfo.which_task=tmp_allocation.which_target!=-1? tmp_allocation.which_target:
+//                                                                         tmp_allocation.which_task;
+//                if(teammateinfo.which_task==-1)
+//                {
+//                    teammateinfo.robot_pos.x=tmp_gazebo.robot_pos.x_;
+//                    teammateinfo.robot_pos.y=tmp_gazebo.robot_pos.y_;
+//                }
+//                else
+//                {
+//                    teammateinfo.robot_pos.x=all_tasks_[teammateinfo.which_task].gazebo_task_info.task_pos.x_;
+//                    teammateinfo.robot_pos.y=all_tasks_[teammateinfo.which_task].gazebo_task_info.task_pos.y_;
+//                }
             }
             else
             {
@@ -719,30 +845,48 @@ bool Task_Allocation::choose_task_()
         Gazebo_task_info tmp_gazebo=all_tasks_[i].gazebo_task_info;
         Allocation_task_info tmp_allocation=all_tasks_[i].allocation_task_info;
 
+        taskinfo.task_ID=tmp_gazebo.task_ID;
+        taskinfo.is_target=tmp_allocation.istarget==true? 1:0;
+        if(tmp_allocation.iscomplete)
+            taskinfo.task_status=0;
+        else if(tmp_allocation.isexplored)
+            taskinfo.task_status=1;
+        else if(tmp_allocation.isallocated)
+            taskinfo.task_status=2;
+        else
+            taskinfo.task_status=3;
+
+//        if(taskinfo.task_status==3)
+//        {
+//            taskinfo.task_pos.x=0;
+//            taskinfo.task_pos.y=0;
+//        }
+//        else
+//        {
+//            taskinfo.task_pos.x=tmp_gazebo.task_pos.x_;
+//            taskinfo.task_pos.y=tmp_gazebo.task_pos.y_;
+//        }
         taskinfo.task_pos.x=tmp_gazebo.task_pos.x_;
         taskinfo.task_pos.y=tmp_gazebo.task_pos.y_;
-        taskinfo.task_ID=tmp_gazebo.task_ID;
-        taskinfo.is_target=tmp_allocation.istarget;
-        if(tmp_allocation.iscomplete)
-            taskinfo.task_status=3;
-        else if(tmp_allocation.isexplored)
-            taskinfo.task_status=2;
-        else if(tmp_allocation.isallocated)
-            taskinfo.task_status=1;
-        else
-            taskinfo.task_status=0;
-
         srv.request.observation.tasksinfo.push_back(taskinfo);
     }
     //input the observation into the DQN and return the action
-    if (get_action_client_.call(srv))
+    if(get_action_client_.call(srv))
     {
-        if (srv.response.action==-1)
+        if(srv.response.action==-1)
         {
             ROS_ERROR("Failed to allocate task");
             return false;
         }
-        ROS_INFO("action: %d", (int)srv.response.action);
+        else if(srv.response.action==0)
+        {
+#ifdef debug
+            std::cout<<"don't allocate any task"<<std::endl;
+#endif
+            return true;
+        }
+        srv.response.action-=1;
+//        ROS_INFO("action: %d", (int)srv.response.action);
         start_point_=my_robot_.gazebo_robot_info.robot_pos;
         Allocation_task_info tmp=all_tasks_[srv.response.action].allocation_task_info;
         if(tmp.istarget)
@@ -750,7 +894,7 @@ bool Task_Allocation::choose_task_()
             //the target has been completed
             if(tmp.iscomplete)
             {
-                return_rewrad_(Invalid_task);
+                //return_rewrad_(Invalid_task);
                 return false;
             }
             else
@@ -759,15 +903,18 @@ bool Task_Allocation::choose_task_()
                 my_robot_.allocation_robot_info.robot_mode=PLAN;
                 _which_target=my_robot_.allocation_robot_info.which_target;
                 all_tasks_[_which_target].allocation_task_info.current_distance=my_robot_.gazebo_robot_info.robot_pos.distance(all_tasks_[_which_target].gazebo_task_info.task_pos);
+                all_tasks_[_which_target].allocation_task_info.isallocated=true;
+                //return_rewrad_(Valid_task, all_tasks_[_which_target].gazebo_task_info.task_pos);
+#ifdef debug
                 std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" selects target "<<_which_target<<std::endl;
+#endif
             }
-
         }
         else
         {
             if(tmp.isexplored)
             {
-                return_rewrad_(Invalid_task);
+                //return_rewrad_(Invalid_task);
                 return false;
             }
             else
@@ -776,7 +923,11 @@ bool Task_Allocation::choose_task_()
                 my_robot_.allocation_robot_info.robot_mode=PLAN;
                 _which_task=my_robot_.allocation_robot_info.which_task;
                 all_tasks_[_which_task].allocation_task_info.current_distance=my_robot_.gazebo_robot_info.robot_pos.distance(all_tasks_[_which_task].gazebo_task_info.task_pos);
+                all_tasks_[_which_task].allocation_task_info.isallocated=true;
+                //return_rewrad_(Valid_task, all_tasks_[_which_task].gazebo_task_info.task_pos);
+#ifdef debug
                 std::cout<<"robot"<<my_robot_.allocation_robot_info.robot_ID<<" selects task "<<_which_task<<std::endl;
+#endif
             }
         }
     }
@@ -790,7 +941,7 @@ bool Task_Allocation::choose_task_()
 }
 
 /// \brief return the reward and the observation_ to the DQN
-bool Task_Allocation::return_rewrad_(char causes)
+bool Task_Allocation::return_rewrad_(char causes, DPoint task_pos)
 {
     //prepare the observation_ info for the DQN
     allocation_common::ReturnReward srv;
@@ -809,7 +960,20 @@ bool Task_Allocation::return_rewrad_(char causes)
                 teammateinfo.robot_pos.x=tmp_gazebo.robot_pos.x_;
                 teammateinfo.robot_pos.y=tmp_gazebo.robot_pos.y_;
                 teammateinfo.which_task=tmp_allocation.which_target!=-1? tmp_allocation.which_target:
-                                                                         tmp_allocation.which_target;
+                                                                         tmp_allocation.which_task;
+
+//                teammateinfo.which_task=tmp_allocation.which_target!=-1? tmp_allocation.which_target:
+//                                                                         tmp_allocation.which_task;
+//                if(teammateinfo.which_task==-1)
+//                {
+//                    teammateinfo.robot_pos.x=tmp_gazebo.robot_pos.x_;
+//                    teammateinfo.robot_pos.y=tmp_gazebo.robot_pos.y_;
+//                }
+//                else
+//                {
+//                    teammateinfo.robot_pos.x=all_tasks_[teammateinfo.which_task].gazebo_task_info.task_pos.x_;
+//                    teammateinfo.robot_pos.y=all_tasks_[teammateinfo.which_task].gazebo_task_info.task_pos.y_;
+//                }
             }
             else
             {
@@ -821,49 +985,100 @@ bool Task_Allocation::return_rewrad_(char causes)
         }
 
     allocation_common::Taskinfo taskinfo;
+    int _complete_tasks=0;
+    int _explore_tasks=0;
+    int _allocate_tasks=0;
     for(unsigned int i; i<all_tasks_.size();i++)
     {
         Gazebo_task_info tmp_gazebo=all_tasks_[i].gazebo_task_info;
         Allocation_task_info tmp_allocation=all_tasks_[i].allocation_task_info;
 
+        taskinfo.task_ID=tmp_gazebo.task_ID;
+        taskinfo.is_target=tmp_allocation.istarget==true? 1:0;
+        if(tmp_allocation.iscomplete)
+        {
+            _complete_tasks++;
+            taskinfo.task_status=0;
+        }
+        else if(tmp_allocation.isexplored)
+        {
+            _explore_tasks++;
+            taskinfo.task_status=1;
+        }
+        else if(tmp_allocation.isallocated)
+        {
+            _allocate_tasks++;
+            taskinfo.task_status=2;
+        }
+        else
+            taskinfo.task_status=3;
+
+//        if(taskinfo.task_status==3)
+//        {
+//            taskinfo.task_pos.x=0;
+//            taskinfo.task_pos.y=0;
+//        }
+//        else
+//        {
+//            taskinfo.task_pos.x=tmp_gazebo.task_pos.x_;
+//            taskinfo.task_pos.y=tmp_gazebo.task_pos.y_;
+//        }
         taskinfo.task_pos.x=tmp_gazebo.task_pos.x_;
         taskinfo.task_pos.y=tmp_gazebo.task_pos.y_;
-        taskinfo.task_ID=tmp_gazebo.task_ID;
-        taskinfo.is_target=tmp_allocation.istarget;
-        if(tmp_allocation.iscomplete)
-            taskinfo.task_status=3;
-        else if(tmp_allocation.isexplored)
-            taskinfo.task_status=2;
-        else if(tmp_allocation.isallocated)
-            taskinfo.task_status=1;
-        else
-            taskinfo.task_status=0;
-
         srv.request.observation_.tasksinfo.push_back(taskinfo);
     }
     //return the reward to the DQN
     float _tmp_reward=0;
+    float _max_distance=6*1.414;
+    static float _invalid_tasks=0;
+    static float _total_reward=0;
     switch (causes)
     {
     case Invalid_task:
-        _tmp_reward=-Reward_I;
+        //_invalid_tasks+=1;
+        _tmp_reward= -0.5
+                     -(all_tasks_.size()-_allocate_tasks)/all_tasks_.size();
+//        std::cout<<"Invalid_task: "<<_tmp_reward<<std::endl;
+        break;
+    case Valid_task:
+        _invalid_tasks=0;
+        _tmp_reward= (_max_distance-my_robot_.gazebo_robot_info.robot_pos.distance(task_pos))/_max_distance;
+                     //+_allocate_tasks/all_tasks_.size();
+//        std::cout<<"Valid_task: "<<_tmp_reward<<std::endl;
         break;
     case Drop_task:
-        _tmp_reward=-my_robot_.gazebo_robot_info.robot_pos.distance(start_point_)*Reward_D;
+        _invalid_tasks+=1;
+        _tmp_reward= -my_robot_.gazebo_robot_info.robot_pos.distance(start_point_)/_max_distance;
+                     //-(all_tasks_.size()-_allocate_tasks)/all_tasks_.size();
+//        std::cout<<"Drop_task: "<<_tmp_reward<<std::endl;
         break;
     case Complete_target:
-        _tmp_reward=20/my_robot_.gazebo_robot_info.robot_pos.distance(start_point_)*Reward_C;
+        _invalid_tasks=0;
+        _tmp_reward= (_max_distance-my_robot_.gazebo_robot_info.robot_pos.distance(start_point_))/_max_distance;
+                     //+_complete_tasks/all_tasks_.size();
+//        std::cout<<"Complete_target: "<<_tmp_reward<<std::endl;
         break;
     case Explore_task:
-        _tmp_reward=20/my_robot_.gazebo_robot_info.robot_pos.distance(start_point_)*Reward_E;
+        _invalid_tasks=0;
+        _tmp_reward= (_max_distance-my_robot_.gazebo_robot_info.robot_pos.distance(start_point_))/_max_distance;
+                     //+_explore_tasks/all_tasks_.size();
+//        std::cout<<"Explore_task: "<<_tmp_reward<<std::endl;
         break;
     case Robot_damage:
-        _tmp_reward=-Reward_R;
+        _invalid_tasks=0;
+        _tmp_reward= -1;
         break;
+    case All_complete:
+//        std::cout<<"total_reward: "<<_total_reward<<std::endl;
+        _total_reward=0;
+        _invalid_tasks=0;
+        _tmp_reward=0;
+        srv.request.is_done=is_all_completed;
     default:
         break;
     }
-    srv.request.is_done=is_all_completed;
+    srv.request.reward=_tmp_reward;
+    _total_reward+=_tmp_reward;
     if (return_reward_client_.call(srv))
     {
         if (!srv.response.is_train)
@@ -871,7 +1086,9 @@ bool Task_Allocation::return_rewrad_(char causes)
             ROS_ERROR("The space of the observation is unmatched");
             return false;
         }
-        ROS_INFO("Run a train");
+#ifdef debug
+//        ROS_INFO("Run a train");
+#endif
     }
     else
     {
@@ -883,6 +1100,17 @@ bool Task_Allocation::return_rewrad_(char causes)
 /// \brief control cycle
 void Task_Allocation::loopControl(const ros::TimerEvent &event)
 {
+//    //static int count=0;
+//    if(my_robot_.allocation_robot_info.robot_ID==1)//&&count<10000)
+//    {
+//        terminal_info_.allocation_method=Prediction;
+//        count++;
+//        if(count==10000)
+//            std::cout<<"agent "<<my_robot_.allocation_robot_info.robot_ID<<" begin DQN"<<std::endl;
+//    }
+//    else
+//        terminal_info_.allocation_method=DQN;
+
     //reset some flag
     bid_new_task_=false;
     bid_new_target_=false;
@@ -931,7 +1159,9 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
             if(!choose2hitOrexplore_())
             {
                 //all tasks have been completed
+#ifdef debug
                 std::cout<<"All tasks have been completed!"<<std::endl;
+#endif
                 is_all_completed=true;
                 return;
                 //allocation_timer_.stop();
@@ -941,15 +1171,19 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
         else if(my_robot_.allocation_robot_info.which_target!=-1)
         {
             is_target_completed=try2hit_();
+#ifdef debug
             if(is_target_completed)
                 std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" destroy the target "<<my_robot_.allocation_robot_info.which_target<<std::endl;
+#endif
         }
         //the allocated task is not explored
         else if(my_robot_.allocation_robot_info.which_task!=-1)
         {
             is_task_explored=try2explore_();
+#ifdef debug
             if(is_task_explored)
                 std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" explore the task "<<my_robot_.allocation_robot_info.which_task<<std::endl;
+#endif
         }
         pubAllocation_info();
 
@@ -980,7 +1214,9 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
             if(bid_new_target_)
             {
                 pubAllocation_info();
+#ifdef debug
                 std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" bid a new target "<<my_robot_.allocation_robot_info.target_list.back()<<std::endl;
+#endif
             }
         }
         else if(num_task_unallocated_!=0)
@@ -990,7 +1226,9 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
             if(bid_new_task_)
             {
                 pubAllocation_info();
+#ifdef debug
                 std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" bid a new task "<<my_robot_.allocation_robot_info.task_list.back()<<std::endl;
+#endif
             }
         }
         //the allocated target is not complete
@@ -1001,24 +1239,31 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
             if(is_target_completed)
             {
                 //the target has been completed, delete it from the target_list
+#ifdef debug
                 std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" destroy the target "<<my_robot_.allocation_robot_info.target_list.front()<<std::endl;
+#endif
                 my_robot_.allocation_robot_info.target_list.erase(my_robot_.allocation_robot_info.target_list.begin());
             }
         }
         else if(my_robot_.allocation_robot_info.task_list.size()!=0)
         {
+            my_robot_.allocation_robot_info.expect_pos=my_robot_.gazebo_robot_info.robot_pos;
             is_task_explored=try2explore_();
             pubAllocation_info();
             if(is_task_explored)
             {
                 //the task has been explored, delete it from the task_list
+#ifdef debug
                 std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" explore the task "<<my_robot_.allocation_robot_info.task_list.front()<<std::endl;
+#endif
                 my_robot_.allocation_robot_info.task_list.erase(my_robot_.allocation_robot_info.task_list.begin());
             }
         }
         else if(!num_target_valid_&&!num_task_valid_)
         {
+#ifdef debug
             std::cout<<"All tasks have been completed!"<<std::endl;
+#endif
             is_all_completed=true;
             return;
         }
@@ -1034,26 +1279,37 @@ void Task_Allocation::loopControl(const ros::TimerEvent &event)
             if(!num_target_valid_&&!num_task_valid_)
             {
                 //all tasks have been completed
+#ifdef debug
                 std::cout<<"All tasks have been completed!"<<std::endl;
+#endif
                 is_all_completed=true;
+                //return_rewrad_(All_complete);
                 return;
             }
             else if(!choose_task_())
+#ifdef debug
                 std::cout<<"get an invalid task!"<<std::endl;
+#else
+                ;
+#endif
         }
         //the allocated target is not completed
         else if(my_robot_.allocation_robot_info.which_target!=-1)
         {
             is_target_completed=try2hit_();
+#ifdef debug
             if(is_target_completed)
                 std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" destroy the target "<<my_robot_.allocation_robot_info.which_target<<std::endl;
+#endif
         }
         //the allocated task is not explored
         else if(my_robot_.allocation_robot_info.which_task!=-1)
         {
             is_task_explored=try2explore_();
+#ifdef debug
             if(is_task_explored)
                 std::cout<<"Robot"<<my_robot_.allocation_robot_info.robot_ID<<" explore the task "<<my_robot_.allocation_robot_info.which_task<<std::endl;
+#endif
         }
         pubAllocation_info();
 
@@ -1131,12 +1387,12 @@ void Task_Allocation::pubAllocation_info()
 
         _allocation_info.task_info.task_ID=_target_info.task_ID;
         _allocation_info.task_info.current_distance=_target_info.current_distance;
-        _allocation_info.task_info.task_ID=_target_info.task_ID;
-        _allocation_info.task_info.known_power=_target_info.known_power;
-        _allocation_info.task_info.istarget=_target_info.istarget;
-        _allocation_info.task_info.iscomplete=_target_info.iscomplete;
-        _allocation_info.task_info.isexplored=_target_info.isexplored;
         _allocation_info.task_info.isallocated=_target_info.isallocated;
+        if(my_robot_.allocation_robot_info.robot_mode==HIT||my_robot_.allocation_robot_info.robot_mode==DAMAGE)
+        {
+            _allocation_info.task_info.known_power=_target_info.known_power;
+            _allocation_info.task_info.iscomplete=_target_info.iscomplete;
+        }
     }
     else if(_which_task!=-1)
     {
@@ -1144,12 +1400,14 @@ void Task_Allocation::pubAllocation_info()
 
         _allocation_info.task_info.task_ID=_task_info.task_ID;
         _allocation_info.task_info.current_distance=_task_info.current_distance;
-        _allocation_info.task_info.task_ID=_task_info.task_ID;
-        _allocation_info.task_info.known_power=_task_info.known_power;
-        _allocation_info.task_info.istarget=_task_info.istarget;
-        _allocation_info.task_info.iscomplete=_task_info.iscomplete;
-        _allocation_info.task_info.isexplored=_task_info.isexplored;
         _allocation_info.task_info.isallocated=_task_info.isallocated;
+        if(my_robot_.allocation_robot_info.robot_mode==EXPLORE)
+        {
+            _allocation_info.task_info.known_power=_task_info.known_power;
+            _allocation_info.task_info.istarget=_task_info.istarget;
+            _allocation_info.task_info.iscomplete=_task_info.iscomplete;
+            _allocation_info.task_info.isexplored=_task_info.isexplored;
+        }
     }
     else
         _allocation_info.task_info.task_ID=-1;

@@ -1,1 +1,3 @@
-/home/daiwei/dynamic_allocation/src/DQN/srv/GetAction.srv
+Observation observation
+---
+int32       action

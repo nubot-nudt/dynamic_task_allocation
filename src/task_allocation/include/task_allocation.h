@@ -38,7 +38,7 @@ public:
     bool which2explore_();
     //for DQN method
     bool choose_task_();
-    bool return_rewrad_(char causes);
+    bool return_rewrad_(char causes, DPoint task_pos=DPoint(0,0));
 public:
     Robot_info my_robot_;                          //my robot item
     std::vector<Robot_info> all_robots_;           //all robots

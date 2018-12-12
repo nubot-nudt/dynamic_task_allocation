@@ -307,7 +307,7 @@
        <number>10</number>
       </property>
       <property name="value">
-       <number>8</number>
+       <number>10</number>
       </property>
      </widget>
     </item>
@@ -944,7 +944,7 @@ border-radius:5px;
      <x>20</x>
      <y>660</y>
      <width>451</width>
-     <height>37</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -964,7 +964,7 @@ border-radius:5px;
        <enum>Qt::NoFocus</enum>
       </property>
       <property name="text">
-       <string>Prediction</string>
+       <string>Vacancy_chain</string>
       </property>
       <property name="checked">
        <bool>true</bool>
@@ -985,7 +985,7 @@ border-radius:5px;
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Market_base</string>
+       <string>Auction_base</string>
       </property>
      </widget>
     </item>
@@ -1051,9 +1051,9 @@ border-radius:5px;
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>700</y>
-     <width>451</width>
-     <height>37</height>
+     <y>710</y>
+     <width>241</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -1222,13 +1222,13 @@ border-radius:5px;
        <enum>Qt::StrongFocus</enum>
       </property>
       <property name="minimum">
-       <number>8</number>
+       <number>6</number>
       </property>
       <property name="maximum">
        <number>20</number>
       </property>
       <property name="value">
-       <number>12</number>
+       <number>16</number>
       </property>
      </widget>
     </item>
@@ -1288,7 +1288,7 @@ border-radius:5px;
        <number>100</number>
       </property>
       <property name="value">
-       <number>25</number>
+       <number>40</number>
       </property>
      </widget>
     </item>
@@ -1309,13 +1309,13 @@ border-radius:5px;
        <enum>Qt::StrongFocus</enum>
       </property>
       <property name="minimum">
-       <number>8</number>
+       <number>6</number>
       </property>
       <property name="maximum">
        <number>20</number>
       </property>
       <property name="value">
-       <number>12</number>
+       <number>16</number>
       </property>
      </widget>
     </item>
@@ -1352,6 +1352,47 @@ border-radius:5px;
       </property>
       <property name="text">
        <string>INIT_MAP</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>710</y>
+     <width>201</width>
+     <height>38</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QCheckBox" name="train">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Train</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="episode_num_in">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximum">
+       <number>999</number>
+      </property>
+      <property name="value">
+       <number>10</number>
       </property>
      </widget>
     </item>

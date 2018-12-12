@@ -41,7 +41,8 @@ MainDialog::MainDialog(Terminal2Gazebo_info &terminal2gazebo_info, Terminal2Robo
 
     terminal2robots_info_->allocation_mode=ALLOCATION_STOP;
     terminal2robots_info_->greedorprobability=1;
-//    terminal2robots_info_->marketorprediction=1;
+    terminal2robots_info_->finish_train=false;
+    terminal2robots_info_->finish_episode=false;
     //default use the prediction method
     terminal2robots_info_->allocation_method=Prediction;
 
@@ -98,6 +99,28 @@ bool MainDialog::init_robots()
     }
 }
 
+/// \brief when the game is done, restart the game from begin point for DQN train
+void MainDialog::restart_game(int count)
+{
+    //set the allocation_mode as STOP, then all of the parameters are initialized
+    float total_distance=0;
+    for(int i=0;i<MAXNUM_AGENT;i++)
+        if(agent_vaild_[i]->isChecked())
+        {
+            total_distance += terminal2robots_info_->all_allocation_robot_info[i].move_distance;
+            agent_vaild_[i]->setText("RESET");
+            agent_distance_[i]->setText("0");
+        }
+    std::cout<<"duration_time: "<<duration_time_<<" , total_distance: "<<total_distance<<" , start the "<<count<<" episode!"<<std::endl;
+
+    terminal2robots_info_->allocation_mode=ALLOCATION_STOP;
+    duration_time_=tmp_time_=0;
+    ui->time_show->setText("0");
+    sleep(2);
+    terminal2robots_info_->allocation_mode=ALLOCATION_START;
+    current_time_.start();
+}
+
 void MainDialog::timerUpdate()
 {
     //start is clicked
@@ -107,6 +130,7 @@ void MainDialog::timerUpdate()
         ui->time_show->setText(QString::number(duration_time_));
     }
     //show the mode of robot on the button
+    int _total_distance=0;
     for(unsigned int i=0;i<MAXNUM_AGENT;i++)
         if(agent_vaild_[i]->isChecked())
         {
@@ -123,6 +147,7 @@ void MainDialog::timerUpdate()
             }
             agent_vaild_[i]->setText(current_mode_);
             agent_distance_[i]->setText(QString::number(terminal2robots_info_->all_allocation_robot_info[i].move_distance));
+            _total_distance += terminal2robots_info_->all_allocation_robot_info[i].move_distance;
         }
     //show task_information
     QString _allShow_combine;
@@ -163,6 +188,7 @@ void MainDialog::timerUpdate()
     ui->target_show->setText(QString::number(_uncomplete_target));
     //check whether the tasks are all completed
     bool _is_all_completed=true;
+    static int count=1;
     for(unsigned int i=0;i<terminal2robots_info_->all_allocation_task_info.size();i++)
         if(!terminal2robots_info_->all_allocation_task_info[i].iscomplete)
         {
@@ -171,9 +197,28 @@ void MainDialog::timerUpdate()
         }
     if(_is_all_completed)
     {
-        timer_->stop();
-        //terminal2robots_info_->allocation_mode=ALLOCATION_STOP;
-        notice_->information(this,"Notice","The all tasks have been completed",QMessageBox::Ok);
+        if(terminal2robots_info_->allocation_method==DQN&&ui->train->isChecked()&&count<ui->episode_num_in->value())
+        {
+            count++;
+            terminal2robots_info_->finish_episode=true;
+            restart_game(count);
+        }
+        else if(terminal2robots_info_->allocation_method==DQN&&ui->train->isChecked())
+        {
+            count=1;
+            terminal2robots_info_->finish_train=true;
+            timer_->stop();
+            notice_->information(this,"Notice","The train have been completed",QMessageBox::Ok);
+        }
+        else
+        {
+            timer_->stop();
+            //terminal2robots_info_->allocation_mode=ALLOCATION_STOP;
+            std::cout<<"duration_time: "<<duration_time_<<" , total_distance: "<<_total_distance<<std::endl;
+            for(int i=0;i<terminal2robots_info_->all_allocation_robot_info.size();i++)
+                std::cout<<terminal2robots_info_->all_allocation_robot_info[i].move_distance<<std::endl;
+            notice_->information(this,"Notice","The all tasks have been completed",QMessageBox::Ok);
+        }
     }
 }
 

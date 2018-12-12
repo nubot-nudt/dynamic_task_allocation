@@ -1,1 +1,2 @@
-/home/daiwei/dynamic_allocation/src/DQN/srv/Teammateinfo.msg
+Point2d  robot_pos
+int32    which_task
