@@ -1,4 +1,4 @@
-# Dynamic_task_allocation
+#   Dynamic_task_allocation
 
 We built a simulation environment combining the Robot Operating System (ROS) with Gazebo, which is suitable for dynamic multi-robot task allocation. The simulation system adopts distributed programming,
 i.e., each simulated robot runs the whole program independently under different ROS nodes. In this way, the simulation system is close to the real environment, featuring communication delay, world model synchronization and other common problems of distributed systems. The map size, the number of tasks and the number of robots, etc. can be customized.
@@ -46,7 +46,7 @@ We can launch the other nodes by using a single launch file:
 
 Now, you can see a QT Gui for control terminal and the simulation environment in Gazebo:
 
-<img src="image/control_terminal.png" style="height:285px" /><img src="image/Gazebo.png" style="height:285px" />
+![](image/control_terminal&Gazebo.png) 
 
 ## Framework of simulation system
 
@@ -80,4 +80,4 @@ With this specially designed simulation system, it is very convenient to complet
 
 ### video example
 
-<video src="image/video.mp4"></video>
+<div align=center><img src="image/video.gif"></div>
