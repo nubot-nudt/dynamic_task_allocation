@@ -2,28 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89335962-5fe8-4f81-94b1-27bcb388e5d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/srcipts/dqn_PER.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcipts/gazebo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcipts/multi_discrete.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcipts/reinforcement_learning.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/srcipts/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/srcipts/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/srv/Taskinfo.msg" beforeDir="false" afterPath="$PROJECT_DIR$/srv/Taskinfo.msg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../allocation_common/include/Core.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/include/Core.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../allocation_common/msgs/Observation.msg" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/msgs/Observation.msg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../allocation_common/msgs/Taskinfo.msg" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/msgs/Taskinfo.msg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../allocation_common/msgs/Teammateinfo.msg" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/msgs/Teammateinfo.msg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../allocation_common/msgs/terminal2DQN_info.msg" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/msgs/terminal2DQN_info.msg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../allocation_common/srv/GetAction.srv" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/srv/GetAction.srv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../allocation_common/srv/ReturnReward.srv" beforeDir="false" afterPath="$PROJECT_DIR$/../allocation_common/srv/ReturnReward.srv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../control_terminal/include/maindialog.h" beforeDir="false" afterPath="$PROJECT_DIR$/../control_terminal/include/maindialog.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../control_terminal/src/maindialog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../control_terminal/src/maindialog.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../control_terminal/src/maindialog.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../control_terminal/src/maindialog.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../control_terminal/src/topic_info.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../control_terminal/src/topic_info.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task_allocation/include/task_allocation.h" beforeDir="false" afterPath="$PROJECT_DIR$/../task_allocation/include/task_allocation.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task_allocation/src/task_allocation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../task_allocation/src/task_allocation.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,40 +66,40 @@
     <session id="-1664950928">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="43" />
+          <entry key="project.closed" value="46" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.20" value="1" />
-          <entry key="project.open.time.4" value="10" />
-          <entry key="project.open.time.5" value="28" />
+          <entry key="project.open.time.4" value="11" />
+          <entry key="project.open.time.5" value="30" />
           <entry key="project.open.time.6" value="4" />
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="3" />
-          <entry key="project.opened" value="54" />
+          <entry key="project.opened" value="57" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="cfg" value="2" />
-          <entry key="md" value="2" />
-          <entry key="py" value="74" />
+          <entry key="md" value="3" />
+          <entry key="py" value="75" />
           <entry key="txt" value="3" />
           <entry key="xml" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Markdown" value="2" />
+          <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="76" />
+          <entry key="Python" value="77" />
           <entry key="XML" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cfg" value="321" />
-          <entry key="md" value="46" />
+          <entry key="md" value="407" />
           <entry key="py" value="9335" />
           <entry key="txt" value="80" />
           <entry key="xml" value="49" />
@@ -127,7 +107,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="46" />
+          <entry key="Markdown" value="407" />
           <entry key="PLAIN_TEXT" value="80" />
           <entry key="Python" value="9656" />
           <entry key="XML" value="49" />
@@ -140,11 +120,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srcipts/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3008">
-              <caret line="103" column="44" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
+            <state relative-caret-position="416">
+              <caret line="70" column="75" selection-start-line="70" selection-start-column="75" selection-end-line="70" selection-end-column="75" />
               <folding>
                 <element signature="e#47#59#0" expanded="true" />
               </folding>
@@ -153,9 +133,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/srcipts/train_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2752">
+              <caret line="93" selection-start-line="93" selection-end-line="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcipts/dqn_PER.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
+            <state relative-caret-position="7040">
               <caret line="221" column="58" selection-start-line="241" selection-start-column="72" selection-end-line="241" selection-end-column="82" />
               <folding>
                 <marker date="1542189974537" expanded="true" signature="11795:11804" ph="..." />
@@ -173,7 +162,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcipts/dqn_Dueling.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1568">
@@ -261,6 +250,7 @@
         <option value="$PROJECT_DIR$/srcipts/dqn_PER.py" />
         <option value="$PROJECT_DIR$/srcipts/train.py" />
         <option value="$USER_HOME$/Desktop/WorkShop规则讨论的看法.md" />
+        <option value="$PROJECT_DIR$/../../README.md" />
       </list>
     </option>
   </component>
@@ -402,7 +392,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="96" y="-6" width="2906" height="2008" extended-state="6" />
+    <frame x="97" y="1" width="2904" height="2000" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49916527" visible="true" weight="0.13661775" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -455,7 +446,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/srcipts/LICENSE.txt" />
     <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/maddpg_ros/__init__.py" />
     <entry file="file://$PROJECT_DIR$/../../devel/lib/python2.7/dist-packages/maddpg_ros/srv/_maddpg_o2a.py" />
     <entry file="file://$PROJECT_DIR$/srcipts/maddpg/common/distributions.py" />
@@ -638,19 +628,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Desktop/WorkShop规则讨论的看法.md" />
     <entry file="file://$PROJECT_DIR$/srcipts/train_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1352">
-          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+        <state relative-caret-position="2752">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcipts/train.py">
+    <entry file="file://$PROJECT_DIR$/srcipts/dqn_PER.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3008">
-          <caret line="103" column="44" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
+        <state relative-caret-position="7040">
+          <caret line="221" column="58" selection-start-line="241" selection-start-column="72" selection-end-line="241" selection-end-column="82" />
           <folding>
-            <element signature="e#47#59#0" expanded="true" />
+            <marker date="1542189974537" expanded="true" signature="11795:11804" ph="..." />
           </folding>
         </state>
       </provider>
@@ -662,30 +653,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcipts/dqn_PER.py">
+    <entry file="file://$PROJECT_DIR$/srcipts/dqn_Dueling.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="221" column="58" selection-start-line="241" selection-start-column="72" selection-end-line="241" selection-end-column="82" />
-          <folding>
-            <marker date="1542189974537" expanded="true" signature="11795:11804" ph="..." />
-          </folding>
+        <state relative-caret-position="1568">
+          <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/WorkShop规则讨论的看法.md">
+    <entry file="file://$PROJECT_DIR$/../../README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="800">
-            <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+          <first_editor relative-caret-position="1487">
+            <caret line="47" column="27" lean-forward="true" selection-start-line="47" selection-start-column="27" selection-end-line="47" selection-end-column="27" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcipts/dqn_Dueling.py">
+    <entry file="file://$PROJECT_DIR$/srcipts/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1568">
-          <caret line="50" column="24" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="24" />
+        <state relative-caret-position="416">
+          <caret line="70" column="75" selection-start-line="70" selection-start-column="75" selection-end-line="70" selection-end-column="75" />
+          <folding>
+            <element signature="e#47#59#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
