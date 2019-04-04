@@ -16,6 +16,8 @@ Place the package in your workspace content, and then:
 
 `$ cd dynamic_allocation`
 
+`$ catkin_make --pkg allocation_common`
+
 `$ catkin_make`
 
 ## Run
