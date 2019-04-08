@@ -32,9 +32,13 @@ We need to initiate a **roscore** in any path with the following command:
 
 The Deep Q-learning network is built with **tensorflow** (Python), and we need to launch it separately:
 
+`$ export PYTHONPATH="Your_path"+/dynamic_allocation/devel/lib/python2.7/dist-packages:$PYTHONPATH`
+
 `$ cd dynamic_allocation/src/DQN/srcipts/`
 
 `$ python3 train.py`
+
+If you do not need the approach with DQN, you can skip this step.
 
 ### other nodes
 
