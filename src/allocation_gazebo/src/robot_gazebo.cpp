@@ -83,16 +83,16 @@ void Robot_Gazebo::robot_control()
 }
 
 /// \brief Dynmaic recofigure calback function
-void Robot_Gazebo::config(allocation_gazebo::Robot_GazeboConfig &config, uint32_t level)
-{
-    dribble_P_      = config.P;
-    dribble_I_      = config.I;
-    dribble_D_      = config.D;
-    I_term_max_     = config.I_max;
-    I_term_min_     = config.I_min;
-    ROS_FATAL("Reconfig request: P:%f I:%f D:%f I_term_max:%f I_term_min:%f",
-              dribble_P_, dribble_I_, dribble_D_, I_term_max_, I_term_min_);
-}
+//void Robot_Gazebo::config(allocation_gazebo::Robot_GazeboConfig &config, uint32_t level)
+//{
+//    dribble_P_      = config.P;
+//    dribble_I_      = config.I;
+//    dribble_D_      = config.D;
+//    I_term_max_     = config.I_max;
+//    I_term_min_     = config.I_min;
+//    ROS_FATAL("Reconfig request: P:%f I:%f D:%f I_term_max:%f I_term_min:%f",
+//              dribble_P_, dribble_I_, dribble_D_, I_term_max_, I_term_min_);
+//}
 
 /// \brief VelCmd message CallBack function
 /// \param[in] cmd VelCmd msg shared pointer

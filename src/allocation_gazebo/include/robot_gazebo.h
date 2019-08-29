@@ -48,7 +48,7 @@ public:
     void    robot_locomotion(math::Vector3 linear_vel_vector, math::Vector3 angular_vel_vector);
     void    message_queue_thread();
     void    robot_control();
-    void    config(allocation_gazebo::Robot_GazeboConfig &config, uint32_t level);    
+//    void    config(allocation_gazebo::Robot_GazeboConfig &config, uint32_t level);
 protected:
     void    Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/);
     virtual void Reset();

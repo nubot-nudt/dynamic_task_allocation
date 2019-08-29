@@ -19,7 +19,7 @@ find_package(Protobuf REQUIRED)
 find_package(gazebo REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 
-generate_dynamic_reconfigure_options(config/allocation_gazebo.cfg)
+# generate_dynamic_reconfigure_options(config/allocation_gazebo.cfg)
 
 link_directories(${GAZEBO_LIBRARY_DIRS})
 include_directories(${Boost_INCLUDE_DIR}
