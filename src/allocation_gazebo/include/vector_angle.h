@@ -29,27 +29,27 @@
 #define PI 3.14159265
 using namespace gazebo;
 
-double get_cos_angle(math::Vector3 vector1, math::Vector3 vector2); // vectors' angle range [-PI, PI]
-double get_sin_angle(math::Vector3 reference_vector, math::Vector3 target_vector); // vectors' angle range [-PI, PI]
-double get_angle_PI(math::Vector3 reference_vector, math::Vector3 target_vector);   // return angle range [-PI,PI]
-double get_angle_2PI(math::Vector3 reference_vector, math::Vector3 target_vector);  // return angle range [0, 2*PI]
+double get_cos_angle(ignition::math::Vector3d vector1, ignition::math::Vector3d vector2); // vectors' angle range [-PI, PI]
+double get_sin_angle(ignition::math::Vector3d reference_vector, ignition::math::Vector3d target_vector); // vectors' angle range [-PI, PI]
+double get_angle_PI(ignition::math::Vector3d reference_vector, ignition::math::Vector3d target_vector);   // return angle range [-PI,PI]
+double get_angle_2PI(ignition::math::Vector3d reference_vector, ignition::math::Vector3d target_vector);  // return angle range [0, 2*PI]
 
-double get_cos_angle(math::Vector3 vector1, math::Vector3 vector2)
+double get_cos_angle(ignition::math::Vector3d vector1, ignition::math::Vector3d vector2)
 {
-    math::Vector3 vector1_norm = vector1.Normalize();
-    math::Vector3 vector2_norm = vector2.Normalize();
+    ignition::math::Vector3d vector1_norm = vector1.Normalize();
+    ignition::math::Vector3d vector2_norm = vector2.Normalize();
     return vector1_norm.Dot(vector2_norm);
 }
 
-double get_sin_angle(math::Vector3 reference_vector, math::Vector3 target_vector)
+double get_sin_angle(ignition::math::Vector3d reference_vector, ignition::math::Vector3d target_vector)
 {
-    math::Vector3 reference_vector_norm = reference_vector.Normalize();
-    math::Vector3 target_vector_norm = target_vector.Normalize();
-    math::Vector3 cross_vector = reference_vector_norm.Cross(target_vector_norm);
-    return (cross_vector.z>0 ? cross_vector.GetLength() : -cross_vector.GetLength());
+    ignition::math::Vector3d reference_vector_norm = reference_vector.Normalize();
+    ignition::math::Vector3d target_vector_norm = target_vector.Normalize();
+    ignition::math::Vector3d cross_vector = reference_vector_norm.Cross(target_vector_norm);
+    return (cross_vector.Z()>0 ? cross_vector.Length() : -cross_vector.Length());
 }
 
-double get_angle_PI(math::Vector3 reference_vector, math::Vector3 target_vector) // return angle range [-PI,PI]
+double get_angle_PI(ignition::math::Vector3d reference_vector, ignition::math::Vector3d target_vector) // return angle range [-PI,PI]
 {
     double cos_angle = get_cos_angle(reference_vector, target_vector);
     double sin_angle = get_sin_angle(reference_vector, target_vector);
@@ -57,7 +57,7 @@ double get_angle_PI(math::Vector3 reference_vector, math::Vector3 target_vector)
     return (sin_angle>0 ? angle : -angle);
 }
 
-double get_angle_2PI(math::Vector3 reference_vector, math::Vector3 target_vector)  // return angle range [0, 2*PI]
+double get_angle_2PI(ignition::math::Vector3d reference_vector, ignition::math::Vector3d target_vector)  // return angle range [0, 2*PI]
 {
     double cos_angle = get_cos_angle(reference_vector, target_vector);
     double sin_angle = get_sin_angle(reference_vector, target_vector);

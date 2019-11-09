@@ -17,7 +17,7 @@ private:
     boost::mutex                        msgCB_lock_;                         //a mutex to lock access to fields that are used in ROS message callbacks
     ros::CallbackQueue                  message_queue_;                      //custom Callback Queue
 
-    math::Rand                          rand_;
+    ignition::math::Rand                rand_;
 
     std::string                         model_name_;
     std::string                         robot_namespace_;

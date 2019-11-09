@@ -19,10 +19,10 @@ private:
 
     allocation_common::robot2gazebo_info  robot2gazebo_info_;
 
-    math::Vector3                         desired_rot_vector_;
-    math::Vector3                         desired_trans_vector_;
-    math::Vector3                         unitX_world_;
-    math::Vector3                         unitY_world_;
+    ignition::math::Vector3d              desired_rot_vector_;
+    ignition::math::Vector3d              desired_trans_vector_;
+    ignition::math::Vector3d              unitX_world_;
+    ignition::math::Vector3d              unitY_world_;
 
     std::string                           model_name_;
     std::string                           robot_namespace_;
@@ -45,7 +45,7 @@ public:
     virtual ~Robot_Gazebo();
 
     void    robot2gazebo_CB(const allocation_common::robot2gazebo_info::ConstPtr& _msg);
-    void    robot_locomotion(math::Vector3 linear_vel_vector, math::Vector3 angular_vel_vector);
+    void    robot_locomotion(ignition::math::Vector3d linear_vel_vector, ignition::math::Vector3d angular_vel_vector);
     void    message_queue_thread();
     void    robot_control();
 //    void    config(allocation_gazebo::Robot_GazeboConfig &config, uint32_t level);

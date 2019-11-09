@@ -107,10 +107,10 @@ void Robot_Gazebo::robot2gazebo_CB(const allocation_common::robot2gazebo_info::C
     Vy_cmd_ = _msg->robot_twist.linear.y;
     w_cmd_  = _msg->robot_twist.angular;
 
-    math::Vector3 Vx_robot     = Vx_cmd_*unitX_world_;
-    math::Vector3 Vy_robot     = Vy_cmd_*unitY_world_;
-    math::Vector3 linear_vector= Vx_robot + Vy_robot;
-    math::Vector3 angular_vector(0,0,w_cmd_);
+    ignition::math::Vector3d Vx_robot     = Vx_cmd_*unitX_world_;
+    ignition::math::Vector3d Vy_robot     = Vy_cmd_*unitY_world_;
+    ignition::math::Vector3d linear_vector= Vx_robot + Vy_robot;
+    ignition::math::Vector3d angular_vector(0,0,w_cmd_);
 
 //        ROS_FATAL("%s vel_cmd_CB():linear_vector:%f %f %f angular_vector:0 0 %f",model_name_.c_str(),
 //                        linear_vector.x, linear_vector.y, linear_vector.z, angular_vector.z);
@@ -120,16 +120,16 @@ void Robot_Gazebo::robot2gazebo_CB(const allocation_common::robot2gazebo_info::C
 }
 
 /// \brief according to the topic from robot allocation node, move the model in the Gazebo
-void Robot_Gazebo::robot_locomotion(math::Vector3 linear_vel_vector, math::Vector3 angular_vel_vector)
+void Robot_Gazebo::robot_locomotion(ignition::math::Vector3d linear_vel_vector, ignition::math::Vector3d angular_vel_vector)
 {
     //robots is on the ground, so the vector.z of linear velocity is 0
     desired_trans_vector_ = linear_vel_vector;
-    desired_trans_vector_.z = 0;
+    desired_trans_vector_.Z(0);
 
     //robots is on the ground, so the vector.x vector.y of angular velocity is 0
     desired_rot_vector_   = angular_vel_vector;
-    desired_rot_vector_.x = 0;
-    desired_rot_vector_.y = 0;
+    desired_rot_vector_.X(0);
+    desired_rot_vector_.Y(0);
 
     robot_model_->SetLinearVel(desired_trans_vector_);
     robot_model_->SetAngularVel(desired_rot_vector_);

@@ -123,12 +123,12 @@ template<typename _Tp> static inline Angle & operator *= (Angle& a , _Tp b){
 	a=Angle(a.radian_*b);
 	return a;
 }
-template<typename _Tp> static inline Angle operator +  (const Angle & a , const _Tp & b){
-	return Angle(double(a.radian_+b));
-}	
-template<typename _Tp> static inline Angle operator - (const Angle & a , const _Tp & b){
-	return Angle(double(a.radian_-b));
-}	
+//template<typename _Tp> static inline Angle operator +  (const Angle & a , const _Tp & b){
+//	return Angle(double(a.radian_+b));
+//}
+//template<typename _Tp> static inline Angle operator - (const Angle & a , const _Tp & b){
+//	return Angle(double(a.radian_-b));
+//}
 template<typename _Tp> static inline Angle operator * (const _Tp &a , const Angle & b){ 
 	return Angle(double(a*b.radian_));
 }

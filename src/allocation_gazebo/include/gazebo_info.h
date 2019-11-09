@@ -8,7 +8,6 @@
 #include <assert.h>
 #include <vector_angle.h>
 #include <gazebo/gazebo.hh>
-#include <gazebo/math/gzmath.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 #include <gazebo/common/Plugin.hh>
@@ -32,15 +31,18 @@
 #include <dynamic_reconfigure/server.h>
 #include <allocation_gazebo/Robot_GazeboConfig.h>
 #include <Core.hpp>
+#include <ignition/math/Vector3.hh>
+#include <ignition/math/Pose3.hh>
+#include <ignition/math/Quaternion.hh>
 
 #define PI 3.14159265
 #define CM2M_CONVERSION 0.01
 #define M2CM_CONVERSION 100
 
-#define XUNIT_VECTOR math::Vector3::UnitX
-#define YUNIT_VECTOR math::Vector3::UnitY
-#define ZERO_VECTOR  math::Vector3::Zero
-#define ZERO_QUATER  math::Quaternion(0,0,0,0)
+#define XUNIT_VECTOR ignition::math::Vector3d::UnitX
+#define YUNIT_VECTOR ignition::math::Vector3d::UnitY
+#define ZERO_VECTOR  ignition::math::Vector3d::Zero
+#define ZERO_QUATER  ignition::math::Quaterniond(0,0,0,0)
 
 const std::string robot_name="Robot";
 const std::string task_name="Task";
@@ -49,14 +51,14 @@ const double g = 9.8;
 // robot_state
 struct Pose
 {
-    math::Vector3    position;
-    math::Quaternion orient;
+    ignition::math::Vector3d    position;
+    ignition::math::Quaterniond orient;
 };
 
 struct Twist
 {
-    math::Vector3    linear;
-    math::Vector3    angular;
+    ignition::math::Vector3d    linear;
+    ignition::math::Vector3d    angular;
 };
 
 struct Robot_state

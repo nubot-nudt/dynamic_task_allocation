@@ -17,7 +17,7 @@ World_Gazebo::World_Gazebo()
 
 World_Gazebo::~World_Gazebo()
 {
-    event::Events::DisconnectWorldUpdateBegin(update_connection_);
+//    event::Events::DisconnectWorldUpdateBegin(update_connection_);
     // Removes all callbacks from the queue. Does not wait for calls currently in progress to finish.
     message_queue_.clear();
     // Disable the queue, meaning any calls to addCallback() will have no effect.
@@ -33,7 +33,7 @@ void World_Gazebo::Load(physics::WorldPtr _world, sdf::ElementPtr _sdf)
 {
     // Get the world name.
     world_ = _world;
-    world_name_=_world->GetName();
+    world_name_=_world->Name();
 
     // Make sure the ROS node for Gazebo has already been initialized
     if (!ros::isInitialized())
@@ -106,7 +106,7 @@ void World_Gazebo::model_states_CB(const gazebo_msgs::ModelStates::ConstPtr& _ms
     model_states_.pose.clear();
     model_states_.twist.clear();
 
-    for(int i=0; i<world_->GetModelCount() ;i++)
+    for(unsigned i=0; i<world_->ModelCount() ;i++)
     {
         // get info of robots and tasks, reference frame: world
         if(_msg->name[i].find(robot_name)!=std::string::npos||_msg->name[i].find(task_name)!=std::string::npos)
@@ -146,7 +146,7 @@ void World_Gazebo::terminal_info_CB(const allocation_common::terminal2gazebo_inf
     }
     // each robot has different model, so we can use the factory msg to spwan robot model
     msgs::Factory  factory_msg;
-    for(int i=0;i<_msg->robot_pos_x.size();i++)
+    for(unsigned i=0;i<_msg->robot_pos_x.size();i++)
     {
         // Model file to load
         factory_msg.set_sdf_filename("model://Robot"+std::to_string(i));
@@ -188,7 +188,7 @@ void World_Gazebo::terminal_info_CB(const allocation_common::terminal2gazebo_inf
             </model>\
             </sdf>");
 
-    for(int i=0;i<_msg->task_pos_x.size();i++)
+    for(unsigned i=0;i<_msg->task_pos_x.size();i++)
     {
         // set different name for each task (Task i)
         task_name="Task"+std::to_string(i);
@@ -219,7 +219,7 @@ bool World_Gazebo::update_model_info(void)
 
     if(ModelStatesCB_flag_)
     {
-        for(int i=0; i<model_count_;i++)
+        for(unsigned i=0; i<model_count_;i++)
         {
             // tasks info, compare model name' prefix to determine tasks
             // the origin of task is the angular, change it to the center
@@ -242,9 +242,9 @@ bool World_Gazebo::update_model_info(void)
 
                 geometry_msgs::Pose  robot_pose  = model_states_.pose[i];
                 geometry_msgs::Twist robot_twist = model_states_.twist[i];
-                math::Quaternion rot_qua(robot_pose.orientation.w, robot_pose.orientation.x,
-                                         robot_pose.orientation.y, robot_pose.orientation.z);
-                double heading_theta = rot_qua.GetYaw();
+                ignition::math::Quaterniond rot_qua(robot_pose.orientation.w, robot_pose.orientation.x,
+                                                    robot_pose.orientation.y, robot_pose.orientation.z);
+                double heading_theta = rot_qua.Yaw();
                 robots_info_.robot_ID              = robot_id;
                 robots_info_.robot_pose.position.x = robot_pose.position.x;
                 robots_info_.robot_pose.position.y = robot_pose.position.y;
@@ -269,12 +269,12 @@ bool World_Gazebo::update_model_info(void)
 /// \param[in] probability      the probability of generating noise, probability should be in [0,1]
 double World_Gazebo::noise(double scale, double probability)
 {
-    if(math::equal<double>(scale, 0.0))
+    if(ignition::math::equal<double>(scale, 0.0))
         return 0.0;
     else
     {
-        if(rand_.GetIntUniform(0,10) <= (int)10.0*probability)
-            return scale*rand_.GetDblNormal(0,1);
+        if(rand_.IntUniform(0,10) <= (int)10.0*probability)
+            return scale*rand_.DblNormal(0,1);
         else
             return 0.0;
     }

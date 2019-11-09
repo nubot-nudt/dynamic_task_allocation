@@ -28,8 +28,8 @@ private:
     allocation_common::gazebo_task_info     tasks_info_;
     std_msgs::Float64MultiArray             debug_msgs_;
 
-    math::Vector3                           unitX_robot_;
-    math::Rand                              rand_;
+    ignition::math::Vector3d                unitX_robot_;
+    ignition::math::Rand                    rand_;
     double                                  noise_scale_;                        //scale of gaussian noise
     double                                  noise_rate_;                         //how frequent the noise generates
     bool                                    ModelStatesCB_flag_;                 //the flag after ModelStates callback
