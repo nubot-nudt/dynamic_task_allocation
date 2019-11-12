@@ -5,10 +5,19 @@ i.e., each simulated robot runs the whole program independently under different 
 
 ## Runtime environment
 
+Branch **master** :
+
 1. Ubuntu 16.04
 2. ROS Kinetic
 3. Python 3.5
 4. Gazebo version 7.0 (the full ROS Kinetic includes the Gazebo 7.0)
+
+Branch **18.04_melodic** :
+
+1. Ubuntu 18.04
+2. ROS Melodic
+3. Python 3.5
+4. Gazebo version 9.0 (the full ROS Melodic includes the Gazebo 9.0)
 
 ## Build
 
@@ -87,3 +96,7 @@ With this specially designed simulation system, it is very convenient to complet
 ### video example
 
 <div align=center><img src="image/video.gif"></div>
+
+## Notice
+
+If you make use of this work, please cite [my paper](https://www.researchgate.net/profile/Huimin_Lu/publication/336816063_Multi-Robot_Dynamic_Task_Allocation_for_Exploration_and_Destruction/links/5db45103299bf111d4d03a02/Multi-Robot-Dynamic-Task-Allocation-for-Exploration-and-Destruction.pdf): **Dai W, Lu H, Xiao J, et al. Multi-Robot Dynamic Task Allocation for Exploration and Destruction[J]. Journal of Intelligent & Robotic Systems, 2019: 1-25.**
