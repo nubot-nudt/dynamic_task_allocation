@@ -36,7 +36,7 @@ catkin_package(
     gazebo_ros 
     roscpp
     dynamic_reconfigure
-  DEPENDS 
+  DEPENDS
     GAZEBO
 )				
 
