@@ -5,10 +5,19 @@ i.e., each simulated robot runs the whole program independently under different 
 
 ## Runtime environment
 
+Branch **master** :
+
 1. Ubuntu 16.04
 2. ROS Kinetic
 3. Python 3.5
 4. Gazebo version 7.0 (the full ROS Kinetic includes the Gazebo 7.0)
+
+Branch **18.04_melodic** :
+
+1. Ubuntu 18.04
+2. ROS Melodic
+3. Python 3.5
+4. Gazebo version 9.0 (the full ROS Melodic includes the Gazebo 9.0)
 
 ## Build
 
