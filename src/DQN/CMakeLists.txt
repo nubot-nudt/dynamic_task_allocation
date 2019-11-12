@@ -9,8 +9,6 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
 )
 
-generate_messages(DEPENDENCIES std_msgs)
-
 generate_dynamic_reconfigure_options(cfg/reward_cfg.cfg)
 
 catkin_package(CATKIN_DEPENDS message_runtime)

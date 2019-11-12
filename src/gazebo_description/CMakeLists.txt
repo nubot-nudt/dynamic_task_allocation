@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
+cmake_policy(SET CMP0054 NEW)
 project(gazebo_description)
 
 find_package(catkin REQUIRED COMPONENTS 

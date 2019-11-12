@@ -38,7 +38,7 @@ private:
     double                                I_term_min_;                         //minimum I term
 
     int                                   robotID_;
-    dynamic_reconfigure::Server<allocation_gazebo::Robot_GazeboConfig> *reconfigureServer_;
+//    dynamic_reconfigure::Server<allocation_gazebo::Robot_GazeboConfig> *reconfigureServer_;
 
 public:
     Robot_Gazebo();
