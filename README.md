@@ -99,4 +99,17 @@ With this specially designed simulation system, it is very convenient to complet
 
 ## Notice
 
-If you make use of this work, please cite [my paper](https://www.researchgate.net/profile/Huimin_Lu/publication/336816063_Multi-Robot_Dynamic_Task_Allocation_for_Exploration_and_Destruction/links/5db45103299bf111d4d03a02/Multi-Robot-Dynamic-Task-Allocation-for-Exploration-and-Destruction.pdf): **Dai W, Lu H, Xiao J, et al. Multi-Robot Dynamic Task Allocation for Exploration and Destruction[J]. Journal of Intelligent & Robotic Systems, 2019: 1-25.**
+If you make use of this work, please star our repo and cite [our paper](https://www.researchgate.net/profile/Huimin_Lu/publication/336816063_Multi-Robot_Dynamic_Task_Allocation_for_Exploration_and_Destruction/links/5db45103299bf111d4d03a02/Multi-Robot-Dynamic-Task-Allocation-for-Exploration-and-Destruction.pdf): 
+```
+@article{Dai2020,
+author = {Dai, Wei and Lu, Huimin and Xiao, Junhao and Zeng, Zhiwen and Zheng, Zhiqiang},
+journal = {Journal of Intelligent and Robotic Systems},
+keywords = {Auction-based, Deep Q-learning, Dynamic task allocation, Exploration and destruction, Vacancy chain},
+number = {2},
+pages = {455--479},
+title = {Multi-Robot Dynamic Task Allocation for Exploration and Destruction},
+volume = {98},
+year = {2020},
+publisher={Springer}
+}
+```
