@@ -99,7 +99,7 @@ With this specially designed simulation system, it is very convenient to complet
 
 ## Notice
 
-If you make use of this work, please cite [my paper](https://www.researchgate.net/profile/Huimin_Lu/publication/336816063_Multi-Robot_Dynamic_Task_Allocation_for_Exploration_and_Destruction/links/5db45103299bf111d4d03a02/Multi-Robot-Dynamic-Task-Allocation-for-Exploration-and-Destruction.pdf): 
+If you make use of this work, please star our repo and cite [our paper](https://www.researchgate.net/profile/Huimin_Lu/publication/336816063_Multi-Robot_Dynamic_Task_Allocation_for_Exploration_and_Destruction/links/5db45103299bf111d4d03a02/Multi-Robot-Dynamic-Task-Allocation-for-Exploration-and-Destruction.pdf): 
 ```
 @article{Dai2020,
 author = {Dai, Wei and Lu, Huimin and Xiao, Junhao and Zeng, Zhiwen and Zheng, Zhiqiang},
